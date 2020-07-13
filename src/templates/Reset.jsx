@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { TextInput, Button } from '../components/ui'
+import { TextInput, Button } from '../components/UI'
 import { resetPassword } from '../reducks/users/operations'
 import { useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'

@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { push } from 'connected-react-router'
 import { signIn } from '../reducks/users/operations'
-import { TextInput, Button } from '../components/ui'
+import { TextInput, Button } from '../components/UI'
 
 const SignIn = () => {
 

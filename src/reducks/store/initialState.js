@@ -4,6 +4,12 @@ const initialState = {
     isSignedIn: false,
     uid: '',
     username: '',
+  },
+  flights: {
+    Carriers: '',
+    Currencies: 'JPY',
+    Places: '',
+    Quotes: ''
   }
 }
 
