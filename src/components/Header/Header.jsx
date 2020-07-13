@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
-import { getIsSignedIn } from '../../reducks/users/selectors';
+import { getIsSignedIn, getUsername } from '../../reducks/users/selectors';
 import { HeaderMenus, ClosableDrawer } from './index';
 import { useCallback } from 'react';
 
@@ -29,12 +29,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Header = () => {
-  const classes = useStyles();
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const isSignedIn = getIsSignedIn(selector);
+  const classes = useStyles()
+  const dispatch = useDispatch()
+  const selector = useSelector((state) => state)
+  const isSignedIn = getIsSignedIn(selector)
+  const username = getUsername(selector)
 
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false)
 
   const handleDrawerToggle = useCallback((event) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -52,6 +53,9 @@ const Header = () => {
           </Typography>
           {isSignedIn && (
             <div className={classes.iconButtons}>
+              <Typography variant="span" onClick={() => dispatch(push('/user/profile'))}>
+                Hi, {username}
+              </Typography>
               <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
             </div>
           )}
