@@ -1,9 +1,8 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsername } from '../reducks/users/selectors'
-
+import { getCurrencies } from '../reducks/flights/selectors'
 import { searchFlights } from '../reducks/flights/operations'
-
 import { Button } from '../components/UI'
 import { makeStyles } from '@material-ui/core/styles'
 import Paper from '@material-ui/core/Paper';
@@ -24,6 +23,7 @@ const Home = () => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state)
   const username = getUsername(selector)
+  const currency = getCurrencies(selector)
   const classes = useStyles()
 
   return (
@@ -35,7 +35,7 @@ const Home = () => {
               <h2>検索バー</h2>
               <h2>フィルタ</h2>
               <Button onClick={() => dispatch(searchFlights())} label={'検索'} />
-              {username}
+              {currency}
             </Paper>
           </Grid>
           <Grid item xs={12} md={2}>

@@ -4,10 +4,11 @@ const initialState = {
     isSignedIn: false,
     uid: '',
     username: '',
+    test: 'test'
   },
   flights: {
     Carriers: '',
-    Currencies: 'JPY',
+    Currencies: 'CAD',
     Places: '',
     Quotes: ''
   }
