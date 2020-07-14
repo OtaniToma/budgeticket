@@ -4,12 +4,16 @@ const initialState = {
     isSignedIn: false,
     uid: '',
     username: '',
+    test: 'test'
+  },
+  searchTerms: {
+
   },
   flights: {
-    Carriers: '',
-    Currencies: 'JPY',
-    Places: '',
-    Quotes: ''
+    carriers: [],
+    currency: [],
+    places: [],
+    quotes: []
   }
 }
 

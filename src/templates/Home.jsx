@@ -1,13 +1,14 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { getUsername } from '../reducks/users/selectors'
-
+import { getCarriers, getCurrency, getPlaces, getQuotes } from '../reducks/flights/selectors'
 import { searchFlights } from '../reducks/flights/operations'
 
 import { Button } from '../components/UI'
 import { makeStyles } from '@material-ui/core/styles'
-import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
+import Divider from '@material-ui/core/Divider'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,6 +25,11 @@ const Home = () => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state)
   const username = getUsername(selector)
+
+  const carriers = getCarriers(selector)
+  const currency = getCurrency(selector)
+  const places = getPlaces(selector)
+  const quotes = getQuotes(selector)
   const classes = useStyles()
 
   return (
@@ -31,28 +37,42 @@ const Home = () => {
       <div className={classes.root}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <Paper className={classes.paper}>
               <h2>検索バー</h2>
-              <h2>フィルタ</h2>
-              <Button onClick={() => dispatch(searchFlights())} label={'検索'} />
-              {username}
-            </Paper>
+              <Button onClick={() => dispatch(searchFlights())} label={'検索'} color={'primary'} />
           </Grid>
           <Grid item xs={12} md={2}>
             <Paper className={classes.paper}>
               <h2>直行・経由</h2>
+              <Divider />
               <h2>航空会社</h2>
+              <ul>
+                {carriers && carriers.map((carrier) => {
+                  return (
+                    <li key={carrier.CarrierId}>{carrier.Name}</li>
+                  )
+                })}
+              </ul>
+              <Divider />
               <h2>検索履歴</h2>
+              <Divider />
             </Paper>
           </Grid>
           <Grid item xs={12} md={8}>
             <Paper className={classes.paper}>
               <h2>検索結果</h2>
+              <ul>
+                {quotes && quotes.map((quote) => {
+                  return (
+                    <li key={quote.QuoteId}>{quote.MinPrice}</li>
+                  )
+                })}
+              </ul>
             </Paper>
           </Grid>
           <Grid item xs={12} md={2}>
             <Paper className={classes.paper}>
               <h2>現地情報</h2>
+              <Divider />
               <h2>現地空港</h2>
             </Paper>
           </Grid>

@@ -1,7 +1,7 @@
 import { searchFlightsAction } from './actions'
 
 export const searchFlights = () => {
-  return async (dispatch) => {
+  return (dispatch) => {
     fetch(`https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/USD/en-US/YVR/HND/2020-08-01/2020-08-31`, {
       method: 'GET',
       headers: {
@@ -13,6 +13,7 @@ export const searchFlights = () => {
       .then(res => res.json())
       .then(data => {
         console.log(data);
+        dispatch(searchFlightsAction(data));
       })
       .catch(error => {
         alert('Failed to get the result.');
