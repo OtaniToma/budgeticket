@@ -6,11 +6,14 @@ const initialState = {
     username: '',
     test: 'test'
   },
+  searchTerms: {
+
+  },
   flights: {
-    Carriers: '',
-    Currencies: 'CAD',
-    Places: '',
-    Quotes: ''
+    carriers: [],
+    currency: [],
+    places: [],
+    quotes: []
   }
 }
 

@@ -4,7 +4,6 @@ import initialState from '../store/initialState'
 export const FlightsReducer = (state = initialState.flights, action) => {
   switch (action.type) {
     case Actions.TEST_FUNC:
-      console.log(action.payload)
       return {
         ...state,
         ...action.payload
