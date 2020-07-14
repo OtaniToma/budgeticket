@@ -1,4 +1,4 @@
-import { searchFlightsAction } from './actions'
+import { testFuncAction } from './actions'
 
 export const searchFlights = () => {
   return async (dispatch) => {
@@ -17,5 +17,11 @@ export const searchFlights = () => {
       .catch(error => {
         alert('Failed to get the result.');
       });
+  }
+}
+
+export const testFunc = () => {
+  return async(dispatch) => {
+    dispatch(testFuncAction());
   }
 }
