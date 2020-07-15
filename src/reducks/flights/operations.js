@@ -4,10 +4,12 @@ export const searchFlights = ({
   originAirport,
   destinationAirport,
   currency,
+  departDate,
+  returnDate
 }) => {
   return (dispatch) => {
     fetch(
-      `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/${currency}/en-US/${originAirport}/${destinationAirport}/2020-08-01/2020-08-31`,
+      `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/US/${currency}/en-US/${originAirport}/${destinationAirport}/${departDate}/${returnDate}`,
       {
         method: "GET",
         headers: {

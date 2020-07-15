@@ -2,17 +2,18 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
-const TextInput = (props) => {
+const SelectBox = (props) => {
   const {
     value,
     options,
-    select
+    select,
+    label
   } = props;
 
   return (
     <TextField
       select
-      label="Select"
+      label={label}
       value={value}
       onChange={(event) => select(event.target.value)}
     >
@@ -25,4 +26,4 @@ const TextInput = (props) => {
   );
 };
 
-export default TextInput;
+export default SelectBox;
