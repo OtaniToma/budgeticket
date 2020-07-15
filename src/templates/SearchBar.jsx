@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { searchFlights } from '../reducks/flights/operations'
-import { Button } from '../components/UI'
+import { Button } from '../components/atoms'
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
 
