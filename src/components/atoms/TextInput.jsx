@@ -1,9 +1,17 @@
-import React from 'react'
-import TextField from '@material-ui/core/TextField'
+import React from "react";
+import TextField from "@material-ui/core/TextField";
 
 const TextInput = (props) => {
-
-  const { fullWidth, label, multiline, required, rows, value, type, onChange } = props;
+  const {
+    fullWidth,
+    label,
+    multiline,
+    required,
+    rows,
+    value,
+    type,
+    onChange,
+  } = props;
 
   return (
     <TextField
@@ -17,7 +25,7 @@ const TextInput = (props) => {
       type={type}
       onChange={onChange}
     />
-  )
-}
+  );
+};
 
-export default TextInput
+export default TextInput;

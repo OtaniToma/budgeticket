@@ -1,20 +1,18 @@
 const initialState = {
   users: {
-    icon: '',
+    icon: "",
     isSignedIn: false,
-    uid: '',
-    username: '',
-    test: 'test'
+    uid: "",
+    username: "",
+    test: "test",
   },
-  searchTerms: {
-
-  },
+  searchTerms: {},
   flights: {
     carriers: [],
     currency: [],
     places: [],
-    quotes: []
-  }
-}
+    quotes: [],
+  },
+};
 
-export default initialState
+export default initialState;
