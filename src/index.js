@@ -1,15 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import createStore from "./reducks/store/store";
+import createStore from "./reducks/store";
 import App from "./App";
 import { ConnectedRouter } from "connected-react-router";
 import * as History from "history";
 import { MuiThemeProvider } from "@material-ui/core";
 import { theme } from "./assets/theme";
+import { devToolsEnhancer } from 'redux-devtools-extension'
 
 const history = History.createBrowserHistory();
-export const store = createStore(history);
+export const store = createStore(history, devToolsEnhancer());
 
 ReactDOM.render(
   <Provider store={store}>

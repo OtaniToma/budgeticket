@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchFlights } from "../reducks/flights/operations";
 import { Button } from "../components/atoms";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
+import { SelectBox, SelectDate } from "../components/atoms";
 
 const airports = [
   {
@@ -45,68 +44,47 @@ const SearchBar = () => {
   const [originAirport, setOriginAirport] = useState("YVR");
   const [destinationAirport, setDestinationAirport] = useState("SFO");
   const [currency, setCurrency] = useState("CAD");
-
-  const handleChangeOriginAirport = (event) => {
-    setOriginAirport(event.target.value);
-  };
-
-  const handleChangeDestinationAirport = (event) => {
-    setDestinationAirport(event.target.value);
-  };
-
-  const handleChangeCurrency = (event) => {
-    setCurrency(event.target.value);
-  };
+  const [departDate, setDepartDate] = useState("2020-08-01");
+  const [returnDate, setReturnDate] = useState("2020-08-11");
 
   return (
     <>
       <form>
-        <TextField
-          select
-          label="Select"
+        <SelectBox
           value={originAirport}
-          onChange={handleChangeOriginAirport}
-        >
-          {airports.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
-          select
-          label="Select"
+          options={airports}
+          label={'From'}
+          select={setOriginAirport}
+        />
+        <SelectBox
           value={destinationAirport}
-          onChange={handleChangeDestinationAirport}
-        >
-          {airports.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-
-        <TextField
-          select
-          label="Select"
+          options={airports}
+          label={'To'}
+          select={setDestinationAirport}
+        />
+        <SelectBox
           value={currency}
-          onChange={handleChangeCurrency}
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
-
+          options={currencies}
+          label={'Currency'}
+          select={setCurrency}
+        />
+        <SelectDate
+          label={'Depart'}
+          defaultValue={departDate}
+          select={setDepartDate}
+        />
+        <SelectDate
+          label={'Return'}
+          defaultValue={returnDate}
+          select={setReturnDate}
+        />
         <Button
           onClick={() =>
             dispatch(
-              searchFlights({ originAirport, destinationAirport, currency })
+              searchFlights({ originAirport, destinationAirport, currency, departDate, returnDate })
             )
           }
-          label={"検索"}
+          label={"Search"}
           color={"primary"}
         />
       </form>

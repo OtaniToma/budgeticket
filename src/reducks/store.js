@@ -4,11 +4,12 @@ import {
   applyMiddleware,
 } from "redux";
 import { connectRouter, routerMiddleware } from "connected-react-router";
-import { UsersReducer } from "../users/reducers";
-import { FlightsReducer } from "../flights/reducers";
+import { UsersReducer } from "./users/reducers";
+import { FlightsReducer } from "./flights/reducers";
 import thunk from "redux-thunk";
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-export default function createStore(history) {
+export default function createStore(history, composeWithDevTools) {
   return reduxCreateStore(
     combineReducers({
       router: connectRouter(history),
