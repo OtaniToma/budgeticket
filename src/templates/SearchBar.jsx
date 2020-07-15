@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchFlights } from "../reducks/flights/operations";
 import { Button } from "../components/atoms";
+import { SelectBox } from "../components/atoms";
 import TextField from "@material-ui/core/TextField";
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -46,59 +47,27 @@ const SearchBar = () => {
   const [destinationAirport, setDestinationAirport] = useState("SFO");
   const [currency, setCurrency] = useState("CAD");
 
-  const handleChangeOriginAirport = (event) => {
-    setOriginAirport(event.target.value);
-  };
-
-  const handleChangeDestinationAirport = (event) => {
-    setDestinationAirport(event.target.value);
-  };
-
-  const handleChangeCurrency = (event) => {
-    setCurrency(event.target.value);
-  };
-
   return (
     <>
       <form>
-        <TextField
-          select
-          label="Select"
+
+        <SelectBox
           value={originAirport}
-          onChange={handleChangeOriginAirport}
-        >
-          {airports.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={airports}
+          select={setOriginAirport}
+        />
 
-        <TextField
-          select
-          label="Select"
+        <SelectBox
           value={destinationAirport}
-          onChange={handleChangeDestinationAirport}
-        >
-          {airports.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={airports}
+          select={setDestinationAirport}
+        />
 
-        <TextField
-          select
-          label="Select"
+        <SelectBox
           value={currency}
-          onChange={handleChangeCurrency}
-        >
-          {currencies.map((option) => (
-            <MenuItem key={option.value} value={option.value}>
-              {option.label}
-            </MenuItem>
-          ))}
-        </TextField>
+          options={currencies}
+          select={setCurrency}
+        />
 
         <Button
           onClick={() =>

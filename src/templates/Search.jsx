@@ -7,6 +7,7 @@ import {
   getQuotes,
 } from "../reducks/flights/selectors";
 import SearchBar from "./SearchBar";
+import SearchResult from "./SearchResult";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -41,38 +42,27 @@ const Search = () => {
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
-            <Paper className={classes.paper}>
-              <h2>直行・経由</h2>
-              <Divider />
-              <h2>航空会社</h2>
-              <ul>
-                {carriers &&
-                  carriers.map((carrier) => {
-                    return <li key={carrier.CarrierId}>{carrier.Name}</li>;
-                  })}
-              </ul>
-              <Divider />
-              <h2>検索履歴</h2>
-              <Divider />
-            </Paper>
+            <h2>直行・経由</h2>
+            <Divider />
+            <h2>航空会社</h2>
+            <ul>
+              {carriers &&
+                carriers.map((carrier) => {
+                  return <li key={carrier.CarrierId}>{carrier.Name}</li>;
+                })}
+            </ul>
+            <Divider />
+            <h2>検索履歴</h2>
+            <Divider />
           </Grid>
           <Grid item xs={12} md={8}>
-            <Paper className={classes.paper}>
-              <h2>検索結果</h2>
-              <ul>
-                {quotes &&
-                  quotes.map((quote) => {
-                    return <li key={quote.QuoteId}>{quote.MinPrice}</li>;
-                  })}
-              </ul>
-            </Paper>
+            <h2>検索結果</h2>
+            <SearchResult quotes={quotes} />
           </Grid>
           <Grid item xs={12} md={2}>
-            <Paper className={classes.paper}>
-              <h2>現地情報</h2>
-              <Divider />
-              <h2>現地空港</h2>
-            </Paper>
+            <h2>現地情報</h2>
+            <Divider />
+            <h2>現地空港</h2>
           </Grid>
         </Grid>
       </div>
