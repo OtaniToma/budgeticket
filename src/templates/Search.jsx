@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Home = () => {
+const Search = () => {
   const dispatch = useDispatch()
   const selector = useSelector(state => state)
   const carriers = getCarriers(selector)
@@ -77,4 +77,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default Search
