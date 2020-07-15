@@ -9,13 +9,13 @@ import { FlightsReducer } from "./flights/reducers";
 import thunk from "redux-thunk";
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-export default function createStore(history, composeWithDevTools) {
+export default function createStore(history) {
   return reduxCreateStore(
     combineReducers({
       router: connectRouter(history),
       users: UsersReducer,
       flights: FlightsReducer,
     }),
-    applyMiddleware(routerMiddleware(history), thunk)
+    composeWithDevTools(applyMiddleware(routerMiddleware(history), thunk))
   );
 }
