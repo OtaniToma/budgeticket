@@ -8,7 +8,7 @@ import {
 } from "../reducks/flights/selectors";
 import SearchBar from "./SearchBar";
 import SearchResult from "./SearchResult";
-import Ticket from './Ticket'
+import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
@@ -57,8 +57,7 @@ const Search = () => {
             <Divider />
           </Grid>
           <Grid item xs={12} md={8}>
-            <h2>検索結果</h2>
-            <Ticket quotes={quotes} />
+            <Tickets quotes={quotes} />
           </Grid>
           <Grid item xs={12} md={2}>
             <h2>現地情報</h2>
