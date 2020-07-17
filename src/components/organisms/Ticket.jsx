@@ -13,8 +13,15 @@ const Ticket = (props) => {
   const {
     id,
     price,
+    currencies,
+    departAirportCode,
+    arriveAirportCode,
+    departAirportName,
+    arriveAirportName,
     outboundCarriers,
-    inboundCarriers
+    inboundCarriers,
+    outboundDepartureDate,
+    inboundDepartureDate
   } = props;
 
   const classes = useStyles();
@@ -30,11 +37,14 @@ const Ticket = (props) => {
                 {outboundCarriers}
               </div>
               <div className="outdate">
+                {outboundDepartureDate}
               </div>
               <div className="depAirport">
                 <span className="depAirport__iata">
+                  {departAirportCode}
                 </span>
                 <span className="depAirport__city">
+                  {departAirportName}
                 </span>
               </div>
               <div className="arrow">
@@ -42,8 +52,10 @@ const Ticket = (props) => {
               </div>
               <div className="arrAirport">
                 <span className="arrAirport__iata">
+                  {arriveAirportCode}
                 </span>
                 <span className="arrAirport__city">
+                  {arriveAirportName}
                 </span>
               </div>
             </div>
@@ -52,11 +64,14 @@ const Ticket = (props) => {
                 {inboundCarriers}
               </div>
               <div className="outdate">
+                {inboundDepartureDate}
               </div>
               <div className="depAirport">
                 <span className="depAirport__iata">
+                  {arriveAirportCode}
                 </span>
                 <span className="depAirport__city">
+                  {arriveAirportName}
                 </span>
               </div>
               <div className="arrow">
@@ -64,8 +79,10 @@ const Ticket = (props) => {
               </div>
               <div className="arrAirport">
                 <span className="arrAirport__iata">
+                  {departAirportCode}
                 </span>
                 <span className="arrAirport__city">
+                  {arriveAirportName}
                 </span>
               </div>
             </div>
@@ -77,7 +94,9 @@ const Ticket = (props) => {
         <div className="ticket__punchline__bottom"></div>
       </div>
       <div className={"ticket__right"}>
-        <span className="ticket__right__price">{price}</span>
+        <span className="ticket__right__price">
+          {currencies.Symbol} {price}
+        </span>
       </div>
     </div>
   </div>

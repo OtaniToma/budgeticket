@@ -4,7 +4,7 @@ export const searchFlightsAction = (data) => {
     type: "SEARCH_FLIGHTS",
     payload: {
       carriers: data.Carriers,
-      currency: data.Currencies,
+      currencies: data.Currencies,
       places: data.Places,
       quotes: data.Quotes,
     },
