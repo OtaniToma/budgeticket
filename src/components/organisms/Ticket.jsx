@@ -20,6 +20,8 @@ const Ticket = (props) => {
     arriveAirportName,
     outboundCarriers,
     inboundCarriers,
+    outboundCarriersLogo,
+    inboundCarriersLogo,
     outboundDepartureDate,
     inboundDepartureDate
   } = props;
@@ -34,7 +36,7 @@ const Ticket = (props) => {
           <div className="left__wrapper">
             <div className="left__row1">
               <div className="airline">
-                {outboundCarriers}
+                <img src={outboundCarriersLogo} alt={outboundCarriers}/>
               </div>
               <div className="outdate">
                 {outboundDepartureDate}
@@ -61,7 +63,7 @@ const Ticket = (props) => {
             </div>
             <div className="left__row2">
               <div className="airline">
-                {inboundCarriers}
+                <img src={inboundCarriersLogo} alt={inboundCarriers}/>
               </div>
               <div className="outdate">
                 {inboundDepartureDate}
