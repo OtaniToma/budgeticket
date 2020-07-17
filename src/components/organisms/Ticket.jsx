@@ -13,6 +13,8 @@ const Ticket = (props) => {
   const {
     id,
     price,
+    outboundCarriers,
+    inboundCarriers
   } = props;
 
   const classes = useStyles();
@@ -25,6 +27,7 @@ const Ticket = (props) => {
           <div className="left__wrapper">
             <div className="left__row1">
               <div className="airline">
+                {outboundCarriers}
               </div>
               <div className="outdate">
               </div>
@@ -46,6 +49,7 @@ const Ticket = (props) => {
             </div>
             <div className="left__row2">
               <div className="airline">
+                {inboundCarriers}
               </div>
               <div className="outdate">
               </div>

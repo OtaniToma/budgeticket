@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getCarriers,
-  getCurrency,
+  getCurrencies,
   getPlaces,
   getQuotes,
 } from "../reducks/flights/selectors";
@@ -29,7 +29,7 @@ const Search = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const carriers = getCarriers(selector);
-  const currency = getCurrency(selector);
+  const currencies = getCurrencies(selector);
   const places = getPlaces(selector);
   const quotes = getQuotes(selector);
   const classes = useStyles();
@@ -57,7 +57,12 @@ const Search = () => {
             <Divider />
           </Grid>
           <Grid item xs={12} md={8}>
-            <Tickets quotes={quotes} />
+            <Tickets
+              carriers={carriers}
+              currencies={currencies}
+              places={places}
+              quotes={quotes}
+            />
           </Grid>
           <Grid item xs={12} md={2}>
             <h2>現地情報</h2>

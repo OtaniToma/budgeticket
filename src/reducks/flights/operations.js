@@ -23,7 +23,6 @@ export const searchFlights = ({
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         dispatch(searchFlightsAction(data));
       })
       .catch((error) => {
