@@ -6,9 +6,9 @@ export const getCarriers = createSelector(
   (state) => state.carriers
 );
 
-export const getCurrency = createSelector(
+export const getCurrencies = createSelector(
   [userSelector],
-  (state) => state.currency
+  (state) => state.currencies
 );
 
 export const getPlaces = createSelector(

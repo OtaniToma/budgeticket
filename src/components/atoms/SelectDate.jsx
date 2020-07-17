@@ -5,7 +5,8 @@ const SelectDate = (props) => {
   const {
     label,
     defaultValue,
-    select
+    select,
+    minDate
   } = props;
 
   return (
@@ -14,9 +15,7 @@ const SelectDate = (props) => {
       label={label}
       type="date"
       defaultValue={defaultValue}
-      InputLabelProps={{
-        shrink: true,
-      }}
+      InputProps={{ inputProps: { min: minDate } }}
     />
   );
 };
