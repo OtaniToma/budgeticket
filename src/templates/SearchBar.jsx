@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { searchFlights, ascendFlights } from "../reducks/flights/operations";
 import { Button } from "../components/atoms";
 import { SelectBox, SelectDate } from "../components/atoms";
+import { getQuotes } from "../reducks/flights/selectors";
 
 const airports = [
   {
@@ -58,6 +59,8 @@ const getTwoWeeksLater = new Date(getToday.getTime() + 14 * 24 * 60 * 60 * 1000)
 
 const SearchBar = () => {
   const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
+  const quotes = getQuotes(selector);
 
   const [originAirport, setOriginAirport] = useState("YVR");
   const [destinationAirport, setDestinationAirport] = useState("SFO");
@@ -77,6 +80,7 @@ const SearchBar = () => {
       alert('Please select the departure date before the return date.');
     }
   }, [returnDate])
+
 
   return (
     <>
@@ -120,7 +124,7 @@ const SearchBar = () => {
           label={"Search"}
           color={"primary"}
         />
-        <button onClick={() => ascendFlights()}>Low to High</button>
+        <button onClick={() => ascendFlights(quotes)}>Low to High</button>
       </form>
     </>
   );

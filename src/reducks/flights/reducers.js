@@ -11,7 +11,7 @@ export const FlightsReducer = (state = initialState.flights, action) => {
     case Actions.ASCEND_FLIGHTS:
       return {
         ...state,
-        ...action.payload,
+        quotes: action.payload,
       };
     default:
       return state;

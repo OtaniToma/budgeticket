@@ -14,10 +14,10 @@ export const searchFlightsAction = (data) => {
 
 export const ASCEND_FLIGHTS = "ASCEND_FLIGHTS";
 export const ascendFlightsAction = (data) => {
+  console.log(data);
+  debugger
   return {
     type: "ASCEND_FLIGHTS",
-    payload: {
-      quotes: data
-    }
+    payload: data
   };
 };
