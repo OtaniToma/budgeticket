@@ -9,7 +9,6 @@ const Tickets = (props) => {
     places,
     quotes,
   } = props;
-  console.log(props);
 
   const carriersToShow = {};
   carriers.map(carrier => {
