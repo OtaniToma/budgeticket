@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { searchFlights } from "../reducks/flights/operations";
+import { searchFlights, ascendFlights } from "../reducks/flights/operations";
 import { Button } from "../components/atoms";
 import { SelectBox, SelectDate } from "../components/atoms";
 
@@ -120,6 +120,7 @@ const SearchBar = () => {
           label={"Search"}
           color={"primary"}
         />
+        <button onClick={() => ascendFlights()}>Low to High</button>
       </form>
     </>
   );
