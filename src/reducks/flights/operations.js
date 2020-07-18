@@ -31,7 +31,13 @@ export const searchFlights = ({
   };
 };
 
-export const ascendFlights = (quotes) => {
-  const sortedFlights = quotes.sort((a, b) => a.MinPrice - b.MinPrice);
-  ascendFlightsAction(sortedFlights);
+export const ascendFlights = (data) => {
+  return (dispatch) => {
+    dispatch(ascendFlightsAction(data));
+  };
 };
+
+// export const ascendFlights = (quotes) => {
+//   const sortedFlights = quotes.sort((a, b) => a.MinPrice - b.MinPrice);
+//   ascendFlightsAction(sortedFlights);
+// };
