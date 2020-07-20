@@ -36,8 +36,6 @@ const Search = () => {
   const quotes = getQuotes(selector);
   const classes = useStyles();
 
-  console.log(quotes);
-
   return (
     <>
       <div className={classes.root}>
@@ -52,9 +50,6 @@ const Search = () => {
             />
             <Divider />
             <AirlineList carriers={carriers} />
-            <Divider />
-            <h2>検索履歴</h2>
-            <Divider />
           </Grid>
           <Grid item xs={12} md={8}>
             <Tickets
