@@ -7,6 +7,7 @@ import {
   getQuotes,
 } from "../reducks/flights/selectors";
 import SearchBar from "../components/organisms/SearchBar";
+import StopList from "../components/organisms/StopList";
 import AirlineList from "../components/organisms/AirlineList";
 import SearchResult from "./SearchResult";
 import Tickets from './Tickets'
@@ -35,7 +36,7 @@ const Search = () => {
   const quotes = getQuotes(selector);
   const classes = useStyles();
 
-  console.log(carriers);
+  console.log(quotes);
 
   return (
     <>
@@ -46,7 +47,9 @@ const Search = () => {
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
-            <h2>直行・経由</h2>
+            <StopList
+              quotes={quotes}
+            />
             <Divider />
             <AirlineList carriers={carriers} />
             <Divider />
