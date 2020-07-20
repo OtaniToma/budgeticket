@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { searchFlights, ascendFlights } from "../reducks/flights/operations";
-import { Button } from "../components/atoms";
-import { SelectBox, SelectDate } from "../components/atoms";
-import { getQuotes } from "../reducks/flights/selectors";
+import { searchFlights, ascendFlights } from "../../reducks/flights/operations";
+import { Button } from "../atoms";
+import { SelectBox, SelectDate } from "../atoms";
+import { getQuotes } from "../../reducks/flights/selectors";
 
 const airports = [
   {

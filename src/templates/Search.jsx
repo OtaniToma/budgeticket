@@ -6,7 +6,8 @@ import {
   getPlaces,
   getQuotes,
 } from "../reducks/flights/selectors";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/organisms/SearchBar";
+import AirlineList from "../components/organisms/AirlineList";
 import SearchResult from "./SearchResult";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
@@ -34,6 +35,8 @@ const Search = () => {
   const quotes = getQuotes(selector);
   const classes = useStyles();
 
+  console.log(carriers);
+
   return (
     <>
       <div className={classes.root}>
@@ -45,13 +48,7 @@ const Search = () => {
           <Grid item xs={12} md={2}>
             <h2>直行・経由</h2>
             <Divider />
-            <h2>航空会社</h2>
-            <ul>
-              {carriers &&
-                carriers.map((carrier) => {
-                  return <li key={carrier.CarrierId}>{carrier.Name}</li>;
-                })}
-            </ul>
+            <AirlineList carriers={carriers} />
             <Divider />
             <h2>検索履歴</h2>
             <Divider />
