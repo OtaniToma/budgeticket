@@ -8,6 +8,7 @@ const Tickets = (props) => {
     currencies,
     places,
     quotes,
+    onChangeSortType
   } = props;
 
   const carriersToShow = {};
@@ -26,6 +27,9 @@ const Tickets = (props) => {
 
   return (
     <>
+    <button onClick={() => onChangeSortType('lowToHigh')}>Lowest Price</button>
+    <button onClick={() => onChangeSortType('highToLow')}>Highest Price</button>
+
       {quotes &&
         quotes.map((quote) => {
           return (

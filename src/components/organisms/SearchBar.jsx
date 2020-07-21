@@ -128,7 +128,6 @@ const SearchBar = () => {
         label={"Search"}
         color={"primary"}
       />
-      <button onClick={() => dispatch(ascendFlights(quotes))}>Low to High</button>
     </>
   );
 };

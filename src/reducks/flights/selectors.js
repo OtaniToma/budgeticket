@@ -18,5 +18,9 @@ export const getPlaces = createSelector(
 
 export const getQuotes = createSelector(
   [userSelector],
-  (state) => state.quotes
+  (state) => ({
+    default: state.quotes,
+    lowToHigh: [...state.quotes].sort((a, b) => a.MinPrice - b.MinPrice),
+    highToLow: [...state.quotes].sort((a, b) => b.MinPrice - a.MinPrice),
+  })
 );

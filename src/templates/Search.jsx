@@ -15,6 +15,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import { List } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,6 +36,8 @@ const Search = () => {
   const places = getPlaces(selector);
   const quotes = getQuotes(selector);
   const classes = useStyles();
+  const [sortType, setSortType] = useState('default');
+  const list = quotes[sortType];
 
   return (
     <>
@@ -46,7 +49,7 @@ const Search = () => {
           </Grid>
           <Grid item xs={12} md={2}>
             <StopList
-              quotes={quotes}
+              quotes={quotes.default}
             />
             <Divider />
             <AirlineList carriers={carriers} />
@@ -56,7 +59,8 @@ const Search = () => {
               carriers={carriers}
               currencies={currencies}
               places={places}
-              quotes={quotes}
+              quotes={list}
+              onChangeSortType={setSortType}
             />
           </Grid>
           <Grid item xs={12} md={2}>
