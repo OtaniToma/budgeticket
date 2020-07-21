@@ -10,3 +10,11 @@ export const searchFlightsAction = (data) => {
     },
   };
 };
+
+export const ASCEND_FLIGHTS = "ASCEND_FLIGHTS";
+export const ascendFlightsAction = (data) => {
+  return {
+    type: "ASCEND_FLIGHTS",
+    payload: data
+  };
+};

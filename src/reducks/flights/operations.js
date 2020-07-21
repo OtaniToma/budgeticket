@@ -1,4 +1,4 @@
-import { searchFlightsAction } from "./actions";
+import { searchFlightsAction, ascendFlightsAction } from "./actions";
 
 export const searchFlights = ({
   originAirport,
@@ -21,12 +21,24 @@ export const searchFlights = ({
         },
       }
     )
-      .then((res) => res.json())
-      .then((data) => {
-        dispatch(searchFlightsAction(data));
-      })
-      .catch((error) => {
-        alert("Failed to get the result.");
-      });
+    .then((res) => res.json())
+    .then((data) => {
+      dispatch(searchFlightsAction(data));
+    })
+    .catch((error) => {
+      alert("Failed to get the result.");
+    });
   };
+};
+
+// export const ascendFlights = (data) => {
+//   return (dispatch) => {
+//     dispatch(ascendFlightsAction(data));
+//   };
+// };
+
+export const ascendFlights = (quotes) => {
+  const sortedFlights = quotes.sort((a, b) => a.MinPrice - b.MinPrice);
+  ascendFlightsAction(sortedFlights);
+  console.log(sortedFlights);
 };

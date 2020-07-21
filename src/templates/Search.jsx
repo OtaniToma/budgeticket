@@ -6,13 +6,16 @@ import {
   getPlaces,
   getQuotes,
 } from "../reducks/flights/selectors";
-import SearchBar from "./SearchBar";
+import SearchBar from "../components/organisms/SearchBar";
+import StopList from "../components/organisms/StopList";
+import AirlineList from "../components/organisms/AirlineList";
 import SearchResult from "./SearchResult";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import { List } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +36,8 @@ const Search = () => {
   const places = getPlaces(selector);
   const quotes = getQuotes(selector);
   const classes = useStyles();
+  const [sortType, setSortType] = useState('default');
+  const list = quotes[sortType];
 
   return (
     <>
@@ -43,25 +48,19 @@ const Search = () => {
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
-            <h2>直行・経由</h2>
+            <StopList
+              quotes={quotes.default}
+            />
             <Divider />
-            <h2>航空会社</h2>
-            <ul>
-              {carriers &&
-                carriers.map((carrier) => {
-                  return <li key={carrier.CarrierId}>{carrier.Name}</li>;
-                })}
-            </ul>
-            <Divider />
-            <h2>検索履歴</h2>
-            <Divider />
+            <AirlineList carriers={carriers} />
           </Grid>
           <Grid item xs={12} md={8}>
             <Tickets
               carriers={carriers}
               currencies={currencies}
               places={places}
-              quotes={quotes}
+              quotes={list}
+              onChangeSortType={setSortType}
             />
           </Grid>
           <Grid item xs={12} md={2}>
