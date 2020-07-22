@@ -54,7 +54,7 @@ const Search = () => {
             <Divider />
             <AirlineList carriers={carriers} />
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={7}>
             <Tickets
               carriers={carriers}
               currencies={currencies}
@@ -63,7 +63,7 @@ const Search = () => {
               onChangeSortType={setSortType}
             />
           </Grid>
-          <Grid item xs={12} md={2}>
+          <Grid item xs={12} md={3}>
             <h2>現地情報</h2>
             <Divider />
             <h2>現地空港</h2>
