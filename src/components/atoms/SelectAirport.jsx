@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import AirportsData from '../../reducks/flights/airports.json'
+import AirportsData from 'airport-data'
 
 const AutocompleteInput = (props) => {
   const {
@@ -13,7 +13,7 @@ const AutocompleteInput = (props) => {
     if (values === null) {
       return false;
     }
-    select(values.code);
+    select(values.iata);
   }
 
   return (
