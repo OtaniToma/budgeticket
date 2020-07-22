@@ -1604,7 +1604,7 @@
   {
     "id": "LO",
     "lcc": "0",
-    "name": "LOT Polish Airlines",
+    "name": "LOT",
     "logo": "https://images.kiwi.com/airlines/64/LO.png"
   },
   {
@@ -5270,7 +5270,7 @@
   {
     "id": "E2",
     "lcc": "0",
-    "name": "Eurowings Europe",
+    "name": "eurowings",
     "logo": "https://images.kiwi.com/airlines/64/E2.png"
   },
   {
@@ -5906,7 +5906,7 @@
   {
     "id": "B6",
     "lcc": "1",
-    "name": "JetBlue Airways",
+    "name": "jetBlue",
     "logo": "https://images.kiwi.com/airlines/64/B6.png"
   },
   {
@@ -6080,7 +6080,7 @@
   {
     "id": "VY",
     "lcc": "1",
-    "name": "Vueling",
+    "name": "Vueling Airlines",
     "logo": "https://images.kiwi.com/airlines/64/VY.png"
   },
   {
@@ -6530,7 +6530,7 @@
   {
     "id": "SU",
     "lcc": "0",
-    "name": "Aeroflot Russian Airlines",
+    "name": "Aeroflot",
     "logo": "https://images.kiwi.com/airlines/64/SU.png"
   },
   {
