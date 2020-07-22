@@ -1,4 +1,4 @@
-import { searchFlightsAction, ascendFlightsAction } from "./actions";
+import { searchFlightsAction } from "./actions";
 
 export const searchFlights = ({
   originAirport,
@@ -29,16 +29,4 @@ export const searchFlights = ({
       alert("Failed to get the result.");
     });
   };
-};
-
-// export const ascendFlights = (data) => {
-//   return (dispatch) => {
-//     dispatch(ascendFlightsAction(data));
-//   };
-// };
-
-export const ascendFlights = (quotes) => {
-  const sortedFlights = quotes.sort((a, b) => a.MinPrice - b.MinPrice);
-  ascendFlightsAction(sortedFlights);
-  console.log(sortedFlights);
 };

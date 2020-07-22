@@ -1,28 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { searchFlights, ascendFlights } from "../../reducks/flights/operations";
+import { searchFlights } from "../../reducks/flights/operations";
 import { Button } from "../atoms";
-import { SelectBox, SelectDate } from "../atoms";
+import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { getQuotes } from "../../reducks/flights/selectors";
-
-const airports = [
-  {
-    value: "YVR",
-    label: "Vancouver",
-  },
-  {
-    value: "SEA",
-    label: "Seattle",
-  },
-  {
-    value: "SFO",
-    label: "San Francisco",
-  },
-  {
-    value: "LAX",
-    label: "Los Angeles",
-  },
-];
+import { makeStyles } from '@material-ui/core/styles';
 
 const currencies = [
   {
@@ -81,21 +63,25 @@ const SearchBar = () => {
     }
   }, [returnDate])
 
+  const useStyles = makeStyles({
+    root: {
+      display: 'flex',
+    },
+  });
+  const classes = useStyles();
 
   return (
-    <>
-      <SelectBox
-        value={originAirport}
-        options={airports}
-        label={'From'}
+    <div className={classes.root}>
+      <SelectAirport
         select={setOriginAirport}
+        label={'From'}
       />
-      <SelectBox
-        value={destinationAirport}
-        options={airports}
-        label={'To'}
+
+      <SelectAirport
         select={setDestinationAirport}
+        label={'To'}
       />
+
       <SelectBox
         value={currency}
         options={currencies}
@@ -114,6 +100,7 @@ const SearchBar = () => {
         select={setReturnDate}
         minDate={todayDate}
       />
+
       <Button onClick={() =>
           dispatch(
             searchFlights({
@@ -128,7 +115,8 @@ const SearchBar = () => {
         label={"Search"}
         color={"primary"}
       />
-    </>
+
+    </div>
   );
 };
 

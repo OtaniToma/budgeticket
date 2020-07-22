@@ -8,11 +8,6 @@ export const FlightsReducer = (state = initialState.flights, action) => {
         ...state,
         ...action.payload,
       };
-    case Actions.ASCEND_FLIGHTS:
-      return {
-        ...state,
-        quotes: action.payload,
-      };
     default:
       return state;
   }
