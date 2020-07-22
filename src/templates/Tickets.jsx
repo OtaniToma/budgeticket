@@ -50,11 +50,16 @@ const Tickets = (props) => {
   };
 
   useEffect(() => {
-    if (sort === 'lowToHigh') {
-      onChangeSortType('lowToHigh')
-    }
-    if (sort === 'highToLow') {
-      onChangeSortType('highToLow')
+    switch (sort) {
+      case 'lowToHigh':
+        onChangeSortType('lowToHigh')
+        break;
+      case 'highToLow':
+        onChangeSortType('highToLow')
+        break;
+      case 'departEarly':
+        onChangeSortType('departEarly')
+        break;
     }
   }, [sort])
 
@@ -68,6 +73,7 @@ const Tickets = (props) => {
         >
           <MenuItem value={'lowToHigh'}>Low to High</MenuItem>
           <MenuItem value={'highToLow'}>High to Low</MenuItem>
+          <MenuItem value={'departEarly'}>Early Departure</MenuItem>
         </Select>
       </FormControl>
 

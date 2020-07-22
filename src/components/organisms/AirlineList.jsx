@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 const AirlineList = ({ carriers }) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
-  console.log(checked);
+  // console.log(checked);
 
   const handleToggle = (carrier) => () => {
     const currentIndex = checked.indexOf(carrier);
