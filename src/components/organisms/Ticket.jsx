@@ -84,7 +84,7 @@ const Ticket = (props) => {
                   {departAirportCode}
                 </span>
                 <span className="arrAirport__city">
-                  {arriveAirportName}
+                  {departAirportName}
                 </span>
               </div>
             </div>
