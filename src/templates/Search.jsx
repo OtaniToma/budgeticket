@@ -9,6 +9,7 @@ import {
 import SearchBar from "../components/organisms/SearchBar";
 import StopList from "../components/organisms/StopList";
 import AirlineList from "../components/organisms/AirlineList";
+import AirportInfo from "../components/organisms/AirportInfo";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
@@ -93,7 +94,7 @@ const Search = () => {
           <Grid item xs={12} md={3}>
             <h2>現地情報</h2>
             <Divider />
-            <h2>現地空港</h2>
+            <AirportInfo places={places} />
           </Grid>
         </Grid>
       </div>
