@@ -60,6 +60,9 @@ const Tickets = (props) => {
       case 'highToLow':
         onChangeSortType('highToLow')
         break;
+      case 'selectedAirlines':
+        onChangeSortType('selectedAirlines')
+        break;
     }
   }, [sort])
 

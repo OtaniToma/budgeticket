@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AirlineList = ({ carriers }) => {
+const AirlineList = ({ carriers, filterAirlines }) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
   // console.log(checked);
@@ -31,6 +31,10 @@ const AirlineList = ({ carriers }) => {
 
     setChecked(newChecked);
   };
+
+  useEffect(() => {
+    filterAirlines(checked)
+  }, [checked])
 
   return (
     <>
