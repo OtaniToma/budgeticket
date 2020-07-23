@@ -5,17 +5,15 @@ import {
   getCurrencies,
   getPlaces,
   getQuotes,
+  filterQuotes
 } from "../reducks/flights/selectors";
 import SearchBar from "../components/organisms/SearchBar";
 import StopList from "../components/organisms/StopList";
 import AirlineList from "../components/organisms/AirlineList";
-import SearchResult from "./SearchResult";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-import { List } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,24 +37,35 @@ const Search = () => {
   const quotes = getQuotes(selector);
 
   const [sortType, setSortType] = useState('default');
-  const list = quotes[sortType];
+  const quotesToSorted = quotes[sortType];
+
+  const [quotesList, setQuotesList] = useState([]);
+
+  useEffect(()=>{
+    setQuotesList(quotesToSorted)
+  }, [quotes, sortType])
 
   const filterAirlines = (checked) => {
-    const checkedAirlines = [];
-    const filteredList = [];
 
+    const airlineNumbers = [];
     checked.map(airline => {
-      checkedAirlines.push(airline.CarrierId)
+      airlineNumbers.push(airline.CarrierId)
     })
 
-    checkedAirlines.map(airline => {
-      list.map(quote => {
-        if (airline === quote.OutboundLeg.CarrierIds[0] || airline === quote.InboundLeg.CarrierIds[0]) {
-          filteredList.push(quote)
+    const filteredArray = [];
+    airlineNumbers.map(number => {
+      quotesToSorted.map(quote => {
+        if (quote.OutboundLeg.CarrierIds[0] === number) {
+          filteredArray.push(quote)
+          return false
+        }
+        if (quote.InboundLeg.CarrierIds[0] === number) {
+          filteredArray.push(quote)
         }
       })
     })
-    console.log(filteredList)
+    console.log(filteredArray);
+    setQuotesList(filteredArray);
   }
 
   return (
@@ -83,8 +92,7 @@ const Search = () => {
               carriers={carriers}
               currencies={currencies}
               places={places}
-              // quotes={filteredList.length > 0 ? filteredList : list}
-              quotes={list}
+              quotes={quotesList}
               onChangeSortType={setSortType}
             />
           </Grid>

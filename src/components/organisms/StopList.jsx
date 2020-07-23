@@ -8,11 +8,7 @@ const StopList = ({ quotes }) => {
     let direct = 0,
         indirect = 0;
     quotes.map(quote => {
-      if (quote.Direct === true) {
-        direct++
-      } else {
-        indirect++
-      }
+      quote.Direct ? direct++ : indirect++
     })
     setDirectFlights(direct);
     setIndirectFlights(indirect);
@@ -20,6 +16,10 @@ const StopList = ({ quotes }) => {
 
   return (
     <>
+    <ul>
+      <li>Direct:   {directFlights}</li>
+      <li>Indirect: {indirectFlights}</li>
+    </ul>
     </>
   );
 };
