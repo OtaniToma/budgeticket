@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getCarriers,
@@ -37,13 +37,36 @@ const Search = () => {
   const quotes = getQuotes(selector);
 
   const [sortType, setSortType] = useState('default');
-  const list = quotes[sortType];
+  const quotesToSorted = quotes[sortType];
 
-  const [selectedAirlines, setSelectedAirlines] = useState([])
+  const [quotesList, setQuotesList] = useState([]);
+
+  useEffect(()=>{
+    setQuotesList(quotesToSorted)
+  }, [quotes, sortType])
+
   const filterAirlines = (checked) => {
-    setSelectedAirlines(checked)
+
+    const airlineNumbers = [];
+    checked.map(airline => {
+      airlineNumbers.push(airline.CarrierId)
+    })
+
+    const filteredArray = [];
+    airlineNumbers.map(number => {
+      quotesToSorted.map(quote => {
+        if (quote.OutboundLeg.CarrierIds[0] === number) {
+          filteredArray.push(quote)
+          return false
+        }
+        if (quote.InboundLeg.CarrierIds[0] === number) {
+          filteredArray.push(quote)
+        }
+      })
+    })
+    console.log(filteredArray);
+    setQuotesList(filteredArray);
   }
-  console.log(selectedAirlines);
 
   return (
     <>
@@ -69,7 +92,7 @@ const Search = () => {
               carriers={carriers}
               currencies={currencies}
               places={places}
-              quotes={list}
+              quotes={quotesList}
               onChangeSortType={setSortType}
             />
           </Grid>
