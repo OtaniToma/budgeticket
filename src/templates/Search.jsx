@@ -5,6 +5,7 @@ import {
   getCurrencies,
   getPlaces,
   getQuotes,
+  filterQuotes
 } from "../reducks/flights/selectors";
 import SearchBar from "../components/organisms/SearchBar";
 import StopList from "../components/organisms/StopList";
@@ -38,25 +39,11 @@ const Search = () => {
   const [sortType, setSortType] = useState('default');
   const list = quotes[sortType];
 
-  const checkedAirlines = [];
-  const filteredList = [];
-
+  const [selectedAirlines, setSelectedAirlines] = useState([])
   const filterAirlines = (checked) => {
-
-    checked.map(airline => {
-      checkedAirlines.push(airline.CarrierId)
-    })
-    console.log(checkedAirlines)
-
-    checkedAirlines.map(airline => {
-      list.map(quote => {
-        if (airline === quote.OutboundLeg.CarrierIds[0] || airline === quote.InboundLeg.CarrierIds[0]) {
-          filteredList.push(quote)
-        }
-      })
-    })
-    console.log(filteredList)
+    setSelectedAirlines(checked)
   }
+  console.log(selectedAirlines);
 
   return (
     <>
@@ -82,11 +69,7 @@ const Search = () => {
               carriers={carriers}
               currencies={currencies}
               places={places}
-
-              // quotes={filteredList}
-              quotes={filteredList.length > 0 ? filteredList : list}
-              // quotes={list}
-
+              quotes={list}
               onChangeSortType={setSortType}
             />
           </Grid>
