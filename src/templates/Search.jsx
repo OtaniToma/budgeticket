@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   getCarriers,
@@ -9,13 +9,10 @@ import {
 import SearchBar from "../components/organisms/SearchBar";
 import StopList from "../components/organisms/StopList";
 import AirlineList from "../components/organisms/AirlineList";
-import SearchResult from "./SearchResult";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
-import { List } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,13 +38,15 @@ const Search = () => {
   const [sortType, setSortType] = useState('default');
   const list = quotes[sortType];
 
+  const checkedAirlines = [];
+  const filteredList = [];
+
   const filterAirlines = (checked) => {
-    const checkedAirlines = [];
-    const filteredList = [];
 
     checked.map(airline => {
       checkedAirlines.push(airline.CarrierId)
     })
+    console.log(checkedAirlines)
 
     checkedAirlines.map(airline => {
       list.map(quote => {
@@ -83,8 +82,11 @@ const Search = () => {
               carriers={carriers}
               currencies={currencies}
               places={places}
-              // quotes={filteredList.length > 0 ? filteredList : list}
-              quotes={list}
+
+              // quotes={filteredList}
+              quotes={filteredList.length > 0 ? filteredList : list}
+              // quotes={list}
+
               onChangeSortType={setSortType}
             />
           </Grid>
