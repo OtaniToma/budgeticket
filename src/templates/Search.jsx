@@ -19,12 +19,13 @@ import Divider from "@material-ui/core/Divider";
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+    marginTop: 100
   },
   paper: {
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  },
+  }
 }));
 
 const Search = () => {
@@ -74,7 +75,6 @@ const Search = () => {
       <div className={classes.root}>
         <Grid container spacing={2}>
           <Grid item xs={12}>
-            <h2>検索バー</h2>
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
@@ -98,7 +98,6 @@ const Search = () => {
             />
           </Grid>
           <Grid item xs={12} md={3}>
-            <h2>現地情報</h2>
             <Divider />
             <AirportInfo places={places} />
           </Grid>
