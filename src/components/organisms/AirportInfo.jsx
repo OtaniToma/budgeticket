@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import axios from 'axios';
+import Map from '../atoms/Map'
 
 const AirportInfo = ({ places }) => {
 
@@ -20,10 +20,13 @@ const AirportInfo = ({ places }) => {
 
   return (
     <>
-    {airport.name}
-    {airport.code}
-    {airport.country}
-    {airport.city}
+      <Map name={airport.name} />
+      <ul>
+        <li>{airport.name}</li>
+        <li>{airport.code}</li>
+        <li>{airport.country}</li>
+        <li>{airport.city}</li>
+      </ul>
     </>
   );
 };
