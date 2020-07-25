@@ -49,7 +49,7 @@ const Search = () => {
 
   const [quotesList, setQuotesList] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setQuotesList(quotesToSorted)
   }, [quotes, sortType])
 
@@ -72,7 +72,6 @@ const Search = () => {
         }
       })
     })
-    console.log(filteredArray);
     setQuotesList(filteredArray);
   }
 
@@ -84,7 +83,7 @@ const Search = () => {
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
-              <Sort onChangeSortType={setSortType} />
+            <Sort onChangeSortType={setSortType} />
             <Divider />
             <StopList
               quotes={quotes.default}
@@ -106,7 +105,7 @@ const Search = () => {
           </Grid>
           <Grid item xs={12} md={3}>
             <Divider />
-            <AirportInfo places={places} />
+            <AirportInfo places={places} quotes={quotes['default']} />
           </Grid>
         </Grid>
       </div>
