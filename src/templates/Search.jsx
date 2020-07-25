@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+  },
+  searchBar: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 
@@ -75,15 +80,15 @@ const Search = () => {
     <>
       <div className={classes.root}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.searchBar}>
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
+              <Sort onChangeSortType={setSortType} />
+            <Divider />
             <StopList
               quotes={quotes.default}
             />
-            <Divider />
-              <Sort onChangeSortType={setSortType} />
             <Divider />
             <AirlineList
               carriers={carriers}
