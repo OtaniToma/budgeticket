@@ -15,6 +15,7 @@ import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import Sort from '../components/organisms/Sort';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,6 +83,8 @@ const Search = () => {
               quotes={quotes.default}
             />
             <Divider />
+              <Sort onChangeSortType={setSortType} />
+            <Divider />
             <AirlineList
               carriers={carriers}
               onChangeSortType={setSortType}
@@ -94,7 +97,6 @@ const Search = () => {
               currencies={currencies}
               places={places}
               quotes={quotesList}
-              onChangeSortType={setSortType}
             />
           </Grid>
           <Grid item xs={12} md={3}>
