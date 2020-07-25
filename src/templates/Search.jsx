@@ -15,6 +15,7 @@ import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
+import Sort from '../components/organisms/Sort';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
+  },
+  searchBar: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 
@@ -43,7 +49,7 @@ const Search = () => {
 
   const [quotesList, setQuotesList] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     setQuotesList(quotesToSorted)
   }, [quotes, sortType])
 
@@ -66,7 +72,6 @@ const Search = () => {
         }
       })
     })
-    console.log(filteredArray);
     setQuotesList(filteredArray);
   }
 
@@ -74,10 +79,12 @@ const Search = () => {
     <>
       <div className={classes.root}>
         <Grid container spacing={2}>
-          <Grid item xs={12}>
+          <Grid item xs={12} className={classes.searchBar}>
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
+            <Sort onChangeSortType={setSortType} />
+            <Divider />
             <StopList
               quotes={quotes.default}
             />
@@ -94,12 +101,11 @@ const Search = () => {
               currencies={currencies}
               places={places}
               quotes={quotesList}
-              onChangeSortType={setSortType}
             />
           </Grid>
           <Grid item xs={12} md={3}>
             <Divider />
-            <AirportInfo places={places} />
+            <AirportInfo places={places} quotes={quotes['default']} />
           </Grid>
         </Grid>
       </div>

@@ -5,6 +5,7 @@ import { Button } from "../atoms";
 import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { getQuotes } from "../../reducks/flights/selectors";
 import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
 
 const currencies = [
   {
@@ -72,46 +73,54 @@ const SearchBar = () => {
 
   return (
     <div className={classes.root}>
-      <SelectAirport
-        select={setOriginAirport}
-        label={'From'}
-      />
-
-      <SelectAirport
-        select={setDestinationAirport}
-        label={'To'}
-      />
-
-      <SelectBox
-        value={currency}
-        options={currencies}
-        label={'Currency'}
-        select={setCurrency}
-      />
-      <SelectDate
-        label={'Depart'}
-        defaultValue={departDate}
-        select={setDepartDate}
-        minDate={todayDate}
-      />
-      <SelectDate
-        label={'Return'}
-        defaultValue={returnDate}
-        select={setReturnDate}
-        minDate={todayDate}
-      />
+      <Box m={1}>
+        <SelectAirport
+          select={setOriginAirport}
+          label={'From'}
+        />
+      </Box>
+      <Box m={1}>
+        <SelectAirport
+          select={setDestinationAirport}
+          label={'To'}
+        />
+      </Box>
+      <Box m={1}>
+        <SelectBox
+          value={currency}
+          options={currencies}
+          label={'Currency'}
+          select={setCurrency}
+        />
+      </Box>
+      <Box m={1}>
+        <SelectDate
+          label={'Depart'}
+          defaultValue={departDate}
+          select={setDepartDate}
+          minDate={todayDate}
+        />
+      </Box>
+      <Box m={1}>
+        <SelectDate
+          label={'Return'}
+          defaultValue={returnDate}
+          select={setReturnDate}
+          minDate={todayDate}
+        />
+      </Box>
 
       <Button onClick={() =>
-          dispatch(
-            searchFlights({
-              originAirport,
-              destinationAirport,
-              currency,
-              departDate,
-              returnDate
-            })
-          )
-        }
+        dispatch(
+          searchFlights({
+            originAirport,
+            destinationAirport,
+            currency,
+            departDate,
+            returnDate
+          })
+        )
+      }
         label={"Search"}
         color={"primary"}
       />
