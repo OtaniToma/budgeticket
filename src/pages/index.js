@@ -6,3 +6,4 @@ export { default as Reset } from "./reset";
 export { default as Search } from "./search";
 export { default as Signin } from "./signin";
 export { default as Signup } from "./signup";
+export { default as Test } from "./test";

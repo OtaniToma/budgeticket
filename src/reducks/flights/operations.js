@@ -1,4 +1,10 @@
 import { searchFlightsAction } from "./actions";
+import { db } from "../../firebase/";
+
+let apiKey = '';
+db.collection('/keys').doc('onM4ZFa2LT4p6UVoRw9k').get().then((doc) => {
+  apiKey = doc.data().key
+})
 
 export const searchFlights = ({
   originAirport,
@@ -16,8 +22,7 @@ export const searchFlights = ({
           "Content-Type": "application/json",
           "X-RapidAPI-Host":
             "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-          "X-RapidAPI-Key":
-            "9ada3d4b58mshc9cbd91f5ad4032p1f7811jsn879a30bd12b3",
+          "X-RapidAPI-Key": apiKey,
         },
       }
     )

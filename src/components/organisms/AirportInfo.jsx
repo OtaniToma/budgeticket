@@ -4,10 +4,8 @@ import Map from '../atoms/Map'
 
 const AirportInfo = ({ places, quotes }) => {
 
-  const [airport, setAirport] = useState({});
-
-  console.log(places)
-  console.log(quotes)
+  const [airport, setAirport] = useState({
+  }, []);
 
   useEffect(() => {
     places.map(place => {
@@ -22,8 +20,6 @@ const AirportInfo = ({ places, quotes }) => {
     })
 
   }, [places])
-
-  console.log(airport.name)
 
   return (
     <>

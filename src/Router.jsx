@@ -9,6 +9,7 @@ import {
   Search,
   Signup,
   Signin,
+  Test
 } from "./pages";
 import Auth from "./Auth";
 
@@ -19,6 +20,7 @@ const Router = () => {
       <Route exact path={"/signup"} component={Signup} />
       <Route exact path={"/signin"} component={Signin} />
       <Route exact path={"/signin/reset"} component={Reset} />
+      <Route exact path={"/test"} component={Test} />
 
       <Auth>
         <Route exact path={"(/)?"} component={Search} />
