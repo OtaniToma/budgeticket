@@ -68,9 +68,9 @@ const Header = () => {
               >
                 Hi, {username}
               </Typography>
-              <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
             </div>
           )}
+        <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
         </Toolbar>
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
