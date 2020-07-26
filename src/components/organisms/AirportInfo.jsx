@@ -5,6 +5,7 @@ import Map from '../atoms/Map'
 const AirportInfo = ({ places, quotes }) => {
 
   const [airport, setAirport] = useState({
+    name: 'San Francisco International Airport',
   }, []);
 
   useEffect(() => {
