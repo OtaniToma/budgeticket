@@ -14,6 +14,7 @@ const Ticket = (props) => {
     id,
     price,
     currencies,
+    direct,
     departAirportCode,
     arriveAirportCode,
     departAirportName,
@@ -23,10 +24,30 @@ const Ticket = (props) => {
     outboundCarriersLogo,
     inboundCarriersLogo,
     outboundDepartureDate,
-    inboundDepartureDate
+    inboundDepartureDate,
+    setSelectedTicket
   } = props;
 
   const classes = useStyles();
+
+  const addTicketToCart = () => {
+    setSelectedTicket({
+      id: id,
+      price: price,
+      currencies: currencies,
+      direct: direct,
+      departAirportCode: currencies,
+      arriveAirportCode: arriveAirportCode,
+      departAirportName: departAirportName,
+      arriveAirportName: arriveAirportName,
+      outboundCarriers: outboundCarriers,
+      inboundCarriers: inboundCarriers,
+      outboundCarriersLogo: outboundCarriersLogo,
+      inboundCarriersLogo: inboundCarriersLogo,
+      outboundDepartureDate: outboundDepartureDate,
+      inboundDepartureDate: inboundDepartureDate
+    })
+  }
 
   return (
   <div key={id} className={"ticket"}>
@@ -95,10 +116,12 @@ const Ticket = (props) => {
         <div className="ticket__punchline__top"></div>
         <div className="ticket__punchline__bottom"></div>
       </div>
-      <div className={"ticket__right"}>
+      <div className={direct ? "ticket__right non-stop" : "ticket__right with-stop"}>
         <span className="ticket__right__price">
           {currencies.Symbol} {price}
         </span>
+        <br />
+        <button onClick={addTicketToCart}>Test</button>
       </div>
     </div>
   </div>

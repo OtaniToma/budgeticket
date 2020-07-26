@@ -17,8 +17,8 @@ const StopList = ({ quotes }) => {
   return (
     <>
     <ul>
-      <li>Direct:   {directFlights}</li>
-      <li>Indirect: {indirectFlights}</li>
+      <li>Non-Stop:   {directFlights}</li>
+      <li>With Stop: {indirectFlights}</li>
     </ul>
     </>
   );

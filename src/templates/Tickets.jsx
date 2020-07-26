@@ -45,6 +45,9 @@ const Tickets = (props) => {
   const classes = useStyles();
   const [sort, setSort] = useState('');
 
+  const [selectedTicket, setSelectedTicket] = useState({})
+  console.log(selectedTicket)
+
   return (
     <>
       {quotes &&
@@ -54,6 +57,7 @@ const Tickets = (props) => {
               id={quote.QuoteId}
               currencies={currencies[0]}
               price={quote.MinPrice.toLocaleString()}
+              direct={quote.Direct}
               departAirportCode={places[1].IataCode}
               arriveAirportCode={places[0].IataCode}
               departAirportName={places[1].Name}
@@ -64,6 +68,7 @@ const Tickets = (props) => {
               inboundCarriersLogo={logosToShow[carriersToShow[quote.InboundLeg.CarrierIds]]}
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
+              setSelectedTicket={setSelectedTicket}
             />
           )
         })
