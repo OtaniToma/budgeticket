@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
@@ -6,7 +6,7 @@ import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import MenuIcon from "@material-ui/icons/Menu";
-import { getIsSignedIn, getUserId } from "../../reducks/users/selectors";
+import { getIsSignedIn, getUserId, getTicketsInCart } from "../../reducks/users/selectors";
 import { push } from "connected-react-router";
 
 const HeaderMenus = (props) => {
@@ -14,13 +14,14 @@ const HeaderMenus = (props) => {
   const selector = useSelector((state) => state);
   const uid = getUserId(selector);
   const isSignedIn = getIsSignedIn(selector);
+  const ticketsInCart = getTicketsInCart(selector);
 
   return (
     <>
     {isSignedIn && (
       <div>
       <IconButton onClick={() => dispatch(push("/cart"))}>
-        <Badge color="secondary">
+        <Badge badgeContent={ticketsInCart.length} color="secondary">
           <ShoppingCartIcon />
         </Badge>
       </IconButton>
