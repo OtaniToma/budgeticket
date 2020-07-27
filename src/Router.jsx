@@ -28,6 +28,7 @@ const Router = () => {
         <Route exact path={"/user/history"} component={History} />
         <Route exact path={"/user/like"} component={Like} />
         <Route exact path={"/user/profile"} component={Profile} />
+        <Route exact path={"/cart"} component={Cart} />
       </Auth>
     </Switch>
   );

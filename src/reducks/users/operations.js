@@ -4,6 +4,17 @@ import { auth, db, FirebaseTimestamp } from "../../firebase/";
 
 const usersRef = db.collection("users");
 
+export const addTicketToCart = (addedTicket) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const cartRef = usersRef.doc(uid).collection('cart').doc()
+    addedTicket['cartId'] = cartRef.id
+
+    await cartRef.set(addedTicket)
+    dispatch(push('/'))
+  }
+}
+
 export const listenAuthState = () => {
   return async (dispatch) => {
     return auth.onAuthStateChanged((user) => {

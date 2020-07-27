@@ -7,7 +7,7 @@ const useStyles = makeStyles({
     fontSize: 16,
     height: 48,
     marginButton: 16,
-    width: 256,
+    width: 150,
   },
 });
 
@@ -20,6 +20,8 @@ const PrimaryButton = (props) => {
       variant={props.variant || "contained"}
       color={props.color}
       onClick={() => props.onClick()}
+      disabled={props.disabled || false}
+      width={props.width || classes.button.width}
     >
       {props.label}
     </Button>

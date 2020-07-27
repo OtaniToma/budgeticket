@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   }
 })
 
-const Cart = () => {
+const CartList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector(state => state);
@@ -41,4 +41,4 @@ const Cart = () => {
   )
 }
 
-export default Cart
+export default CartList

@@ -1,14 +1,25 @@
-import React, { useState, useEffect } from "react";
-import Ticket from '../components/organisms/Ticket'
-import Sort from '../components/organisms/Sort';
+import React, { useState, useEffect, useCallback } from "react";
+import Ticket from '../components/organisms/Ticket';
 import AirlineLogos from '../reducks/flights/airlineLogos.json'
 import { makeStyles } from '@material-ui/core/styles';
-import InputLabel from '@material-ui/core/InputLabel';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
-import Select from '@material-ui/core/Select';
+import { useSelector, useDispatch } from 'react-redux';
+import { db, FirebaseTimestamp } from '../firebase/index';
+import { addTicketToCart } from '../reducks/users/operations';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
+  },
+  selectEmpty: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 const Tickets = (props) => {
+  const classes = useStyles();
+  const dispatch = useDispatch();
+  const selector = useSelector((state) => state);
   
   const {
     carriers,
@@ -16,17 +27,6 @@ const Tickets = (props) => {
     places,
     quotes
   } = props;
-
-  const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
-
 
   const carriersToShow = {};
   carriers.map(carrier => {
@@ -42,11 +42,34 @@ const Tickets = (props) => {
     })
   });
 
-  const classes = useStyles();
   const [sort, setSort] = useState('');
 
-  const [selectedTicket, setSelectedTicket] = useState({})
-  console.log(selectedTicket)
+  const addTicket = ({
+    id, price, currencies, direct, departAirportCode, arriveAirportCode,
+    departAirportName, arriveAirportName,
+    outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
+    outboundDepartureDate, inboundDepartureDate
+  }) => {
+    const timestamp = FirebaseTimestamp.now();
+    dispatch(addTicketToCart({
+      added_at: timestamp,
+      id: id,
+      price: price,
+      currencies: currencies,
+      direct: direct,
+      departAirportCode: departAirportCode,
+      arriveAirportCode: arriveAirportCode,
+      departAirportName: departAirportName,
+      arriveAirportName: arriveAirportName,
+      outboundCarriers: outboundCarriers,
+      inboundCarriers: inboundCarriers,
+      outboundCarriersLogo: outboundCarriersLogo,
+      inboundCarriersLogo: inboundCarriersLogo,
+      outboundDepartureDate: outboundDepartureDate,
+      inboundDepartureDate: inboundDepartureDate
+    }))
+  }
+
 
   return (
     <>
@@ -68,7 +91,7 @@ const Tickets = (props) => {
               inboundCarriersLogo={logosToShow[carriersToShow[quote.InboundLeg.CarrierIds]]}
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
-              setSelectedTicket={setSelectedTicket}
+              addTicket={addTicket}
             />
           )
         })

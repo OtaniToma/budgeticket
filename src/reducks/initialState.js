@@ -1,12 +1,12 @@
 const initialState = {
   users: {
+    cart: [],
     icon: "",
     isSignedIn: false,
     uid: "",
     username: "",
     test: "test",
   },
-  searchTerms: {},
   flights: {
     carriers: [],
     currency: [],

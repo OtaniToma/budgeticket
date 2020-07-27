@@ -6,6 +6,10 @@ service cloud.firestore {
       allow create;
       allow update: if request.auth.uid == userId;
       allow delete: if request.auth.uid == userId;
+
+      match /cart/{cartId} {
+        allow read, write: if request.auth.uid == userId;
+      }
     }
     match /keys/{document} {
       allow read
