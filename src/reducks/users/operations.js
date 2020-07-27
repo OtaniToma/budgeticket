@@ -9,8 +9,6 @@ export const addTicketToCart = (addedTicket) => {
     const uid = getState().users.uid
     const cartRef = usersRef.doc(uid).collection('cart').doc()
     addedTicket['cartId'] = cartRef.id
-    console.log(uid)
-    console.log(cartRef)
 
     await cartRef.set(addedTicket)
     dispatch(push('/'))

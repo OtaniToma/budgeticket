@@ -42,20 +42,34 @@ const Tickets = (props) => {
     })
   });
 
-
   const [sort, setSort] = useState('');
 
-  const [selectedTicket, setSelectedTicket] = useState({})
-  console.log(selectedTicket)
-
-  const addTicket = useCallback((selectedTicket) => {
+  const addTicket = ({
+    id, price, currencies, direct, departAirportCode, arriveAirportCode,
+    departAirportName, arriveAirportName,
+    outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
+    outboundDepartureDate, inboundDepartureDate
+  }) => {
     const timestamp = FirebaseTimestamp.now();
     dispatch(addTicketToCart({
       added_at: timestamp,
-      id: selectedTicket.id,
-      price: selectedTicket.price
+      id: id,
+      price: price,
+      currencies: currencies,
+      direct: direct,
+      departAirportCode: departAirportCode,
+      arriveAirportCode: arriveAirportCode,
+      departAirportName: departAirportName,
+      arriveAirportName: arriveAirportName,
+      outboundCarriers: outboundCarriers,
+      inboundCarriers: inboundCarriers,
+      outboundCarriersLogo: outboundCarriersLogo,
+      inboundCarriersLogo: inboundCarriersLogo,
+      outboundDepartureDate: outboundDepartureDate,
+      inboundDepartureDate: inboundDepartureDate
     }))
-  }, [selectedTicket])
+  }
+
 
   return (
     <>
@@ -77,7 +91,7 @@ const Tickets = (props) => {
               inboundCarriersLogo={logosToShow[carriersToShow[quote.InboundLeg.CarrierIds]]}
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
-              setSelectedTicket={setSelectedTicket}
+              addTicket={addTicket}
             />
           )
         })

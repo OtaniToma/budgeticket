@@ -1,7 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import './Ticket.scss';
+import { auth } from "../../firebase";
+import { getIsSignedIn } from "../../reducks/users/selectors";
+import { Button } from '../atoms'
 
 const useStyles = makeStyles({
   root: {
@@ -10,6 +14,8 @@ const useStyles = makeStyles({
 });
 
 const Ticket = (props) => {
+  const classes = useStyles();
+
   const {
     id,
     price,
@@ -25,29 +31,16 @@ const Ticket = (props) => {
     inboundCarriersLogo,
     outboundDepartureDate,
     inboundDepartureDate,
-    setSelectedTicket
+    addTicket
   } = props;
 
-  const classes = useStyles();
+  const selector = useSelector((state) => state);
+  const isSignedIn = getIsSignedIn(selector);
 
-  const addTicketToCart = () => {
-    setSelectedTicket({
-      id: id,
-      price: price,
-      currencies: currencies,
-      direct: direct,
-      departAirportCode: currencies,
-      arriveAirportCode: arriveAirportCode,
-      departAirportName: departAirportName,
-      arriveAirportName: arriveAirportName,
-      outboundCarriers: outboundCarriers,
-      inboundCarriers: inboundCarriers,
-      outboundCarriersLogo: outboundCarriersLogo,
-      inboundCarriersLogo: inboundCarriersLogo,
-      outboundDepartureDate: outboundDepartureDate,
-      inboundDepartureDate: inboundDepartureDate
-    })
+  const _addTicket = () => {
+    addTicket(props)
   }
+  
 
   return (
   <div key={id} className={"ticket"}>
@@ -121,7 +114,7 @@ const Ticket = (props) => {
           {currencies.Symbol} {price}
         </span>
         <br />
-        <button onClick={addTicketToCart}>Test</button>
+        <Button label={'Add to Cart'} color={'primary'} onClick={_addTicket} disabled={isSignedIn ? false : true} />
       </div>
     </div>
   </div>
