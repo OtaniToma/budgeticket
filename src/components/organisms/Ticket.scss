@@ -192,5 +192,11 @@
       font-size: 2rem;
       font-weight: bold;
     }
+
+    &__favicon {
+      position: absolute;
+      bottom: 5px;
+      right: 5px;
+    }
   }
 }

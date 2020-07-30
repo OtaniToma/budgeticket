@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { getIsSignedIn } from "../../reducks/users/selectors";
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import './Ticket.scss';
+import { auth } from "../../firebase";
+import { getIsSignedIn } from "../../reducks/users/selectors";
+import { Button } from '../atoms'
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +36,9 @@ const Ticket = (props) => {
     addTicket,
     deleteTicket,
   } = props;
+
+  const selector = useSelector((state) => state);
+  const isSignedIn = getIsSignedIn(selector);
 
   const [liked, setLiked] = useState(false)
 
@@ -118,16 +123,14 @@ const Ticket = (props) => {
           <span className="ticket__right__price">
             {currencies.Symbol} {price}
           </span>
-          {addTicket && <>
-            <br />
-            <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_addTicket} />
-          </>
-          }
 
-          {deleteTicket && <>
-            <br />
+          {isSignedIn && addTicket && <div className="ticket__right__favicon">
+            <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_addTicket} />
+          </div>}
+
+          {deleteTicket && <div className="ticket__right__favicon">
             <FavoriteIcon color={'secondary'} onClick={_deleteTicket} />
-          </>
+          </div>
           }
         </div>
       </div>
