@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import './Ticket.scss';
 import { auth } from "../../firebase";
 import { getIsSignedIn } from "../../reducks/users/selectors";
@@ -118,9 +119,9 @@ const Ticket = (props) => {
           <span className="ticket__right__price">
             {currencies.Symbol} {price}
           </span>
-          {addTicket && <>
+          {isSignedIn && <>
             <br />
-            <Button label={'Add to Cart'} color={'primary'} onClick={_addTicket} disabled={isSignedIn ? false : true} />
+            <FavoriteIcon color={'disabled'} onClick={_addTicket} />
           </>
           }
 

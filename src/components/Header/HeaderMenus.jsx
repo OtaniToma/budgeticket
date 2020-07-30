@@ -50,11 +50,11 @@ const HeaderMenus = (props) => {
         <div>
           <IconButton onClick={() => dispatch(push("/cart"))}>
             <Badge badgeContent={ticketsInCart.length} color="secondary">
-              <ShoppingCartIcon />
+              <FavoriteBorderIcon />
             </Badge>
           </IconButton>
           <IconButton onClick={() => dispatch(push("/liked"))}>
-            <FavoriteBorderIcon />
+            <ShoppingCartIcon />
           </IconButton>
           <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
             <MenuIcon />
