@@ -30,7 +30,6 @@ const CartList = () => {
   }, []);
 
   const deleteTicket = (props) => {
-    console.log(props)
     const id = props.cartId;
     return db.collection('users').doc(uid)
             .collection('cart').doc(id)
