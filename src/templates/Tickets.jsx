@@ -70,7 +70,6 @@ const Tickets = (props) => {
     }))
   }
 
-
   return (
     <>
       {quotes &&

@@ -113,8 +113,11 @@ const Ticket = (props) => {
         <span className="ticket__right__price">
           {currencies.Symbol} {price}
         </span>
+        {addTicket && <>
         <br />
         <Button label={'Add to Cart'} color={'primary'} onClick={_addTicket} disabled={isSignedIn ? false : true} />
+        </>
+        }
       </div>
     </div>
   </div>
