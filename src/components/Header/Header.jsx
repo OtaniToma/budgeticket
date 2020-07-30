@@ -5,6 +5,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
+import IconButton from "@material-ui/core/IconButton";
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { getIsSignedIn, getUsername } from "../../reducks/users/selectors";
 import { HeaderMenus, ClosableDrawer } from "./index";
 import { useCallback } from "react";
@@ -60,17 +62,28 @@ const Header = () => {
           >
             BudgeTicket
           </Typography>
+
           {isSignedIn && (
-            <div className={classes.iconButtons}>
-              <Typography
-                variant="span"
-                onClick={() => dispatch(push("/user/profile"))}
-              >
-                Hi, {username}
-              </Typography>
-            </div>
+            <>
+              <div className={classes.iconButtons}>
+                <Typography
+                  variant="span"
+                  onClick={() => dispatch(push("/user/profile"))}
+                >
+                  Hi, {username}
+                </Typography>
+              </div>
+              <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
+            </>
           )}
-        <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
+
+
+          {!isSignedIn &&
+            <IconButton onClick={() => dispatch(push("/signin"))}>
+              <AccountCircleIcon />
+            </IconButton>
+          }
+
         </Toolbar>
       </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
