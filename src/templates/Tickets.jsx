@@ -3,7 +3,7 @@ import Ticket from '../components/organisms/Ticket';
 import AirlineLogos from '../reducks/flights/airlineLogos.json'
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
-import { db, FirebaseTimestamp } from '../firebase/index';
+import { FirebaseTimestamp } from '../firebase/index';
 import { addTicketToCart } from '../reducks/users/operations';
 
 const useStyles = makeStyles((theme) => ({
