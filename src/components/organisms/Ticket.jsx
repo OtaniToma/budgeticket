@@ -35,6 +35,7 @@ const Ticket = (props) => {
     inboundDepartureDate,
     addTicket,
     deleteTicket,
+    purchaseTicket
   } = props;
 
   const selector = useSelector((state) => state);
@@ -46,10 +47,14 @@ const Ticket = (props) => {
     addTicket(props)
     setLiked(true)
   }
-  
+
   const _deleteTicket = () => {
     deleteTicket(props)
     setLiked(false)
+  }
+
+  const _purchaseTicket = () => {
+    purchaseTicket(props)
   }
 
   return (
@@ -124,14 +129,16 @@ const Ticket = (props) => {
             {currencies.Symbol} {price}
           </span>
 
+          {/* {purchaseTicket &&
+            <Button label={'Purchase'} onClick={_purchaseTicket} />} */}
+
           {isSignedIn && addTicket && <div className="ticket__right__favicon">
             <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_addTicket} />
           </div>}
 
           {deleteTicket && <div className="ticket__right__favicon">
             <FavoriteIcon color={'secondary'} onClick={_deleteTicket} />
-          </div>
-          }
+          </div>}
         </div>
       </div>
     </div>

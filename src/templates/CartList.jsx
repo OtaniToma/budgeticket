@@ -21,13 +21,9 @@ const CartList = () => {
   const uid = getUserId(selector);
   const ticketsInCart = getTicketsInCart(selector);
 
-  const goToOrder = useCallback(() => {
-    dispatch(push('/order/confirm'))
-  }, []);
-
-  const backToHome = useCallback(() => {
-    dispatch(push('/'))
-  }, []);
+  const purchaseTicket = (props) => {
+    console.log(props)
+  }
 
   const deleteTicket = (props) => {
     const id = props.cartId;
@@ -35,8 +31,6 @@ const CartList = () => {
             .collection('cart').doc(id)
             .delete()
   }
-
-  console.log(ticketsInCart)
 
   return (
     <>
@@ -68,6 +62,7 @@ const CartList = () => {
                 inboundDepartureDate={ticket.inboundDepartureDate}
                 addTicket={false}
                 deleteTicket={deleteTicket}
+                purchaseTicket={purchaseTicket}
               />)
             )}
           </Grid>
