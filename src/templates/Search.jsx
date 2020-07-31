@@ -77,6 +77,7 @@ const Search = () => {
 
   const filterStops = (checked) => {
     console.log(checked)
+    const filteredArray = [];
   }
 
   return (

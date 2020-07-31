@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const StopList = ({ quotes, filterStops }) => {
   const classes = useStyles();
-  const [checked, setChecked] = React.useState([0]);
+  const [checked, setChecked] = React.useState([]);
 
   useEffect(() => {
     filterStops(checked)
