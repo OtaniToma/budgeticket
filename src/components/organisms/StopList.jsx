@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const StopList = ({ quotes }) => {
+const StopList = ({ quotes, filterStops }) => {
   const [directFlights, setDirectFlights] = useState(0);
   const [indirectFlights, setIndirectFlights] = useState(0);
 
@@ -14,12 +14,17 @@ const StopList = ({ quotes }) => {
     setIndirectFlights(indirect);
   }, [quotes])
 
+  const _filterStops = () => {
+    filterStops('direct')
+  }
+
   return (
     <>
     <ul>
       <li>Non-Stop:   {directFlights}</li>
       <li>With Stop: {indirectFlights}</li>
     </ul>
+    <button onClick={_filterStops}>filter</button>
     </>
   );
 };

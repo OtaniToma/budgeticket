@@ -75,6 +75,10 @@ const Search = () => {
     setQuotesList(filteredArray);
   }
 
+  const filterStops = (checked) => {
+    console.log(checked)
+  }
+
   return (
     <>
       <div className={classes.root}>
@@ -87,6 +91,7 @@ const Search = () => {
             <Divider />
             <StopList
               quotes={quotes.default}
+              filterStops={filterStops}
             />
             <Divider />
             <AirlineList
