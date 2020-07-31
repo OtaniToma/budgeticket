@@ -1,23 +1,23 @@
-import { fetchTicketsInCartAction, signInAction, signOutAction } from "./actions";
+import { fetchTicketsInLikedAction, signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import { auth, db, FirebaseTimestamp } from "../../firebase/";
 
 const usersRef = db.collection("users");
 
-export const addTicketToCart = (addedTicket) => {
+export const addTicketToLiked = (ticket) => {
   return async (dispatch, getState) => {
     const uid = getState().users.uid
-    const cartRef = usersRef.doc(uid).collection('cart').doc()
-    addedTicket['cartId'] = cartRef.id
+    const likedRef = usersRef.doc(uid).collection('liked').doc()
+    ticket['likedId'] = likedRef.id
 
-    await cartRef.set(addedTicket)
+    await likedRef.set(ticket)
     dispatch(push('/'))
   }
 }
 
-export const fetchTicketsInCart = (products) => {
+export const fetchTicketsInLiked = (tickets) => {
   return async (dispatch) => {
-    dispatch(fetchTicketsInCartAction(products))
+    dispatch(fetchTicketsInLikedAction(tickets))
   }
 }
 

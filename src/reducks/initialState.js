@@ -1,6 +1,6 @@
 const initialState = {
   users: {
-    cart: [],
+    liked: [],
     icon: "",
     isSignedIn: false,
     uid: "",

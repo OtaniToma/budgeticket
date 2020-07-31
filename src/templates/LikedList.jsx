@@ -2,9 +2,10 @@ import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { makeStyles } from '@material-ui/styles'
-import { getTicketsInCart } from '../reducks/users/selectors'
+import { getTicketsInLiked, getUserId } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
+import { db } from "../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -13,21 +14,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CartList = () => {
+const LikedList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const ticketsInCart = getTicketsInCart(selector);
+  const uid = getUserId(selector);
+  const ticketsInLiked = getTicketsInLiked(selector);
 
-  const goToOrder = useCallback(() => {
-    dispatch(push('/order/confirm'))
-  }, []);
+  const purchaseTicket = (props) => {
+    console.log(props)
+  }
 
-  const backToHome = useCallback(() => {
-    dispatch(push('/'))
-  }, []);
-
-  console.log(ticketsInCart)
+  const deleteTicket = (props) => {
+    const id = props.likedId;
+    return db.collection('users').doc(uid)
+            .collection('liked').doc(id)
+            .delete()
+  }
 
   return (
     <>
@@ -38,9 +41,12 @@ const CartList = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
-            {ticketsInCart.length > 0 && (
-              ticketsInCart.map(ticket => <Ticket
+            {ticketsInLiked.length > 0 && (
+              ticketsInLiked.map(ticket => 
+              <Ticket
+                key={ticket.likedId}
                 id={ticket.id}
+                likedId={ticket.likedId}
                 currencies={ticket.currencies}
                 price={ticket.price}
                 direct={ticket.direct}
@@ -54,6 +60,9 @@ const CartList = () => {
                 inboundCarriersLogo={ticket.inboundCarriersLogo}
                 outboundDepartureDate={ticket.outboundDepartureDate}
                 inboundDepartureDate={ticket.inboundDepartureDate}
+                addTicket={false}
+                deleteTicket={deleteTicket}
+                purchaseTicket={purchaseTicket}
               />)
             )}
           </Grid>
@@ -65,4 +74,4 @@ const CartList = () => {
   )
 }
 
-export default CartList
+export default LikedList

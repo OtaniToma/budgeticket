@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import './Ticket.scss';
 import { auth } from "../../firebase";
 import { getIsSignedIn } from "../../reducks/users/selectors";
@@ -18,6 +19,7 @@ const Ticket = (props) => {
 
   const {
     id,
+    likedId,
     price,
     currencies,
     direct,
@@ -31,96 +33,115 @@ const Ticket = (props) => {
     inboundCarriersLogo,
     outboundDepartureDate,
     inboundDepartureDate,
-    addTicket
+    addTicket,
+    deleteTicket,
+    purchaseTicket
   } = props;
 
   const selector = useSelector((state) => state);
   const isSignedIn = getIsSignedIn(selector);
 
+  const [liked, setLiked] = useState(false)
+
   const _addTicket = () => {
     addTicket(props)
+    setLiked(true)
   }
-  
+
+  const _deleteTicket = () => {
+    deleteTicket(props)
+    setLiked(false)
+  }
+
+  const _purchaseTicket = () => {
+    purchaseTicket(props)
+  }
 
   return (
-  <div key={id} className={"ticket"}>
-    <div className="ticket__container">
-      <div className="ticket__left">
-        <div className="left__container">
-          <div className="left__wrapper">
-            <div className="left__row1">
-              <div className="airline">
-                <img src={outboundCarriersLogo} alt={outboundCarriers}/>
+    <div key={id} className={"ticket"}>
+      <div className="ticket__container">
+        <div className="ticket__left">
+          <div className="left__container">
+            <div className="left__wrapper">
+              <div className="left__row1">
+                <div className="airline">
+                  <img src={outboundCarriersLogo} alt={outboundCarriers} />
+                </div>
+                <div className="outdate">
+                  {outboundDepartureDate}
+                </div>
+                <div className="depAirport">
+                  <span className="depAirport__iata">
+                    {departAirportCode}
+                  </span>
+                  <span className="depAirport__city">
+                    {departAirportName}
+                  </span>
+                </div>
+                <div className="arrow">
+                  <ArrowRightAltIcon style={{ fill: 'darkgrey', fontSize: 16 }} />
+                </div>
+                <div className="arrAirport">
+                  <span className="arrAirport__iata">
+                    {arriveAirportCode}
+                  </span>
+                  <span className="arrAirport__city">
+                    {arriveAirportName}
+                  </span>
+                </div>
               </div>
-              <div className="outdate">
-                {outboundDepartureDate}
-              </div>
-              <div className="depAirport">
-                <span className="depAirport__iata">
-                  {departAirportCode}
-                </span>
-                <span className="depAirport__city">
-                  {departAirportName}
-                </span>
-              </div>
-              <div className="arrow">
-                <ArrowRightAltIcon style={{ fill: 'darkgrey', fontSize: 16 }} />
-              </div>
-              <div className="arrAirport">
-                <span className="arrAirport__iata">
-                  {arriveAirportCode}
-                </span>
-                <span className="arrAirport__city">
-                  {arriveAirportName}
-                </span>
-              </div>
-            </div>
-            <div className="left__row2">
-              <div className="airline">
-                <img src={inboundCarriersLogo} alt={inboundCarriers}/>
-              </div>
-              <div className="outdate">
-                {inboundDepartureDate}
-              </div>
-              <div className="depAirport">
-                <span className="depAirport__iata">
-                  {arriveAirportCode}
-                </span>
-                <span className="depAirport__city">
-                  {arriveAirportName}
-                </span>
-              </div>
-              <div className="arrow">
-                <ArrowRightAltIcon style={{ fill: 'darkgrey', fontSize: 16 }} />
-              </div>
-              <div className="arrAirport">
-                <span className="arrAirport__iata">
-                  {departAirportCode}
-                </span>
-                <span className="arrAirport__city">
-                  {departAirportName}
-                </span>
+              <div className="left__row2">
+                <div className="airline">
+                  <img src={inboundCarriersLogo} alt={inboundCarriers} />
+                </div>
+                <div className="outdate">
+                  {inboundDepartureDate}
+                </div>
+                <div className="depAirport">
+                  <span className="depAirport__iata">
+                    {arriveAirportCode}
+                  </span>
+                  <span className="depAirport__city">
+                    {arriveAirportName}
+                  </span>
+                </div>
+                <div className="arrow">
+                  <ArrowRightAltIcon style={{ fill: 'darkgrey', fontSize: 16 }} />
+                </div>
+                <div className="arrAirport">
+                  <span className="arrAirport__iata">
+                    {departAirportCode}
+                  </span>
+                  <span className="arrAirport__city">
+                    {departAirportName}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div className="ticket__punchline">
-        <div className="ticket__punchline__top"></div>
-        <div className="ticket__punchline__bottom"></div>
-      </div>
-      <div className={direct ? "ticket__right non-stop" : "ticket__right with-stop"}>
-        <span className="ticket__right__price">
-          {currencies.Symbol} {price}
-        </span>
-        {addTicket && <>
-        <br />
-        <Button label={'Add to Cart'} color={'primary'} onClick={_addTicket} disabled={isSignedIn ? false : true} />
-        </>
-        }
+        <div className="ticket__punchline">
+          <div className="ticket__punchline__top"></div>
+          <div className="ticket__punchline__bottom"></div>
+        </div>
+        <div className={direct ? "ticket__right non-stop" : "ticket__right with-stop"}>
+          <span className="ticket__right__price">
+            {currencies.Symbol} {price}
+          </span>
+
+          {/* {purchaseTicket &&
+            <Button label={'Purchase'} onClick={_purchaseTicket} />} */}
+
+          {isSignedIn && addTicket && <div className="ticket__right__favicon">
+            <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_addTicket} />
+          </div>}
+
+          {deleteTicket && <div className="ticket__right__favicon">
+            <FavoriteIcon color={'secondary'} onClick={_deleteTicket} />
+          </div>}
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 

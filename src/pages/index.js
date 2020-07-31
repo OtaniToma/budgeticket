@@ -1,6 +1,5 @@
-export { default as Cart } from "./cart";
 export { default as History } from "./history";
-export { default as Like } from "./like";
+export { default as Liked } from "./liked";
 export { default as Profile } from "./profile";
 export { default as Reset } from "./reset";
 export { default as Search } from "./search";

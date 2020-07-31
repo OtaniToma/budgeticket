@@ -4,7 +4,7 @@ import AirlineLogos from '../reducks/flights/airlineLogos.json'
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { FirebaseTimestamp } from '../firebase/index';
-import { addTicketToCart } from '../reducks/users/operations';
+import { addTicketToLiked } from '../reducks/users/operations';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -51,7 +51,7 @@ const Tickets = (props) => {
     outboundDepartureDate, inboundDepartureDate
   }) => {
     const timestamp = FirebaseTimestamp.now();
-    dispatch(addTicketToCart({
+    dispatch(addTicketToLiked({
       added_at: timestamp,
       id: id,
       price: price,
