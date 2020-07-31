@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
-import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
-import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import MenuIcon from "@material-ui/icons/Menu";
 import { getIsSignedIn, getUserId, getTicketsInCart, getUsername } from "../../reducks/users/selectors";
 import { push } from "connected-react-router";
@@ -50,11 +49,8 @@ const HeaderMenus = (props) => {
         <div>
           <IconButton onClick={() => dispatch(push("/cart"))}>
             <Badge badgeContent={ticketsInCart.length} color="secondary">
-              <FavoriteBorderIcon />
+              <FavoriteIcon />
             </Badge>
-          </IconButton>
-          <IconButton onClick={() => dispatch(push("/liked"))}>
-            <ShoppingCartIcon />
           </IconButton>
           <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
             <MenuIcon />
