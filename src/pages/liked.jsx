@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import CartList from "../templates/CartList";
+import LikedList from "../templates/LikedList";
 
-const Cart = () => {
+const Liked = () => {
   const useStyles = makeStyles({
     root: {
       marginTop: '100px',
@@ -12,9 +12,9 @@ const Cart = () => {
 
   return (
     <div className={classes.root}>
-      <CartList />
+      <LikedList />
     </div>
   );
 };
 
-export default Cart;
+export default Liked;

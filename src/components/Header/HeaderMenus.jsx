@@ -4,9 +4,9 @@ import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MenuIcon from "@material-ui/icons/Menu";
-import { getIsSignedIn, getUserId, getTicketsInCart, getUsername } from "../../reducks/users/selectors";
+import { getIsSignedIn, getUserId, getTicketsInLiked, getUsername } from "../../reducks/users/selectors";
 import { push } from "connected-react-router";
-import { fetchTicketsInCart } from '../../reducks/users/operations';
+import { fetchTicketsInLiked } from '../../reducks/users/operations';
 import { db } from '../../firebase/index';
 
 const HeaderMenus = (props) => {
@@ -14,10 +14,10 @@ const HeaderMenus = (props) => {
   const selector = useSelector((state) => state);
   const uid = getUserId(selector);
   const isSignedIn = getIsSignedIn(selector);
-  let ticketsInCart = getTicketsInCart(selector);
+  let ticketsInLiked = getTicketsInLiked(selector);
 
   useEffect(() => {
-    const unsubscribe = db.collection('users').doc(uid).collection('cart')
+    const unsubscribe = db.collection('users').doc(uid).collection('liked')
       .onSnapshot(snapshots => {
         snapshots.docChanges().forEach(change => {
           const ticket = change.doc.data();
@@ -25,20 +25,20 @@ const HeaderMenus = (props) => {
 
           switch (changeType) {
             case 'added':
-              ticketsInCart.push(ticket);
+              ticketsInLiked.push(ticket);
               break;
             case 'modified':
-              const index = ticketsInCart.findIndex(ticket => ticket.cartId === change.doc.id);
-              ticketsInCart[index] = ticket;
+              const index = ticketsInLiked.findIndex(ticket => ticket.likedId === change.doc.id);
+              ticketsInLiked[index] = ticket;
               break;
             case 'removed':
-              ticketsInCart = ticketsInCart.filter(ticket => ticket.cartId !== change.doc.id);
+              ticketsInLiked = ticketsInLiked.filter(ticket => ticket.likedId !== change.doc.id);
               break;
             default:
               break;
           }
         })
-        dispatch(fetchTicketsInCart(ticketsInCart));
+        dispatch(fetchTicketsInLiked(ticketsInLiked));
       })
     return () => unsubscribe()
   }, []);
@@ -47,8 +47,8 @@ const HeaderMenus = (props) => {
     <>
       {isSignedIn && (
         <div>
-          <IconButton onClick={() => dispatch(push("/cart"))}>
-            <Badge badgeContent={ticketsInCart.length} color="secondary">
+          <IconButton onClick={() => dispatch(push("/user/liked"))}>
+            <Badge badgeContent={ticketsInLiked.length} color="secondary">
               <FavoriteIcon />
             </Badge>
           </IconButton>

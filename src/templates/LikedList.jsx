@@ -2,7 +2,7 @@ import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { push } from 'connected-react-router'
 import { makeStyles } from '@material-ui/styles'
-import { getTicketsInCart, getUserId } from '../reducks/users/selectors'
+import { getTicketsInLiked, getUserId } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { db } from "../firebase";
@@ -14,21 +14,21 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const CartList = () => {
+const LikedList = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const uid = getUserId(selector);
-  const ticketsInCart = getTicketsInCart(selector);
+  const ticketsInLiked = getTicketsInLiked(selector);
 
   const purchaseTicket = (props) => {
     console.log(props)
   }
 
   const deleteTicket = (props) => {
-    const id = props.cartId;
+    const id = props.likedId;
     return db.collection('users').doc(uid)
-            .collection('cart').doc(id)
+            .collection('liked').doc(id)
             .delete()
   }
 
@@ -41,12 +41,12 @@ const CartList = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
-            {ticketsInCart.length > 0 && (
-              ticketsInCart.map(ticket => 
+            {ticketsInLiked.length > 0 && (
+              ticketsInLiked.map(ticket => 
               <Ticket
-                key={ticket.cartId}
+                key={ticket.likedId}
                 id={ticket.id}
-                cartId={ticket.cartId}
+                likedId={ticket.likedId}
                 currencies={ticket.currencies}
                 price={ticket.price}
                 direct={ticket.direct}
@@ -74,4 +74,4 @@ const CartList = () => {
   )
 }
 
-export default CartList
+export default LikedList

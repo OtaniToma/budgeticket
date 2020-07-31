@@ -3,10 +3,10 @@ import initialState from "../initialState";
 
 export const UsersReducer = (state = initialState.users, action) => {
   switch (action.type) {
-    case Actions.FETCH_TICKETS_IN_CART:
+    case Actions.FETCH_TICKETS_IN_LIKED:
       return {
         ...state,
-        cart: [...action.payload]
+        liked: [...action.payload]
       }
     case Actions.SIGN_IN:
       return {

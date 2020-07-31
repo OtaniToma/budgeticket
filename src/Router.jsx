@@ -1,9 +1,8 @@
 import React from "react";
 import { Switch, Route } from "react-router";
 import {
-  Cart,
   History,
-  Like,
+  Liked,
   Profile,
   Reset,
   Search,
@@ -24,11 +23,9 @@ const Router = () => {
 
       <Auth>
         <Route exact path={"(/)?"} component={Search} />
-        <Route exact path={"/user/cart"} component={Cart} />
         <Route exact path={"/user/history"} component={History} />
-        <Route exact path={"/user/like"} component={Like} />
+        <Route exact path={"/user/liked"} component={Liked} />
         <Route exact path={"/user/profile"} component={Profile} />
-        <Route exact path={"/cart"} component={Cart} />
       </Auth>
     </Switch>
   );

@@ -1,7 +1,7 @@
-export const FETCH_TICKETS_IN_CART = 'FETCH_TICKETS_IN_CART';
-export const fetchTicketsInCartAction = (tickets) => {
+export const FETCH_TICKETS_IN_LIKED = 'FETCH_TICKETS_IN_LIKED';
+export const fetchTicketsInLikedAction = (tickets) => {
   return {
-    type: 'FETCH_TICKETS_IN_CART',
+    type: 'FETCH_TICKETS_IN_LIKED',
     payload: tickets
   }
 }

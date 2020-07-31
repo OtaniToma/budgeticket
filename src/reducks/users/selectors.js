@@ -14,7 +14,7 @@ export const getUsername = createSelector(
   (state) => state.username
 );
 
-export const getTicketsInCart = createSelector(
+export const getTicketsInLiked = createSelector(
   [userSelector],
-  (state) => state.cart
+  (state) => state.liked
 )

@@ -19,7 +19,7 @@ const Ticket = (props) => {
 
   const {
     id,
-    cartId,
+    likedId,
     price,
     currencies,
     direct,
