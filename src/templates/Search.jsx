@@ -104,8 +104,7 @@ const Search = () => {
             />
           </Grid>
           <Grid item xs={12} md={3}>
-            <Divider />
-            <AirportInfo places={places} quotes={quotes['default']} />
+            {/* <AirportInfo places={places} quotes={quotes['default']} /> */}
           </Grid>
         </Grid>
       </div>
