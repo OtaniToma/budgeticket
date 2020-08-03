@@ -54,12 +54,10 @@ const Search = () => {
   }, [quotes, sortType])
 
   const filterAirlines = (checked) => {
-
     const airlineNumbers = [];
     checked.map(airline => {
       airlineNumbers.push(airline.CarrierId)
     })
-
     const filteredArray = [];
     airlineNumbers.map(number => {
       quotesToSorted.map(quote => {
@@ -71,6 +69,33 @@ const Search = () => {
           filteredArray.push(quote)
         }
       })
+    })
+    setQuotesList(filteredArray);
+  }
+
+  const filterStops = (checked) => {
+    const filteredArray = [];
+    const flightNumbers = {
+      direct: 0,
+      indirect: 0
+    };
+    checked.map(type => {
+      if (type === 'Non-stop') {
+        quotesToSorted.map(quote => {
+          if (quote.Direct) {
+            filteredArray.push(quote)
+            flightNumbers.direct++
+          }
+        })
+      }
+      if (type === 'With Stop(s)') {
+        quotesToSorted.map(quote => {
+          if (!quote.Direct) {
+            filteredArray.push(quote)
+            flightNumbers.indirect++
+          }
+        })
+      }
     })
     setQuotesList(filteredArray);
   }
@@ -87,6 +112,7 @@ const Search = () => {
             <Divider />
             <StopList
               quotes={quotes.default}
+              filterStops={filterStops}
             />
             <Divider />
             <AirlineList
