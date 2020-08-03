@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
+import { db } from "../../firebase/";
 
 const Map = (props) => {
 
@@ -12,22 +13,26 @@ const Map = (props) => {
     url: ''
   });
 
-  useEffect(() => {
-    axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${props.name}&key=AIzaSyAwFm8nidy09UCt7c16zYl8imUooco5OyU`)
-    .then(res => {
-      const data = res.data.results[0];
-      setLocation({
-        lat: data.geometry.location.lat,
-        lng: data.geometry.location.lng,
-        name: data.address_components[0].long_name,
-        address: data.formatted_address,
-        url: 'https://www.google.com/maps/place/?q=place_id:' + data.place_id,
-      });
-    })
-    .catch((error) => {
-      alert(error);
-    })
-  }, [location])
+  const [apiKey, setApiKey] = useState('')
+
+  // db.collection('/keys').doc('geocoding').get().then((doc) => {
+  //   setApiKey(doc.data().key)
+  // })
+
+  // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${props.name}&key=${apiKey}`)
+  //   .then(res => {
+  //     const data = res.data.results[0];
+  //     setLocation({
+  //       lat: data.geometry.location.lat,
+  //       lng: data.geometry.location.lng,
+  //       name: data.address_components[0].long_name,
+  //       address: data.formatted_address,
+  //       url: 'https://www.google.com/maps/place/?q=place_id:' + data.place_id,
+  //     });
+  //   })
+  //   .catch((error) => {
+  //     console.log(error);
+  // })
 
   const renderMarker = () => {
     if (location.lat !== 0) {
@@ -45,13 +50,12 @@ const Map = (props) => {
       );
     }
   }
-
-
+  
   return (
     <>
       <LoadScript
         id="script-loader"
-        googleMapsApiKey="AIzaSyAwFm8nidy09UCt7c16zYl8imUooco5OyU"
+        googleMapsApiKey={apiKey}
       >
         <GoogleMap
           id="circle-example"

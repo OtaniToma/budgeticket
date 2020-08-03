@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { signIn } from "../reducks/users/operations";
 import { TextInput, Button } from "../components/atoms";
+import Box from '@material-ui/core/Box';
 
 const SignIn = () => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const SignIn = () => {
   );
 
   return (
-    <>
+    <div>
       <h2>Sign In</h2>
 
       <TextInput
@@ -48,6 +49,7 @@ const SignIn = () => {
         type={"password"}
         onChange={inputPassword}
       />
+      <Box p={1} bgcolor="background.paper" />
       <Button
         label={"Sign In"}
         color="primary"
@@ -55,7 +57,7 @@ const SignIn = () => {
       />
       <p onClick={() => dispatch(push("/signup"))}>Create new account</p>
       <p onClick={() => dispatch(push("/signin/reset"))}>Reset password</p>
-    </>
+    </div>
   );
 };
 

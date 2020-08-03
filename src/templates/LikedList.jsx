@@ -21,11 +21,11 @@ const LikedList = () => {
   const uid = getUserId(selector);
   const ticketsInLiked = getTicketsInLiked(selector);
 
-  const purchaseTicket = (props) => {
+  const _bookTicket = (props) => {
     console.log(props)
   }
 
-  const deleteTicket = (props) => {
+  const _deleteTicket = (props) => {
     const id = props.likedId;
     return db.collection('users').doc(uid)
             .collection('liked').doc(id)
@@ -61,8 +61,8 @@ const LikedList = () => {
                 outboundDepartureDate={ticket.outboundDepartureDate}
                 inboundDepartureDate={ticket.inboundDepartureDate}
                 addTicket={false}
-                deleteTicket={deleteTicket}
-                purchaseTicket={purchaseTicket}
+                deleteTicket={_deleteTicket}
+                bookTicket={_bookTicket}
               />)
             )}
           </Grid>
