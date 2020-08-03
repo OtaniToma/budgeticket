@@ -44,6 +44,10 @@ const Ticket = (props) => {
   const [liked, setLiked] = useState(false)
 
   const _addTicket = () => {
+    if (liked) {
+      setLiked(false)
+      return false
+    }
     addTicket(props)
     setLiked(true)
   }
