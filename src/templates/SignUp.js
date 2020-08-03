@@ -3,6 +3,9 @@ import { TextInput, Button } from "../components/atoms";
 import { signUp } from "../reducks/users/operations";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import Box from '@material-ui/core/Box';
 
 const SignUp = () => {
   const dispatch = useDispatch();
@@ -83,6 +86,7 @@ const SignUp = () => {
         type={"password"}
         onChange={inputConfirmPassword}
       />
+      <Box p={1} bgcolor="background.paper" />
       <Button
         label={"Signup"}
         color="primary"

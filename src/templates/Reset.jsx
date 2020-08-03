@@ -3,6 +3,7 @@ import { TextInput, Button } from "../components/atoms";
 import { resetPassword } from "../reducks/users/operations";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
+import Box from '@material-ui/core/Box';
 
 const Reset = () => {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ const Reset = () => {
         type={"email"}
         onChange={inputEmail}
       />
+      <Box p={1} bgcolor="background.paper" />
       <Button
         label={"Reset"}
         color="primary"
