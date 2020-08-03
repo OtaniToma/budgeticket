@@ -1,6 +1,7 @@
 const initialState = {
   users: {
     liked: [],
+    booking: [],
     icon: "",
     isSignedIn: false,
     uid: "",

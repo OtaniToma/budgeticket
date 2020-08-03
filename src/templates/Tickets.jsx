@@ -4,7 +4,7 @@ import AirlineLogos from '../reducks/flights/airlineLogos.json'
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import { FirebaseTimestamp } from '../firebase/index';
-import { addTicketToLiked } from '../reducks/users/operations';
+import { addTicketToLiked, bookTicket } from '../reducks/users/operations';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -44,7 +44,7 @@ const Tickets = (props) => {
 
   const [sort, setSort] = useState('');
 
-  const addTicket = ({
+  const _addTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
@@ -70,6 +70,10 @@ const Tickets = (props) => {
     }))
   }
 
+  const _bookTicket = (props) => {
+    bookTicket(props)
+  }
+
   return (
     <>
       {quotes &&
@@ -90,7 +94,8 @@ const Tickets = (props) => {
               inboundCarriersLogo={logosToShow[carriersToShow[quote.InboundLeg.CarrierIds]]}
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
-              addTicket={addTicket}
+              addTicket={_addTicket}
+              bookTicket={_bookTicket}
             />
           )
         })
