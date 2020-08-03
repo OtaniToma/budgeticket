@@ -41,7 +41,7 @@ const StopList = ({ quotes, filterStops }) => {
   return (
     <>
     <List className={classes.root}>
-      {['Direct', 'Indirect'].map((value) => {
+      {['Non-stop', 'With Stop(s)'].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (

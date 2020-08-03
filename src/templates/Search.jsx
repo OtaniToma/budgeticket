@@ -54,12 +54,10 @@ const Search = () => {
   }, [quotes, sortType])
 
   const filterAirlines = (checked) => {
-
     const airlineNumbers = [];
     checked.map(airline => {
       airlineNumbers.push(airline.CarrierId)
     })
-
     const filteredArray = [];
     airlineNumbers.map(number => {
       quotesToSorted.map(quote => {
@@ -76,8 +74,30 @@ const Search = () => {
   }
 
   const filterStops = (checked) => {
-    console.log(checked)
     const filteredArray = [];
+    const flightNumbers = {
+      direct: 0,
+      indirect: 0
+    };
+    checked.map(type => {
+      if (type === 'Non-stop') {
+        quotesToSorted.map(quote => {
+          if (quote.Direct) {
+            filteredArray.push(quote)
+            flightNumbers.direct++
+          }
+        })
+      }
+      if (type === 'With Stop(s)') {
+        quotesToSorted.map(quote => {
+          if (!quote.Direct) {
+            filteredArray.push(quote)
+            flightNumbers.indirect++
+          }
+        })
+      }
+    })
+    setQuotesList(filteredArray);
   }
 
   return (
@@ -111,7 +131,7 @@ const Search = () => {
           </Grid>
           <Grid item xs={12} md={3}>
             <Divider />
-            <AirportInfo places={places} quotes={quotes['default']} />
+            {/* <AirportInfo places={places} quotes={quotes['default']} /> */}
           </Grid>
         </Grid>
       </div>
