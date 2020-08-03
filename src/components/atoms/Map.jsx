@@ -3,12 +3,6 @@ import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 import axios from 'axios';
 import { db } from "../../firebase/";
 
-let apiKey = '';
-db.collection('/keys').doc('geocoding').get().then((doc) => {
-  apiKey = doc.data().key
-  // console.log(apiKey)
-})
-
 const Map = (props) => {
 
   const [location, setLocation] = useState({
@@ -18,6 +12,12 @@ const Map = (props) => {
     address: '',
     url: ''
   });
+
+  const [apiKey, setApiKey] = useState('')
+
+  // db.collection('/keys').doc('geocoding').get().then((doc) => {
+  //   setApiKey(doc.data().key)
+  // })
 
   // axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${props.name}&key=${apiKey}`)
   //   .then(res => {
