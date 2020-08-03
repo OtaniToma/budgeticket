@@ -2,7 +2,7 @@ import { searchFlightsAction } from "./actions";
 import { db } from "../../firebase/";
 
 let apiKey = '';
-db.collection('/keys').doc('onM4ZFa2LT4p6UVoRw9k').get().then((doc) => {
+db.collection('/keys').doc('skyscanner').get().then((doc) => {
   apiKey = doc.data().key
 })
 
