@@ -5,7 +5,7 @@ import { auth, db, FirebaseTimestamp } from "../../firebase/";
 const usersRef = db.collection("users");
 
 export const addTicketToLiked = (ticket) => {
-  return async (dispatch, getState) => {
+  return async (getState) => {
     const uid = getState().users.uid
     const likedRef = usersRef.doc(uid).collection('liked').doc()
     ticket['likedId'] = likedRef.id
@@ -18,6 +18,10 @@ export const bookTicket = (ticket) => {
     dispatch(bookTicketAction(ticket))
     dispatch(push("/user/booking"));
   }
+}
+
+export const purchaseTicket = (ticket) => {
+  console.log(ticket)
 }
 
 export const fetchTicketsInLiked = (tickets) => {

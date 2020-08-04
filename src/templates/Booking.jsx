@@ -5,7 +5,11 @@ import { makeStyles } from '@material-ui/styles'
 import { getUserId, getBookingTicket } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
-import { db } from "../firebase";
+import { auth, db, FirebaseTimestamp } from "../firebase/";
+import { Button } from "../components/atoms";
+import { purchaseTicket } from '../reducks/users/operations'
+
+const usersRef = db.collection("users");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,12 +25,9 @@ const Booking = () => {
   const uid = getUserId(selector);
   const bookingTicket = getBookingTicket(selector);
 
-  // const uid = getState().users.uid
-  // const bookingRef = usersRef.doc(uid).collection('booking').doc()
-  // ticket['bookingId'] = bookingRef.id
-  // bookingRef.set(ticket)
-
-  console.log(bookingTicket)
+  const _purchaseTicket = (ticket) => {
+    purchaseTicket(ticket)
+  }
 
   return (
     <>
@@ -37,7 +38,7 @@ const Booking = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
-            <Ticket
+            {Object.keys(bookingTicket).length > 0 && <Ticket
               id={bookingTicket.id}
               price={bookingTicket.price}
               currencies={bookingTicket.currencies}
@@ -52,9 +53,14 @@ const Booking = () => {
               inboundCarriersLogo={bookingTicket.inboundCarriersLogo}
               outboundDepartureDate={bookingTicket.outboundDepartureDate}
               inboundDepartureDate={bookingTicket.inboundDepartureDate}
-            />
+            />}
           </Grid>
           <Grid item xs={12} md={3}>
+          <Button
+            onClick={() => _purchaseTicket(bookingTicket)}
+            label={"Purchase"}
+            color={"primary"}
+          />
           </Grid>
         </Grid>
       </div>
