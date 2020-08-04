@@ -1,7 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router";
 import {
-  Book,
+  Booking,
   History,
   Liked,
   Profile,
@@ -24,7 +24,7 @@ const Router = () => {
 
       <Auth>
         <Route exact path={"(/)?"} component={Search} />
-        <Route exact path={"/user/book"} component={Book} />
+        <Route exact path={"/user/booking"} component={Booking} />
         <Route exact path={"/user/history"} component={History} />
         <Route exact path={"/user/liked"} component={Liked} />
         <Route exact path={"/user/profile"} component={Profile} />

@@ -1,11 +1,12 @@
 import React, { useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { push } from 'connected-react-router'
 import { makeStyles } from '@material-ui/styles'
 import { getTicketsInLiked, getUserId } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { db } from "../firebase";
+import { bookTicket } from '../reducks/users/operations';
+import { FirebaseTimestamp } from '../firebase/index';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -21,8 +22,31 @@ const LikedList = () => {
   const uid = getUserId(selector);
   const ticketsInLiked = getTicketsInLiked(selector);
 
-  const _bookTicket = (props) => {
-    console.log(props)
+  const _bookTicket = ({
+    id, price, currencies, direct, departAirportCode, arriveAirportCode,
+    departAirportName, arriveAirportName,
+    outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
+    outboundDepartureDate, inboundDepartureDate
+  }) => {
+    const timestamp = FirebaseTimestamp.now();
+    dispatch(bookTicket({
+      added_at: timestamp,
+      completed: false,
+      id: id,
+      price: price,
+      currencies: currencies,
+      direct: direct,
+      departAirportCode: departAirportCode,
+      arriveAirportCode: arriveAirportCode,
+      departAirportName: departAirportName,
+      arriveAirportName: arriveAirportName,
+      outboundCarriers: outboundCarriers,
+      inboundCarriers: inboundCarriers,
+      outboundCarriersLogo: outboundCarriersLogo,
+      inboundCarriersLogo: inboundCarriersLogo,
+      outboundDepartureDate: outboundDepartureDate,
+      inboundDepartureDate: inboundDepartureDate
+    }))
   }
 
   const _deleteTicket = (props) => {

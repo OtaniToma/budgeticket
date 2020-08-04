@@ -1,21 +1,26 @@
-import { fetchTicketsInLikedAction, signInAction, signOutAction } from "./actions";
+import { bookTicketAction, fetchTicketsInLikedAction, signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import { auth, db, FirebaseTimestamp } from "../../firebase/";
 
 const usersRef = db.collection("users");
 
 export const addTicketToLiked = (ticket) => {
-  return async (dispatch, getState) => {
+  return async (getState) => {
     const uid = getState().users.uid
     const likedRef = usersRef.doc(uid).collection('liked').doc()
     ticket['likedId'] = likedRef.id
-
     await likedRef.set(ticket)
-    dispatch(push('/'))
   }
 }
 
 export const bookTicket = (ticket) => {
+  return async (dispatch) => {
+    dispatch(bookTicketAction(ticket))
+    dispatch(push("/user/booking"));
+  }
+}
+
+export const purchaseTicket = (ticket) => {
   console.log(ticket)
 }
 

@@ -10,6 +10,10 @@ service cloud.firestore {
       match /liked/{likedId} {
         allow read, write: if request.auth.uid == userId;
       }
+
+      match /booking/{bookingId} {
+        allow read, write: if request.auth.uid == userId;
+      }
     }
     
     match /keys/{document} {

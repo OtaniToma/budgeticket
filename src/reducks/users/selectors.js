@@ -17,4 +17,9 @@ export const getUsername = createSelector(
 export const getTicketsInLiked = createSelector(
   [userSelector],
   (state) => state.liked
-)
+);
+
+export const getBookingTicket = createSelector(
+  [userSelector],
+  (state) => state.booking
+);
