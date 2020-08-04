@@ -1,3 +1,11 @@
+export const BOOK_TICKET = 'BOOK_TICKET';
+export const bookTicketAction = (ticket) => {
+  return {
+    type: 'BOOK_TICKET',
+    payload: ticket
+  }
+}
+
 export const FETCH_TICKETS_IN_LIKED = 'FETCH_TICKETS_IN_LIKED';
 export const fetchTicketsInLikedAction = (tickets) => {
   return {
