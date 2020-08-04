@@ -1,4 +1,4 @@
-export { default as Book } from "./book";
+export { default as Booking } from "./booking";
 export { default as History } from "./history";
 export { default as Liked } from "./liked";
 export { default as Profile } from "./profile";

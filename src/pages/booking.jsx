@@ -1,8 +1,9 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { auth, db, FirebaseTimestamp } from "../firebase/";
+import BookingTemplate from "../templates/Booking";
 
-const Book = () => {
+const Booking = () => {
   const useStyles = makeStyles({
     root: {
       marginTop: '100px',
@@ -12,9 +13,9 @@ const Book = () => {
 
   return (
     <div className={classes.root}>
-      <h1>Book</h1>
+      <BookingTemplate />
     </div>
   );
 };
 
-export default Book;
+export default Booking;

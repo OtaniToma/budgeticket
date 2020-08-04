@@ -11,7 +11,7 @@ export const addTicketToLiked = (ticket) => {
     ticket['likedId'] = likedRef.id
 
     await likedRef.set(ticket)
-    dispatch(push('/'))
+    dispatch(push('/user/booking'))
   }
 }
 

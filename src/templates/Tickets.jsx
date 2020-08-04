@@ -70,8 +70,31 @@ const Tickets = (props) => {
     }))
   }
 
-  const _bookTicket = (props) => {
-    bookTicket(props)
+  const _bookTicket = ({
+    id, price, currencies, direct, departAirportCode, arriveAirportCode,
+    departAirportName, arriveAirportName,
+    outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
+    outboundDepartureDate, inboundDepartureDate
+  }) => {
+    const timestamp = FirebaseTimestamp.now();
+    dispatch(bookTicket({
+      added_at: timestamp,
+      completed: false,
+      id: id,
+      price: price,
+      currencies: currencies,
+      direct: direct,
+      departAirportCode: departAirportCode,
+      arriveAirportCode: arriveAirportCode,
+      departAirportName: departAirportName,
+      arriveAirportName: arriveAirportName,
+      outboundCarriers: outboundCarriers,
+      inboundCarriers: inboundCarriers,
+      outboundCarriersLogo: outboundCarriersLogo,
+      inboundCarriersLogo: inboundCarriersLogo,
+      outboundDepartureDate: outboundDepartureDate,
+      inboundDepartureDate: inboundDepartureDate
+    }))
   }
 
   return (
