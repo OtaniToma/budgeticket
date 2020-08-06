@@ -19,7 +19,7 @@ const AirportInfo = ({ places, quotes }) => {
       }
       return true;
     })
-  }, [places])
+  }, [places, quotes])
 
   return (
     <>

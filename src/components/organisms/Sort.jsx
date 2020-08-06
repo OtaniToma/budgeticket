@@ -45,7 +45,7 @@ const Sort = (props) => {
       default :
       onChangeSortType('departEarly')
     }
-  }, [sort])
+  }, [onChangeSortType, sort])
 
   return (
     <>

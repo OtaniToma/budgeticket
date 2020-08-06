@@ -16,13 +16,13 @@ const Tickets = (props) => {
   } = props;
 
   const carriersToShow = {};
-  carriers.map(carrier => {
+  carriers.forEach(carrier => {
     carriersToShow[carrier.CarrierId] = carrier.Name
   });
 
   const logosToShow = {};
-  carriers.map(carrier => {
-    AirlineLogos.map(airline => {
+  carriers.forEach(carrier => {
+    AirlineLogos.forEach(airline => {
       if (carrier.Name === airline.name) {
         logosToShow[carrier.Name] = airline.logo
       }

@@ -49,16 +49,16 @@ const Search = () => {
 
   useEffect(() => {
     setQuotesList(quotesToSorted)
-  }, [quotes, sortType])
+  }, [quotes, sortType, quotesToSorted])
 
   const filterAirlines = (checked) => {
     const airlineNumbers = [];
-    checked.map(airline => {
+    checked.forEach(airline => {
       airlineNumbers.push(airline.CarrierId)
     })
     const filteredArray = [];
-    airlineNumbers.map(number => {
-      quotesToSorted.map(quote => {
+    airlineNumbers.forEach(number => {
+      quotesToSorted.forEach(quote => {
         if (quote.OutboundLeg.CarrierIds[0] === number) {
           filteredArray.push(quote)
           return false
@@ -77,9 +77,9 @@ const Search = () => {
       direct: 0,
       indirect: 0
     };
-    checked.map(type => {
+    checked.forEach(type => {
       if (type === 'Non-stop') {
-        quotesToSorted.map(quote => {
+        quotesToSorted.forEach(quote => {
           if (quote.Direct) {
             filteredArray.push(quote)
             flightNumbers.direct++
@@ -87,7 +87,7 @@ const Search = () => {
         })
       }
       if (type === 'With Stop(s)') {
-        quotesToSorted.map(quote => {
+        quotesToSorted.forEach(quote => {
           if (!quote.Direct) {
             filteredArray.push(quote)
             flightNumbers.indirect++

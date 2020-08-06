@@ -17,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
 const AirlineList = ({ carriers, filterAirlines }) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
-  // console.log(checked);
 
   const handleToggle = (carrier) => () => {
     const currentIndex = checked.indexOf(carrier);
@@ -33,7 +32,7 @@ const AirlineList = ({ carriers, filterAirlines }) => {
   };
 
   useEffect(() => {
-    filterAirlines(checked)
+    filterAirlines(checked);
   }, [checked])
 
   return (

@@ -58,13 +58,13 @@ const SearchBar = () => {
     if (returnDate <= departDate) {
       alert('Please select the departure date before the return date.');
     }
-  }, [departDate])
+  }, [departDate, returnDate])
 
   useEffect(() => {
     if (departDate > returnDate) {
       alert('Please select the departure date before the return date.');
     }
-  }, [returnDate])
+  }, [departDate, returnDate])
 
   const useStyles = makeStyles({
     root: {
