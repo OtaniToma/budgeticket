@@ -1,7 +1,7 @@
 export const BOOK_TICKET = 'BOOK_TICKET';
 export const bookTicketAction = (ticket) => {
   return {
-    type: 'BOOK_TICKET',
+    type: BOOK_TICKET,
     payload: ticket
   }
 }
@@ -9,15 +9,15 @@ export const bookTicketAction = (ticket) => {
 export const FETCH_TICKETS_IN_LIKED = 'FETCH_TICKETS_IN_LIKED';
 export const fetchTicketsInLikedAction = (tickets) => {
   return {
-    type: 'FETCH_TICKETS_IN_LIKED',
+    type: FETCH_TICKETS_IN_LIKED,
     payload: tickets
   }
 }
 
-export const SIGN_IN = "SIGN_IN";
+export const SIGN_IN = 'SIGN_IN';
 export const signInAction = (userState) => {
   return {
-    type: "SIGN_IN",
+    type: SIGN_IN,
     payload: {
       isSignedIn: true,
       role: userState.role,
@@ -27,10 +27,10 @@ export const signInAction = (userState) => {
   };
 };
 
-export const SIGN_OUT = "SIGN_OUT";
+export const SIGN_OUT = 'SIGN_OUT';
 export const signOutAction = () => {
   return {
-    type: "SIGN_OUT",
+    type: SIGN_OUT,
     payload: {
       isSignedIn: false,
       role: "",
