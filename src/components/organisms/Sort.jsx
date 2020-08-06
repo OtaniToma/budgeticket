@@ -42,8 +42,10 @@ const Sort = (props) => {
       case 'selectedAirlines':
         onChangeSortType('selectedAirlines')
         break;
+      default :
+      onChangeSortType('departEarly')
     }
-  }, [sort])
+  }, [onChangeSortType, sort])
 
   return (
     <>
