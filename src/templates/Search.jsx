@@ -7,14 +7,13 @@ import {
   getQuotes
 } from "../reducks/flights/selectors";
 import SearchBar from "../components/organisms/SearchBar";
-import StopList from "../components/organisms/StopList";
-import AirlineList from "../components/organisms/AirlineList";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Sort from '../components/organisms/Sort';
 import DestinationInfo from '../components/organisms/DestinationInfo'
+import Filters from '../components/organisms/Filters'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,14 +43,13 @@ const Search = () => {
 
   const [sortType, setSortType] = useState('default');
   const quotesToSorted = quotes[sortType];
-
-  const [quotesList, setQuotesList] = useState([]);
+  const [filteredQuotes, setFilteredQuotes] = useState([]);
 
   useEffect(() => {
-    setQuotesList(quotesToSorted)
+    setFilteredQuotes(quotesToSorted)
   }, [quotes, sortType, quotesToSorted])
 
-  const filterAirlines = (checked) => {
+  const _filterAirlines = (checked) => {
     const airlineNumbers = [];
     checked.forEach(airline => {
       airlineNumbers.push(airline.CarrierId)
@@ -68,10 +66,10 @@ const Search = () => {
         }
       })
     })
-    setQuotesList(filteredArray);
+    setFilteredQuotes(filteredArray);
   }
 
-  const filterStops = (checked) => {
+  const _filterStops = (checked) => {
     const filteredArray = [];
     const flightNumbers = {
       direct: 0,
@@ -95,7 +93,11 @@ const Search = () => {
         })
       }
     })
-    setQuotesList(filteredArray);
+    setFilteredQuotes(filteredArray);
+  }
+
+  const _setSortType = (props) => {
+    setSortType(props)
   }
 
   return (
@@ -106,17 +108,10 @@ const Search = () => {
             <SearchBar />
           </Grid>
           <Grid item xs={12} md={2}>
-            <Sort onChangeSortType={setSortType} />
-            <Divider />
-            <StopList
-              quotes={quotes.default}
-              filterStops={filterStops}
-            />
-            <Divider />
-            <AirlineList
-              carriers={carriers}
-              onChangeSortType={setSortType}
-              filterAirlines={filterAirlines}
+            <Filters
+              setSortType={_setSortType}
+              filterStops={_filterStops}
+              filterAirlines={_filterAirlines}
             />
           </Grid>
           <Grid item xs={12} md={7}>
@@ -124,7 +119,7 @@ const Search = () => {
               carriers={carriers}
               currencies={currencies}
               places={places}
-              quotes={quotesList}
+              quotes={filteredQuotes}
             />
           </Grid>
           <Grid item xs={12} md={3}>
