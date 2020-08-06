@@ -8,7 +8,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { getIsSignedIn, getUsername } from "../../reducks/users/selectors";
-import { HeaderMenus, ClosableDrawer } from "./index";
+import HeaderMenus from "../molecules/HeaderMenus";
+import ClosableDrawer from "./ClosableDrawer";
 import { useCallback } from "react";
 
 const useStyles = makeStyles((theme) => ({
