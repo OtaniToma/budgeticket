@@ -1,6 +1,6 @@
 import React from "react";
 import Ticket from '../components/organisms/Ticket';
-import AirlineLogos from '../reducks/flights/airlineLogos.json'
+import AirlineLogos from '../constants/airlineLogos.json'
 import { useDispatch } from 'react-redux';
 import { FirebaseTimestamp } from '../firebase/index';
 import { addTicketToLiked, bookTicket } from '../reducks/users/operations';
