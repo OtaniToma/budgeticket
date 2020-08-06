@@ -9,12 +9,12 @@ import {
 import SearchBar from "../components/organisms/SearchBar";
 import StopList from "../components/organisms/StopList";
 import AirlineList from "../components/organisms/AirlineList";
-import AirportInfo from "../components/organisms/AirportInfo";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Divider from "@material-ui/core/Divider";
 import Sort from '../components/organisms/Sort';
+import DestinationInfo from '../components/organisms/DestinationInfo'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -128,7 +128,7 @@ const Search = () => {
             />
           </Grid>
           <Grid item xs={12} md={3}>
-            <AirportInfo places={places} quotes={quotes['default']} />
+            <DestinationInfo />
           </Grid>
         </Grid>
       </div>
