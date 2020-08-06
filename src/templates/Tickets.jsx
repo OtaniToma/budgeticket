@@ -1,25 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React from "react";
 import Ticket from '../components/organisms/Ticket';
 import AirlineLogos from '../reducks/flights/airlineLogos.json'
-import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { FirebaseTimestamp } from '../firebase/index';
 import { addTicketToLiked, bookTicket } from '../reducks/users/operations';
 
-const useStyles = makeStyles((theme) => ({
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
-}));
-
 const Tickets = (props) => {
-  const classes = useStyles();
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
   
   const {
     carriers,
@@ -41,8 +28,6 @@ const Tickets = (props) => {
       }
     })
   });
-
-  const [sort, setSort] = useState('');
 
   const _addTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,

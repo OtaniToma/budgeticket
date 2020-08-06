@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import MenuIcon from "@material-ui/icons/Menu";
-import { getIsSignedIn, getUserId, getTicketsInLiked, getUsername } from "../../reducks/users/selectors";
+import { getIsSignedIn, getUserId, getTicketsInLiked } from "../../reducks/users/selectors";
 import { push } from "connected-react-router";
 import { fetchTicketsInLiked } from '../../reducks/users/operations';
 import { db } from '../../firebase/index';

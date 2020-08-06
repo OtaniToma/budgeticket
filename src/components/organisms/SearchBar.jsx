@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { searchFlights } from "../../reducks/flights/operations";
 import { Button } from "../atoms";
 import { SelectBox, SelectDate, SelectAirport } from "../atoms";
-import { getQuotes } from "../../reducks/flights/selectors";
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 
@@ -17,6 +16,10 @@ const currencies = [
     label: "USD",
   },
   {
+    value: "EUR",
+    label: "EUR",
+  },
+  {
     value: "JPY",
     label: "JPY",
   },
@@ -27,7 +30,8 @@ const getToday = new Date(),
   todayMonth = ("0" + (getToday.getMonth() + 1)).slice(-2),
   todayDay = ("0" + (getToday.getDate())).slice(-2),
   today = todayYear + '-' + todayMonth + '-' + todayDay;
-
+  const todayDate = today;
+  
 const getAWeekLater = new Date(getToday.getTime() + 7 * 24 * 60 * 60 * 1000),
   aWeekLaterYear = getAWeekLater.getFullYear(),
   aWeekLaterMonth = ("0" + (getAWeekLater.getMonth() + 1)).slice(-2),
@@ -42,13 +46,11 @@ const getTwoWeeksLater = new Date(getToday.getTime() + 14 * 24 * 60 * 60 * 1000)
 
 const SearchBar = () => {
   const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const quotes = getQuotes(selector);
 
   const [originAirport, setOriginAirport] = useState("YVR");
   const [destinationAirport, setDestinationAirport] = useState("SFO");
   const [currency, setCurrency] = useState("CAD");
-  const [todayDate, setTodayDate] = useState(today);
+
   const [departDate, setDepartDate] = useState(aWeekLater);
   const [returnDate, setReturnDate] = useState(twoWeeksLater);
 

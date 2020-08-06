@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import Map from '../atoms/Map'
+// import Map from '../atoms/Map'
 
 const AirportInfo = ({ places, quotes }) => {
 
@@ -18,13 +17,13 @@ const AirportInfo = ({ places, quotes }) => {
           city: place.CityName,
         })
       }
+      return true;
     })
-
   }, [places])
 
   return (
     <>
-      <Map name={airport.name} />
+      {/* <Map name={airport.name} /> */}
       <ul>
         <li>{airport.name}</li>
         <li>{airport.code}</li>

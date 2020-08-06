@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   getCarriers,
   getCurrencies,
   getPlaces,
-  getQuotes,
-  filterQuotes
+  getQuotes
 } from "../reducks/flights/selectors";
 import SearchBar from "../components/organisms/SearchBar";
 import StopList from "../components/organisms/StopList";
@@ -36,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Search = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
   const carriers = getCarriers(selector);

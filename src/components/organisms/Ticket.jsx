@@ -1,25 +1,14 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { makeStyles } from '@material-ui/core/styles';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import './Ticket.scss';
-import { auth } from "../../firebase";
 import { getIsSignedIn } from "../../reducks/users/selectors";
-import { Button } from '../atoms'
-
-const useStyles = makeStyles({
-  root: {
-    minWidth: '100%',
-  }
-});
 
 const Ticket = (props) => {
-  const classes = useStyles();
 
   const {
     id,
-    likedId,
     price,
     currencies,
     direct,
