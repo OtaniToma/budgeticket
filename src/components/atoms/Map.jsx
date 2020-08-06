@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
-import axios from 'axios';
-import { db } from "../../firebase/";
+import React from "react";
+// import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const Map = (props) => {
 
-  const [location, setLocation] = useState({
-    lat: 0,
-    lng: 0,
-    name: '',
-    address: '',
-    url: ''
-  });
+  // const [location, setLocation] = useState({
+  //   lat: 0,
+  //   lng: 0,
+  //   name: '',
+  //   address: '',
+  //   url: ''
+  // });
 
-  const [apiKey, setApiKey] = useState('')
+  // const [apiKey, setApiKey] = useState('')
 
   // db.collection('/keys').doc('geocoding').get().then((doc) => {
   //   setApiKey(doc.data().key)
@@ -34,26 +32,26 @@ const Map = (props) => {
   //     console.log(error);
   // })
 
-  const renderMarker = () => {
-    if (location.lat !== 0) {
-      return (
-        <>
-          <Marker
-            onLoad={marker => {
-            }}
-            position={{
-              lat: location.lat,
-              lng: location.lng
-            }}
-          />
-        </>
-      );
-    }
-  }
+  // const renderMarker = () => {
+  //   if (location.lat !== 0) {
+  //     return (
+  //       <>
+  //         <Marker
+  //           onLoad={marker => {
+  //           }}
+  //           position={{
+  //             lat: location.lat,
+  //             lng: location.lng
+  //           }}
+  //         />
+  //       </>
+  //     );
+  //   }
+  // }
   
   return (
     <>
-      <LoadScript
+      {/* <LoadScript
         id="script-loader"
         googleMapsApiKey={apiKey}
       >
@@ -70,7 +68,7 @@ const Map = (props) => {
           }}>
           {renderMarker()}
         </GoogleMap>
-      </LoadScript>
+      </LoadScript> */}
     </>
   );
 };

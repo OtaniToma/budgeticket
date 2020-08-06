@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AirportsData from 'airport-data'
@@ -15,7 +15,7 @@ const AutocompleteInput = (props) => {
     }
     select(values.iata);
   }
-
+  
   return (
     <Autocomplete
       id="combo-box-demo"

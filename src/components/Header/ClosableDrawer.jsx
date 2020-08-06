@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React from "react";
 import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/list";
@@ -36,15 +36,6 @@ const ClosableDrawer = (props) => {
   const classes = useStyles();
   const { container } = props;
   const dispatch = useDispatch();
-
-  const [keyword, setKeyword] = useState("");
-
-  const inputKeyword = useCallback(
-    (event) => {
-      setKeyword(event.target.value);
-    },
-    [setKeyword]
-  );
 
   const selectMenu = (event, path) => {
     dispatch(push(path));

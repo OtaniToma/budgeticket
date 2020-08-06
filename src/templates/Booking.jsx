@@ -1,15 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { push } from 'connected-react-router'
+import React from 'react'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
-import { getUserId, getBookingTicket } from '../reducks/users/selectors'
+import { getBookingTicket } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
-import { auth, db, FirebaseTimestamp } from "../firebase/";
 import { Button } from "../components/atoms";
 import { purchaseTicket } from '../reducks/users/operations'
-
-const usersRef = db.collection("users");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,9 +16,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Booking = () => {
   const classes = useStyles();
-  const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const uid = getUserId(selector);
   const bookingTicket = getBookingTicket(selector);
 
   const _purchaseTicket = (ticket) => {
