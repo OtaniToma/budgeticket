@@ -73,11 +73,11 @@ const ClosableDrawer = (props) => {
         variant="temporary"
         anchor="right"
         open={props.open}
-        onClose={(e) => props.onClose(e)}
+        onClose={props.onClose}
         classes={{ paper: classes.drawerPaper }}
         ModalProps={{ keepMounted: true }}
       >
-        <div onClose={(e) => props.onClose(e)}>
+        <div onClose={props.onClose}>
           <Divider />
           <List>
             {menus.map((menu) => (
