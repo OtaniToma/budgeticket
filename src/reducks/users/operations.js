@@ -66,7 +66,7 @@ export const signIn = (email, password) => {
       return false;
     }
 
-    const result = await auth
+    await auth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
         const user = result.user;

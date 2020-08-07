@@ -88,6 +88,7 @@ const Tickets = (props) => {
         quotes.map((quote) => {
           return (
             <Ticket
+              key={quote.QuoteId}
               id={quote.QuoteId}
               currencies={currencies[0]}
               price={quote.MinPrice.toLocaleString()}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
@@ -18,41 +18,22 @@ const useStyles = makeStyles((theme) => ({
 const Sort = (props) => {
 
   const {
+    sortType,
     onChangeSortType
   } = props;
 
   const classes = useStyles();
-  const [sort, setSort] = useState('');
 
   const handleChange = (event) => {
-    setSort(event.target.value);
+    onChangeSortType(event.target.value);
   };
-
-  useEffect(() => {
-    switch (sort) {
-      case 'departEarly':
-        onChangeSortType('departEarly')
-        break;
-      case 'lowToHigh':
-        onChangeSortType('lowToHigh')
-        break;
-      case 'highToLow':
-        onChangeSortType('highToLow')
-        break;
-      case 'selectedAirlines':
-        onChangeSortType('selectedAirlines')
-        break;
-      default :
-      onChangeSortType('departEarly')
-    }
-  }, [onChangeSortType, sort])
 
   return (
     <>
       <FormControl className={classes.formControl}>
         <InputLabel>Sort</InputLabel>
         <Select
-          value={sort}
+          value={sortType}
           onChange={handleChange}
         >
           <MenuItem value={'departEarly'}>Early Departure</MenuItem>

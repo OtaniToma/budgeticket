@@ -8,7 +8,6 @@ import { getIsSignedIn } from "../../reducks/users/selectors";
 const Ticket = (props) => {
 
   const {
-    id,
     price,
     currencies,
     direct,
@@ -50,7 +49,7 @@ const Ticket = (props) => {
   }
 
   return (
-    <div key={id} className={"ticket"}>
+    <div className={"ticket"}>
       <div className="ticket__container">
         <div className="ticket__left">
           <div className="left__container">
