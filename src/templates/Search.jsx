@@ -10,8 +10,6 @@ import SearchBar from "../components/organisms/SearchBar";
 import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import Divider from "@material-ui/core/Divider";
-import Sort from '../components/organisms/Sort';
 import DestinationInfo from '../components/organisms/DestinationInfo'
 import Filters from '../components/organisms/Filters'
 
