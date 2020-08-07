@@ -20,13 +20,12 @@ const AutocompleteInput = (props) => {
     <Autocomplete
       id="combo-box-demo"
       options={AirportsData}
-      getOptionLabel={(option) => option.name}
+      getOptionLabel={(option) => `${option.name} (${option.iata})`}
       style={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
       onChange={onTagsChange}
       autoComplete={true}
       autoHighlight={true}
-      getOptionLabel={(option) => `${option.name} (${option.iata})`}
     />
   );
 };
