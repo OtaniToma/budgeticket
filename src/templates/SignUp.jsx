@@ -41,6 +41,9 @@ const SignUp = () => {
               if (!values.confirmPassword) {
                 errors.confirmPassword = 'Required';
               }
+              if (values.password !== values.confirmPassword) {
+                errors.confirmPassword = 'The password and confirm password fields do not match.';
+              }
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
