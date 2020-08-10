@@ -1,28 +1,33 @@
 import React from "react";
+import { signUp } from "../reducks/users/operations";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
-import { signIn } from "../reducks/users/operations";
 import Box from '@material-ui/core/Box';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper';
+import Paper from '@material-ui/core/Paper'
 
-const SignIn = () => {
+const SignUp = () => {
   const dispatch = useDispatch();
 
   return (
     <>
       <Paper elevation={3}>
         <Box p={2} bgcolor="background.paper">
-          <h2>Sign In</h2>
+          <h2>Sign Up</h2>
           <Formik
             initialValues={{
+              username: '',
               email: '',
               password: '',
+              confirmPassword: ''
             }}
             validate={values => {
               const errors = {};
+              if (!values.username) {
+                errors.username = 'Required';
+              }
               if (!values.email) {
                 errors.email = 'Required';
               } else if (
@@ -33,17 +38,34 @@ const SignIn = () => {
               if (!values.password) {
                 errors.password = 'Required';
               }
+              if (!values.confirmPassword) {
+                errors.confirmPassword = 'Required';
+              }
+              if (values.password !== values.confirmPassword) {
+                errors.confirmPassword = 'The password and confirm password fields do not match.';
+              }
               return errors;
             }}
             onSubmit={(values, { setSubmitting }) => {
               setTimeout(() => {
                 setSubmitting(false);
-                dispatch(signIn(values.email, values.password))
+                dispatch(signUp(values.username, values.email, values.password, values.confirmPassword))
               }, 500);
             }}
           >
             {({ submitForm, isSubmitting }) => (
               <Form>
+                <Field
+                  component={TextField}
+                  name="username"
+                  type="username"
+                  label="Username"
+                  fullWidth={true}
+                  multiline={false}
+                  required={true}
+                  rows={1}
+                />
+                <Box p={1} bgcolor="background.paper" />
                 <Field
                   component={TextField}
                   name="email"
@@ -65,6 +87,17 @@ const SignIn = () => {
                   required={true}
                   rows={1}
                 />
+                <Box p={1} bgcolor="background.paper" />
+                <Field
+                  component={TextField}
+                  type="password"
+                  label="Confirm Password"
+                  name="confirmPassword"
+                  fullWidth={true}
+                  multiline={false}
+                  required={true}
+                  rows={1}
+                />
                 {isSubmitting && <LinearProgress />}
                 <Box p={1} bgcolor="background.paper" />
                 <Button
@@ -81,10 +114,12 @@ const SignIn = () => {
         </Box>
       </Paper>
       &nbsp;
-      <p onClick={() => dispatch(push("/signup"))}>Create new account</p>
-      <p onClick={() => dispatch(push("/signin/reset"))}>Reset password</p>
+      <p>
+        Already have an account?{" "}
+        <span onClick={() => dispatch(push("/signin"))}>Sign in</span>
+      </p>
     </>
   );
 };
 
-export default SignIn;
+export default SignUp;
