@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -18,10 +18,6 @@ const StopList = ({ quotes, filterStops }) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
 
-  useEffect(() => {
-    filterStops(checked)
-  }, [checked])
-
   const handleToggle = (value) => () => {
     const currentIndex = checked.indexOf(value);
     const newChecked = [...checked];
@@ -33,6 +29,7 @@ const StopList = ({ quotes, filterStops }) => {
     }
 
     setChecked(newChecked);
+    filterStops(checked);
   };
 
   return (
