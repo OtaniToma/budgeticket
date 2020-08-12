@@ -33,25 +33,20 @@ export const fetchTicketsInLiked = (tickets) => {
 
 export const listenAuthState = () => {
   return async (dispatch) => {
-    return auth.onAuthStateChanged((user) => {
+    return auth.onAuthStateChanged(async (user) => {
       if (user) {
         const uid = user.uid;
+        const snapshot = await db.collection.apply('users').doc(uid).get();
+        const data = snapshot.data();
 
-        db.collection("users")
-          .doc(uid)
-          .get()
-          .then((snapshot) => {
-            const data = snapshot.data();
-
-            dispatch(
-              signInAction({
-                isSignedIn: true,
-                role: data.role,
-                uid: uid,
-                username: data.username,
-              })
-            );
-          });
+        dispatch(
+          signInAction({
+            isSignedIn: true,
+            role: data.role,
+            uid: uid,
+            username: data.username,
+          })
+        );
       } else {
         dispatch(push("/signin"));
       }
