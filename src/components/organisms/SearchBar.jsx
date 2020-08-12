@@ -120,7 +120,7 @@ const SearchBar = () => {
           </Box>
         </Grid>
         <Grid item xs={12} className={classes.center}>
-        <Box mx="auto" p={1}>
+        <Box mx="auto" p={2}>
         <Button onClick={() =>
             dispatch(
               searchFlights({

@@ -10,7 +10,6 @@ export const addTicketToLiked = (ticket) => {
     const likedRef = usersRef.doc(uid).collection('liked').doc()
     ticket['likedId'] = likedRef.id
     await likedRef.set(ticket)
-    dispatch(push('/'))
   }
 }
 
@@ -89,7 +88,7 @@ export const signIn = (email, password) => {
                 })
               );
 
-              dispatch(push("/"));
+              dispatch(push("/search"));
             });
         }
       });
@@ -135,7 +134,7 @@ export const signUp = (username, email, password, confirmPassword) => {
             .doc(uid)
             .set(userInitialData)
             .then(() => {
-              dispatch(push("/"));
+              dispatch(push("/search"));
             });
         }
       });
@@ -161,7 +160,7 @@ export const resetPassword = (email) => {
         .sendPasswordResetEmail(email)
         .then(() => {
           alert("Sent email.");
-          dispatch(push("/"));
+          dispatch(push("/search"));
         })
         .catch(() => {
           alert("Failed to reset.");
