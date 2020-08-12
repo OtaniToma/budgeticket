@@ -21,7 +21,7 @@ const Ticket = (props) => {
     inboundCarriersLogo,
     outboundDepartureDate,
     inboundDepartureDate,
-    addTicket,
+    likeTicket,
     deleteTicket,
     bookTicket
   } = props;
@@ -31,11 +31,11 @@ const Ticket = (props) => {
 
   const [liked, setLiked] = useState(false)
 
-  const _addTicket = () => {
+  const _likeTicket = () => {
     if (liked) {
       return false;
     }
-    addTicket(props)
+    likeTicket(props)
     setLiked(true)
   }
 
@@ -123,8 +123,8 @@ const Ticket = (props) => {
           {isSignedIn && bookTicket &&
             <button onClick={_bookTicket}>Book</button>}
 
-          {isSignedIn && addTicket && <div className="ticket__right__favicon">
-            <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_addTicket} />
+          {isSignedIn && likeTicket && <div className="ticket__right__favicon">
+            <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_likeTicket} />
           </div>}
 
           {deleteTicket && <div className="ticket__right__favicon">
