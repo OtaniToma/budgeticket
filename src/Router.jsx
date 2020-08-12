@@ -3,6 +3,7 @@ import { Switch, Route } from "react-router";
 import {
   Booking,
   History,
+  Home,
   Liked,
   Profile,
   Reset,
@@ -16,14 +17,16 @@ import Auth from "./Auth";
 const Router = () => {
   return (
     <Switch>
-      <Route exact path={"(/)?"} component={Search} />
+      <Route exact path={"(/)?"} component={Home} />
+      <Route exact path={"(/search)?"} component={Search} />
       <Route exact path={"/signup"} component={Signup} />
       <Route exact path={"/signin"} component={Signin} />
       <Route exact path={"/signin/reset"} component={Reset} />
       <Route exact path={"/test"} component={Test} />
 
       <Auth>
-        <Route exact path={"(/)?"} component={Search} />
+        <Route exact path={"(/)?"} component={Home} />
+        <Route exact path={"(/search)?"} component={Search} />
         <Route exact path={"/user/booking"} component={Booking} />
         <Route exact path={"/user/history"} component={History} />
         <Route exact path={"/user/liked"} component={Liked} />

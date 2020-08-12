@@ -16,7 +16,7 @@ import Filters from '../components/organisms/Filters'
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 100
+    margin: '100px 10px 0 10px',
   },
   paper: {
     padding: theme.spacing(2),

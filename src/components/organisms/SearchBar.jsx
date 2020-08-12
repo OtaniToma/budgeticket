@@ -5,6 +5,7 @@ import { Button } from "../atoms";
 import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 
 const currencies = [
   {
@@ -30,8 +31,8 @@ const getToday = new Date(),
   todayMonth = ("0" + (getToday.getMonth() + 1)).slice(-2),
   todayDay = ("0" + (getToday.getDate())).slice(-2),
   today = todayYear + '-' + todayMonth + '-' + todayDay;
-  const todayDate = today;
-  
+const todayDate = today;
+
 const getAWeekLater = new Date(getToday.getTime() + 7 * 24 * 60 * 60 * 1000),
   aWeekLaterYear = getAWeekLater.getFullYear(),
   aWeekLaterMonth = ("0" + (getAWeekLater.getMonth() + 1)).slice(-2),
@@ -68,64 +69,79 @@ const SearchBar = () => {
 
   const useStyles = makeStyles({
     root: {
-      display: 'flex',
+      flexGrow: 1,
     },
+    center: {
+      display: 'flex',
+      justifyContent: 'center'
+    }
   });
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Box m={1}>
-        <SelectAirport
-          select={setOriginAirport}
-          label={'From'}
-        />
-      </Box>
-      <Box m={1}>
-        <SelectAirport
-          select={setDestinationAirport}
-          label={'To'}
-        />
-      </Box>
-      <Box m={1}>
-        <SelectBox
-          value={currency}
-          options={currencies}
-          label={'Currency'}
-          select={setCurrency}
-        />
-      </Box>
-      <Box m={1}>
-        <SelectDate
-          label={'Depart'}
-          defaultValue={departDate}
-          select={setDepartDate}
-          minDate={todayDate}
-        />
-      </Box>
-      <Box m={1}>
-        <SelectDate
-          label={'Return'}
-          defaultValue={returnDate}
-          select={setReturnDate}
-          minDate={todayDate}
-        />
-      </Box>
+      <Grid container spacing={0}>
+        <Grid item xs={12} className={classes.center}>
+          <Box m={1}>
+            <SelectAirport
+              select={setOriginAirport}
+              label={'From'}
+            />
+          </Box>
+          <Box m={1}>
+            <SelectAirport
+              select={setDestinationAirport}
+              label={'To'}
+            />
+          </Box>
+          <Box m={1}>
+            <SelectBox
+              value={currency}
+              options={currencies}
+              label={'Currency'}
+              select={setCurrency}
+            />
+          </Box>
+          <Box m={1}>
+            <SelectDate
+              label={'Depart'}
+              defaultValue={departDate}
+              select={setDepartDate}
+              minDate={todayDate}
+            />
+          </Box>
+          <Box m={1}>
+            <SelectDate
+              label={'Return'}
+              defaultValue={returnDate}
+              select={setReturnDate}
+              minDate={todayDate}
+            />
+          </Box>
+        </Grid>
+        <Grid item xs={12} className={classes.center}>
+        <Box mx="auto" p={2}>
+        <Button onClick={() =>
+            dispatch(
+              searchFlights({
+                originAirport,
+                destinationAirport,
+                currency,
+                departDate,
+                returnDate
+              })
+            )
+          }
+            label={"Search"}
+            color={"primary"}
+          />
+          </Box>
+        </Grid>
+      </Grid>
 
-      <Button onClick={() =>
-        dispatch(
-          searchFlights({
-            originAirport,
-            destinationAirport,
-            currency,
-            departDate,
-            returnDate
-          })
-        )
-      }
-        label={"Search"}
-        color={"primary"}
-      />
+
+
+      
 
     </div>
   );
