@@ -1,5 +1,6 @@
 import { searchFlightsAction } from "./actions";
 import { db } from "../../firebase/";
+import { push } from "connected-react-router";
 
 let apiKey = '';
 db.collection('/keys').doc('skyscanner').get().then((doc) => {
@@ -28,6 +29,7 @@ export const searchFlights = ({
     )
     .then((res) => res.json())
     .then((data) => {
+      dispatch(push('/search'));
       dispatch(searchFlightsAction(data));
     })
     .catch((error) => {
