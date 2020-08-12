@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { signUp } from "../reducks/users/operations";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
@@ -7,7 +7,6 @@ import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import { useCallback } from "react";
 
 const validate = (values) => {
   const errors = {};
