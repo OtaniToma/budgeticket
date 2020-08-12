@@ -1,17 +1,23 @@
 import React from "react";
 import SearchBar from "../components/organisms/SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import Image from '../assets/bgimage.jpg';
+import Box from '@material-ui/core/Box';
+import Paper from '@material-ui/core/Paper';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    marginTop: 100
+    backgroundImage: `url(${Image})`,
+    width: '100%',
+    height: '100vh',
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
+    margin: theme.spacing(16),
   }
 }));
 
@@ -21,11 +27,11 @@ const Home = () => {
   return (
     <>
       <div className={classes.root}>
-        <Grid container spacing={2}>
-          <Grid item xs={12} className={classes.searchBar}>
-            <SearchBar />
-          </Grid>
-        </Grid>
+      <Box mx="auto" p={1}>
+      <Paper elevation={3} className={classes.paper}>
+        <SearchBar />
+      </Paper>
+      </Box>
       </div>
     </>
   );
