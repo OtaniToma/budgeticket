@@ -16,6 +16,8 @@ const HeaderMenus = (props) => {
   const isSignedIn = getIsSignedIn(selector);
   let ticketsInLiked = getTicketsInLiked(selector);
 
+  console.log(ticketsInLiked)
+
   useEffect(() => {
     const unsubscribe = db.collection('users').doc(uid).collection('liked')
       .onSnapshot(snapshots => {
@@ -25,20 +27,30 @@ const HeaderMenus = (props) => {
 
           switch (changeType) {
             case 'added':
-              ticketsInLiked.push(ticket);
+
+              console.log(ticketsInLiked)
+              console.log(ticket)
+              console.log([...ticketsInLiked, ticket])
+              
+              dispatch(fetchTicketsInLiked([...ticketsInLiked, ticket]));
               break;
             case 'modified':
-              const index = ticketsInLiked.findIndex(ticket => ticket.likedId === change.doc.id);
-              ticketsInLiked[index] = ticket;
+              dispatch(fetchTicketsInLiked(ticketsInLiked.map(item => {
+                if (item.likedId === change.doc.id) {
+                  return ticket
+                }
+                return item
+              })));
               break;
             case 'removed':
-              ticketsInLiked = ticketsInLiked.filter(ticket => ticket.likedId !== change.doc.id);
+              dispatch(fetchTicketsInLiked(ticketsInLiked.filter(item =>
+                item.likedId !== change.doc.id
+              )));
               break;
             default:
               break;
           }
         })
-        dispatch(fetchTicketsInLiked(ticketsInLiked));
       })
     return () => unsubscribe()
   }, []);
