@@ -29,7 +29,7 @@ const StopList = ({ quotes, filterStops }) => {
     }
 
     setChecked(newChecked);
-    filterStops(checked);
+    filterStops(newChecked);
   };
 
   return (
