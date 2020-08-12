@@ -32,7 +32,7 @@ const Reset = () => {
     }, 500)}, [dispatch]
   );
 
-  const backToSignIn = useCallback(() => dispatch(push('/signin')), [dispatch]);
+  const toSignIn = useCallback(() => dispatch(push('/signin')), [dispatch]);
 
   return (
     <>
@@ -72,7 +72,7 @@ const Reset = () => {
         </Box>
       </Paper>
       &nbsp;
-      <p onClick={backToSignIn}>Back to Sign In</p>
+      <p onClick={toSignIn}>Back to Sign In</p>
     </>
   );
 };

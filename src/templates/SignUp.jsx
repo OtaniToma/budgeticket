@@ -6,10 +6,55 @@ import Box from '@material-ui/core/Box';
 import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
+import { useCallback } from "react";
+
+const validate = (values) => {
+  const errors = {};
+  if (!values.username) {
+    errors.username = 'Required';
+  }
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = 'Invalid email address';
+  }
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+  if (values.password.length <= 5) {
+    errors.password = 'Password must be at least 6 characters';
+  }
+  if (!values.confirmPassword) {
+    errors.confirmPassword = 'Required';
+  }
+  if (values.password !== values.confirmPassword) {
+    errors.confirmPassword = 'The password and confirm password fields do not match.';
+  }
+  return errors;
+}
+
+const initialValues = {
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: ''
+}
 
 const SignUp = () => {
   const dispatch = useDispatch();
+
+  const onSubmit = useCallback((values, { setSubmitting }) => {
+    setTimeout(() => {
+      setSubmitting(false);
+      dispatch(signUp(values.username, values.email, values.password, values.confirmPassword));
+    }, 500)
+  }, [dispatch]
+  );
+
+  const toSignIn = useCallback(() => dispatch(push('/signin')), [dispatch]);
 
   return (
     <>
@@ -17,41 +62,9 @@ const SignUp = () => {
         <Box p={2} bgcolor="background.paper">
           <h2>Sign Up</h2>
           <Formik
-            initialValues={{
-              username: '',
-              email: '',
-              password: '',
-              confirmPassword: ''
-            }}
-            validate={values => {
-              const errors = {};
-              if (!values.username) {
-                errors.username = 'Required';
-              }
-              if (!values.email) {
-                errors.email = 'Required';
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-              ) {
-                errors.email = 'Invalid email address';
-              }
-              if (!values.password) {
-                errors.password = 'Required';
-              }
-              if (!values.confirmPassword) {
-                errors.confirmPassword = 'Required';
-              }
-              if (values.password !== values.confirmPassword) {
-                errors.confirmPassword = 'The password and confirm password fields do not match.';
-              }
-              return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                setSubmitting(false);
-                dispatch(signUp(values.username, values.email, values.password, values.confirmPassword))
-              }, 500);
-            }}
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={onSubmit}
           >
             {({ submitForm, isSubmitting }) => (
               <Form>
@@ -114,10 +127,7 @@ const SignUp = () => {
         </Box>
       </Paper>
       &nbsp;
-      <p>
-        Already have an account?{" "}
-        <span onClick={() => dispatch(push("/signin"))}>Sign in</span>
-      </p>
+      <p onClick={toSignIn}>Already have an account? Sign in</p>
     </>
   );
 };
