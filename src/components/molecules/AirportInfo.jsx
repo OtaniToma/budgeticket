@@ -4,6 +4,10 @@ import {
   getPlaces,
   getQuotes
 } from "../../reducks/flights/selectors";
+import Map from '../atoms/Map';
+import Typography from '@material-ui/core/Typography';
+import FlightLandIcon from '@material-ui/icons/FlightLand';
+import Box from '@material-ui/core/Box';
 
 const AirportInfo = () => {
   const selector = useSelector((state) => state);
@@ -11,7 +15,7 @@ const AirportInfo = () => {
   const quotes = getQuotes(selector);
 
   const [airport, setAirport] = useState({
-    name: 'San Francisco International Airport',
+    name: '',
   }, []);
 
   useEffect(() => {
@@ -30,13 +34,18 @@ const AirportInfo = () => {
 
   return (
     <>
-    <h2>Airport Info</h2>
-    <ul>
-      <li>{airport.name}</li>
-      <li>{airport.code}</li>
-      <li>{airport.country}</li>
-      <li>{airport.city}</li>
-    </ul>
+      <Map data={airport} />
+      <Box p={1} bgcolor="background.paper" />
+      {airport.name &&
+      <>
+        <Typography variant="subtitle2" gutterBottom>
+            <FlightLandIcon />&nbsp;{airport.name} ({airport.code})
+        </Typography>
+        <Typography variant="body1" gutterBottom>
+          {airport.city}, {airport.country}
+        </Typography>
+      </>
+    }
     </>
   );
 };

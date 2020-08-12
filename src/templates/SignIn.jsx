@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { push } from "connected-react-router";
 import { signIn } from "../reducks/users/operations";
@@ -8,8 +8,38 @@ import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 
+const validate = (values) => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'Required';
+  } else if (
+    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+  ) {
+    errors.email = 'Invalid email address';
+  }
+  if (!values.password) {
+    errors.password = 'Required';
+  }
+  return errors;
+}
+
+const initialValues = { 
+  email: '',
+  password: ''
+};
+
 const SignIn = () => {
   const dispatch = useDispatch();
+
+  const onSubmit = useCallback((values, { setSubmitting }) => {
+    setTimeout(() => {
+      setSubmitting(false);
+      dispatch(signIn(values.email, values.password));
+    }, 500)}, [dispatch]
+  );
+
+  const toSignUp = useCallback(() => dispatch(push('/signup')), [dispatch]);
+  const toReset = useCallback(() => dispatch(push('/signin/reset')), [dispatch]);
 
   return (
     <>
@@ -17,30 +47,9 @@ const SignIn = () => {
         <Box p={2} bgcolor="background.paper">
           <h2>Sign In</h2>
           <Formik
-            initialValues={{
-              email: '',
-              password: '',
-            }}
-            validate={values => {
-              const errors = {};
-              if (!values.email) {
-                errors.email = 'Required';
-              } else if (
-                !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-              ) {
-                errors.email = 'Invalid email address';
-              }
-              if (!values.password) {
-                errors.password = 'Required';
-              }
-              return errors;
-            }}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                setSubmitting(false);
-                dispatch(signIn(values.email, values.password))
-              }, 500);
-            }}
+            initialValues={initialValues}
+            validate={validate}
+            onSubmit={onSubmit}
           >
             {({ submitForm, isSubmitting }) => (
               <Form>
@@ -74,15 +83,15 @@ const SignIn = () => {
                   onClick={submitForm}
                 >
                   Submit
-          </Button>
+                </Button>
               </Form>
             )}
           </Formik>
         </Box>
       </Paper>
       &nbsp;
-      <p onClick={() => dispatch(push("/signup"))}>Create new account</p>
-      <p onClick={() => dispatch(push("/signin/reset"))}>Reset password</p>
+      <p onClick={toSignUp}>Create new account</p>
+      <p onClick={toReset}>Reset password</p>
     </>
   );
 };
