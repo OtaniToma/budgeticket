@@ -1,13 +1,14 @@
 import React from "react";
 import SearchBar from "../components/organisms/SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
-import Image from '../assets/bgimage.jpg';
 import Box from '@material-ui/core/Box';
 import Paper from '@material-ui/core/Paper';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundImage: `url(${Image})`,
+    backgroundImage: `url('https://images.unsplash.com/uploads/14114640960629b5c3fa0/116dc05a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80')`,
     width: '100%',
     height: '100vh',
     backgroundSize: 'cover',
@@ -16,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  paper: {
+  container: {
     margin: theme.spacing(16),
   }
 }));
@@ -27,11 +28,14 @@ const Home = () => {
   return (
     <>
       <div className={classes.root}>
-      <Box mx="auto" p={1}>
-      <Paper elevation={3} className={classes.paper}>
-        <SearchBar />
-      </Paper>
-      </Box>
+        <Box mx="auto" p={16}>
+          <Card>
+            <CardContent>
+            <h1>Where to next?</h1>
+            <SearchBar />
+            </CardContent>
+          </Card>
+        </Box>
       </div>
     </>
   );
