@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  container: {
-    margin: theme.spacing(16),
+  card: {
+    background: 'rgba(255, 255, 255, 0.85)'
   }
 }));
 
@@ -29,7 +29,7 @@ const Home = () => {
     <>
       <div className={classes.root}>
         <Box mx="auto" p={16}>
-          <Card>
+          <Card className={classes.card}>
             <CardContent>
             <h1>Where to next?</h1>
             <SearchBar />
