@@ -1,6 +1,7 @@
 export { default as Booking } from "./booking";
 export { default as History } from "./history";
 export { default as Liked } from "./liked";
+export { default as Home } from "./home";
 export { default as Profile } from "./profile";
 export { default as Reset } from "./reset";
 export { default as Search } from "./search";
