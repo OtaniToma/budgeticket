@@ -5,7 +5,6 @@ import { Button } from "../atoms";
 import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 const currencies = [

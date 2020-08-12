@@ -1,17 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import {
-  getCarriers,
-  getCurrencies,
-  getPlaces,
-  getQuotes
-} from "../reducks/flights/selectors";
+import React from "react";
 import SearchBar from "../components/organisms/SearchBar";
-import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import DestinationInfo from '../components/organisms/DestinationInfo'
-import Filters from '../components/organisms/Filters'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,11 +12,6 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(2),
     textAlign: "center",
     color: theme.palette.text.secondary,
-  },
-  searchBar: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 }));
 
