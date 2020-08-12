@@ -10,22 +10,19 @@ import { push } from "connected-react-router";
 const HeaderMenus = (props) => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const isSignedIn = getIsSignedIn(selector);
 
   return (
     <>
-      {isSignedIn && (
-        <div>
-          <IconButton onClick={() => dispatch(push("/user/liked"))}>
-            <Badge badgeContent={props.ticketNumbers} color="secondary">
-              <FavoriteIcon />
-            </Badge>
-          </IconButton>
-          <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
-            <MenuIcon />
-          </IconButton>
-        </div>
-      )}
+      <div>
+        <IconButton onClick={() => dispatch(push("/user/liked"))}>
+          <Badge badgeContent={props.ticketNumbers} color="secondary">
+            <FavoriteIcon />
+          </Badge>
+        </IconButton>
+        <IconButton onClick={(event) => props.handleDrawerToggle(event)}>
+          <MenuIcon />
+        </IconButton>
+      </div>
     </>
   );
 };

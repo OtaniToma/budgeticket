@@ -80,7 +80,7 @@ const Header = () => {
         })
       return () => unsubscribe()
     }
-  }, [ticketsInLiked])
+  }, [])
 
   const [open, setOpen] = useState(false);
   const handleDrawerToggle = useCallback(
