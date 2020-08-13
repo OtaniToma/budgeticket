@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { push } from "connected-react-router";
 import { makeStyles } from "@material-ui/core/styles";
@@ -10,7 +10,7 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { getIsSignedIn, getUsername } from "../../reducks/users/selectors";
 import HeaderMenus from "../molecules/HeaderMenus";
 import ClosableDrawer from "./ClosableDrawer";
-import { useCallback } from "react";
+import Button from '../atoms/Button';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,9 +84,11 @@ const Header = () => {
 
 
           {!isSignedIn &&
-            <IconButton onClick={() => dispatch(push("/signin"))}>
-              <AccountCircleIcon />
-            </IconButton>
+            <Button
+              color={'primary'}
+              label={'Sign In'}
+              onClick={() => dispatch(push("/signin"))}
+            />
           }
 
         </Toolbar>

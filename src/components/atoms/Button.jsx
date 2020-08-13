@@ -5,9 +5,6 @@ import { makeStyles } from "@material-ui/styles";
 const useStyles = makeStyles({
   button: {
     fontSize: 16,
-    height: 48,
-    marginButton: 16,
-    width: 150,
   },
 });
 
