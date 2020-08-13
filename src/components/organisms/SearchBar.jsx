@@ -6,6 +6,7 @@ import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
+import AirportsData from 'airport-data';
 
 const currencies = [
   {
@@ -48,8 +49,12 @@ const getTwoWeeksLater = new Date(getToday.getTime() + 14 * 24 * 60 * 60 * 1000)
 const SearchBar = () => {
   const dispatch = useDispatch();
 
-  const [originAirport, setOriginAirport] = useState("YVR");
-  const [destinationAirport, setDestinationAirport] = useState("SFO");
+  const yvr = AirportsData.filter(airport => airport.iata === 'YVR')[0],
+        sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
+
+  const [originAirport, setOriginAirport] = useState("YVR"),
+        [destinationAirport, setDestinationAirport] = useState("SFO");
+
   const [currency, setCurrency] = useState("CAD");
 
   const [departDate, setDepartDate] = useState(aWeekLater);
@@ -86,12 +91,14 @@ const SearchBar = () => {
             <SelectAirport
               select={setOriginAirport}
               label={'From'}
+              defaultValue={yvr}
             />
           </Box>
           <Box m={1}>
             <SelectAirport
               select={setDestinationAirport}
               label={'To'}
+              defaultValue={sfo}
             />
           </Box>
           <Box m={1}>
