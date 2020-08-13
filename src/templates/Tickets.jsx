@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useState, useCallback } from "react";
 import Ticket from '../components/organisms/Ticket';
 import AirlineLogos from '../constants/airlineLogos.json'
 import { useDispatch } from 'react-redux';
+import { push } from "connected-react-router";
 import { FirebaseTimestamp } from '../firebase/index';
 import { addTicketToLiked, bookTicket } from '../reducks/users/operations';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const Tickets = (props) => {
   const dispatch = useDispatch();
@@ -82,6 +85,22 @@ const Tickets = (props) => {
     }))
   }
 
+  // Message
+  const toLikedList = useCallback(() => dispatch(push('/user/liked')), [dispatch]);
+
+  const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+  const [open, setOpen] = useState(false);
+
+  const showMessage = (props) => {
+    setOpen(true);
+  }
+
+  const closeMessage = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       {quotes &&
@@ -105,10 +124,18 @@ const Tickets = (props) => {
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               addTicket={_addTicket}
               bookTicket={_bookTicket}
+              showMessage={showMessage}
+              closeMessage={closeMessage}
             />
           )
         })
       }
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={closeMessage}>
+        <Alert onClose={closeMessage} severity="success">
+          Added to <strong onClick={toLikedList}>liked list</strong>.
+        </Alert>
+      </Snackbar>
     </>
   );
 };

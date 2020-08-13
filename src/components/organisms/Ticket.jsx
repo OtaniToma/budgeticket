@@ -23,7 +23,8 @@ const Ticket = (props) => {
     inboundDepartureDate,
     addTicket,
     deleteTicket,
-    bookTicket
+    bookTicket,
+    showMessage
   } = props;
 
   const selector = useSelector((state) => state);
@@ -37,6 +38,7 @@ const Ticket = (props) => {
     }
     addTicket(props)
     setLiked(true)
+    showMessage()
   }
 
   const _deleteTicket = () => {
