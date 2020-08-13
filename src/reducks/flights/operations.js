@@ -29,6 +29,10 @@ export const searchFlights = ({
     )
     .then((res) => res.json())
     .then((data) => {
+      if (data.Quotes.length === 0) {
+        alert('Could not find tickets. Please try with different airport or date.');
+        return false;
+      }
       dispatch(push('/search'));
       dispatch(searchFlightsAction(data));
     })
