@@ -18,8 +18,8 @@ const SelectBox = (props) => {
       onChange={(event) => select(event.target.value)}
     >
       {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label}
+        <MenuItem key={option.number} value={option.code}>
+          {option.currency}  ({option.code})
         </MenuItem>
       ))}
     </TextField>

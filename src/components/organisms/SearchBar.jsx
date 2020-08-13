@@ -7,27 +7,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import AirportsData from 'airport-data';
+import CurrencyCodes from 'currency-codes';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-
-const currencies = [
-  {
-    value: "CAD",
-    label: "CAD",
-  },
-  {
-    value: "USD",
-    label: "USD",
-  },
-  {
-    value: "EUR",
-    label: "EUR",
-  },
-  {
-    value: "JPY",
-    label: "JPY",
-  },
-];
 
 const getToday = new Date(),
   todayYear = getToday.getFullYear(),
@@ -127,7 +109,7 @@ const SearchBar = () => {
             <Box m={1}>
               <SelectBox
                 value={currency}
-                options={currencies}
+                options={CurrencyCodes.data}
                 label={'Currency'}
                 select={setCurrency}
               />
