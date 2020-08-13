@@ -6,25 +6,10 @@ import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
-
-const currencies = [
-  {
-    value: "CAD",
-    label: "CAD",
-  },
-  {
-    value: "USD",
-    label: "USD",
-  },
-  {
-    value: "EUR",
-    label: "EUR",
-  },
-  {
-    value: "JPY",
-    label: "JPY",
-  },
-];
+import AirportsData from 'airport-data';
+import CurrencyCodes from 'currency-codes';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const getToday = new Date(),
   todayYear = getToday.getFullYear(),
@@ -48,13 +33,19 @@ const getTwoWeeksLater = new Date(getToday.getTime() + 14 * 24 * 60 * 60 * 1000)
 const SearchBar = () => {
   const dispatch = useDispatch();
 
-  const [originAirport, setOriginAirport] = useState("YVR");
-  const [destinationAirport, setDestinationAirport] = useState("SFO");
+  // Default values
+  const yvr = AirportsData.filter(airport => airport.iata === 'YVR')[0],
+        sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
+
+  const [originAirport, setOriginAirport] = useState("YVR"),
+        [destinationAirport, setDestinationAirport] = useState("SFO");
+
   const [currency, setCurrency] = useState("CAD");
 
   const [departDate, setDepartDate] = useState(aWeekLater);
   const [returnDate, setReturnDate] = useState(twoWeeksLater);
 
+  // Check dates
   useEffect(() => {
     if (returnDate <= departDate) {
       alert('Please select the departure date before the return date.');
@@ -67,6 +58,24 @@ const SearchBar = () => {
     }
   }, [departDate, returnDate])
 
+  // Error Message
+  const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const [message, setMessage] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const showError = (props) => {
+    setMessage(props);
+    setOpen(true);
+  }
+
+  const closeError = () => {
+    setOpen(false);
+  };
+
+  // Styles
   const useStyles = makeStyles({
     root: {
       flexGrow: 1,
@@ -79,71 +88,77 @@ const SearchBar = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
-      <Grid container spacing={0}>
-        <Grid item xs={12} className={classes.center}>
-          <Box m={1}>
-            <SelectAirport
-              select={setOriginAirport}
-              label={'From'}
-            />
-          </Box>
-          <Box m={1}>
-            <SelectAirport
-              select={setDestinationAirport}
-              label={'To'}
-            />
-          </Box>
-          <Box m={1}>
-            <SelectBox
-              value={currency}
-              options={currencies}
-              label={'Currency'}
-              select={setCurrency}
-            />
-          </Box>
-          <Box m={1}>
-            <SelectDate
-              label={'Depart'}
-              defaultValue={departDate}
-              select={setDepartDate}
-              minDate={todayDate}
-            />
-          </Box>
-          <Box m={1}>
-            <SelectDate
-              label={'Return'}
-              defaultValue={returnDate}
-              select={setReturnDate}
-              minDate={todayDate}
-            />
-          </Box>
+    <>
+      <div className={classes.root}>
+        <Grid container spacing={0}>
+          <Grid item xs={12} className={classes.center}>
+            <Box m={1}>
+              <SelectAirport
+                select={setOriginAirport}
+                label={'From'}
+                defaultValue={yvr}
+              />
+            </Box>
+            <Box m={1}>
+              <SelectAirport
+                select={setDestinationAirport}
+                label={'To'}
+                defaultValue={sfo}
+              />
+            </Box>
+            <Box m={1}>
+              <SelectBox
+                value={currency}
+                options={CurrencyCodes.data}
+                label={'Currency'}
+                select={setCurrency}
+              />
+            </Box>
+            <Box m={1}>
+              <SelectDate
+                label={'Depart'}
+                defaultValue={departDate}
+                select={setDepartDate}
+                minDate={todayDate}
+              />
+            </Box>
+            <Box m={1}>
+              <SelectDate
+                label={'Return'}
+                defaultValue={returnDate}
+                select={setReturnDate}
+                minDate={todayDate}
+              />
+            </Box>
+          </Grid>
+          <Grid item xs={12} className={classes.center}>
+            <Box mx="auto" p={2}>
+              <Button onClick={() =>
+                dispatch(
+                  searchFlights({
+                    originAirport,
+                    destinationAirport,
+                    currency,
+                    departDate,
+                    returnDate,
+                    showError
+                  })
+                )
+              }
+                label={"Search"}
+                color={"primary"}
+              />
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item xs={12} className={classes.center}>
-        <Box mx="auto" p={2}>
-        <Button onClick={() =>
-            dispatch(
-              searchFlights({
-                originAirport,
-                destinationAirport,
-                currency,
-                departDate,
-                returnDate
-              })
-            )
-          }
-            label={"Search"}
-            color={"primary"}
-          />
-          </Box>
-        </Grid>
-      </Grid>
+      </div>
 
-
-
-      
-
-    </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={closeError}>
+        <Alert onClose={closeError} severity="error">
+          {message}
+        </Alert>
+      </Snackbar>
+    </>
   );
 };
 

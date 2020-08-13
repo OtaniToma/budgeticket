@@ -1,12 +1,13 @@
 import React from "react";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import AirportsData from 'airport-data'
+import AirportsData from 'airport-data';
 
 const AutocompleteInput = (props) => {
   const {
     select,
-    label
+    label,
+    defaultValue
   } = props;
 
   const onTagsChange = (event, values) => {
@@ -21,6 +22,7 @@ const AutocompleteInput = (props) => {
       id="combo-box-demo"
       options={AirportsData}
       getOptionLabel={(option) => `${option.name} (${option.iata})`}
+      defaultValue={defaultValue}
       style={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
       onChange={onTagsChange}

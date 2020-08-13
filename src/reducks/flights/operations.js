@@ -12,7 +12,8 @@ export const searchFlights = ({
   destinationAirport,
   currency,
   departDate,
-  returnDate
+  returnDate,
+  showError
 }) => {
   return (dispatch) => {
     fetch(
@@ -29,11 +30,16 @@ export const searchFlights = ({
     )
     .then((res) => res.json())
     .then((data) => {
+      if (data.Quotes.length === 0) {
+        showError('Could not find result. Please try with different airport or date.');
+        return false;
+      }
       dispatch(push('/search'));
       dispatch(searchFlightsAction(data));
     })
     .catch((error) => {
-      alert("Failed to get the result.");
+      console.log(error);
+      showError('Failed to get results. Please try again later.');
     });
   };
 };

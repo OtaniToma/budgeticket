@@ -1,14 +1,21 @@
 import React from "react";
 import SearchBar from "../components/organisms/SearchBar";
 import { makeStyles } from "@material-ui/core/styles";
-import Box from '@material-ui/core/Box';
-import Paper from '@material-ui/core/Paper';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
+const bgimages = [
+  'https://images.unsplash.com/photo-1593182440709-4b7b56482c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80',
+  'https://images.unsplash.com/photo-1528048786098-cc8217b47088?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80',
+  'https://images.unsplash.com/photo-1527727077-682b21ea22d8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80',
+  'https://images.unsplash.com/photo-1483450388369-9ed95738483c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80'
+];
+
+const randomBgImg = bgimages[Math.floor(Math.random() * bgimages.length)];
+
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundImage: `url('https://images.unsplash.com/uploads/14114640960629b5c3fa0/116dc05a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2550&q=80')`,
+    backgroundImage: `url('${randomBgImg}')`,
     width: '100%',
     height: '100vh',
     backgroundSize: 'cover',
@@ -18,7 +25,14 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center'
   },
   card: {
-    background: 'rgba(255, 255, 255, 0.85)'
+    background: 'rgba(255, 255, 255, 0.85)',
+    maxWidth: '90%'
+  },
+  cardContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 }));
 
@@ -28,14 +42,12 @@ const Home = () => {
   return (
     <>
       <div className={classes.root}>
-        <Box mx="auto" p={16}>
-          <Card className={classes.card}>
-            <CardContent>
+        <Card className={classes.card}>
+          <CardContent className={classes.cardContent}>
             <h1>Where to next?</h1>
             <SearchBar />
-            </CardContent>
-          </Card>
-        </Box>
+          </CardContent>
+        </Card>
       </div>
     </>
   );
