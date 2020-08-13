@@ -35,10 +35,10 @@ const SearchBar = () => {
 
   // Default values
   const yvr = AirportsData.filter(airport => airport.iata === 'YVR')[0],
-        sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
+    sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
 
   const [originAirport, setOriginAirport] = useState("YVR"),
-        [destinationAirport, setDestinationAirport] = useState("SFO");
+    [destinationAirport, setDestinationAirport] = useState("SFO");
 
   const [currency, setCurrency] = useState("CAD");
 
@@ -76,62 +76,64 @@ const SearchBar = () => {
   };
 
   // Styles
-  const useStyles = makeStyles({
+  const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-    },
-    center: {
       display: 'flex',
       justifyContent: 'center'
-    }
-  });
+    },
+    container: {
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      maxWidth: 1024
+    },
+  }));
   const classes = useStyles();
 
   return (
     <>
       <div className={classes.root}>
-        <Grid container spacing={0}>
-          <Grid item xs={12} className={classes.center}>
-            <Box m={1}>
-              <SelectAirport
-                select={setOriginAirport}
-                label={'From'}
-                defaultValue={yvr}
-              />
-            </Box>
-            <Box m={1}>
-              <SelectAirport
-                select={setDestinationAirport}
-                label={'To'}
-                defaultValue={sfo}
-              />
-            </Box>
-            <Box m={1}>
-              <SelectBox
-                value={currency}
-                options={CurrencyCodes.data}
-                label={'Currency'}
-                select={setCurrency}
-              />
-            </Box>
-            <Box m={1}>
-              <SelectDate
-                label={'Depart'}
-                defaultValue={departDate}
-                select={setDepartDate}
-                minDate={todayDate}
-              />
-            </Box>
-            <Box m={1}>
-              <SelectDate
-                label={'Return'}
-                defaultValue={returnDate}
-                select={setReturnDate}
-                minDate={todayDate}
-              />
-            </Box>
+        <Grid container spacing={2} className={classes.container}>
+          <Grid item xs={12} sm={6} md={4}>
+            <SelectAirport
+              select={setOriginAirport}
+              label={'From'}
+              defaultValue={yvr}
+            />
           </Grid>
-          <Grid item xs={12} className={classes.center}>
+          <Grid item xs={12} sm={6} md={4}>
+            <SelectAirport
+              select={setDestinationAirport}
+              label={'To'}
+              defaultValue={sfo}
+            />
+          </Grid>
+          <Grid item xs={12} sm={12} md={4}>
+            <SelectBox
+              value={currency}
+              options={CurrencyCodes.data}
+              label={'Currency'}
+              select={setCurrency}
+            />
+          </Grid>
+          <Grid item xs={6} sm={3} md={2}>
+            <SelectDate
+              label={'Depart'}
+              defaultValue={departDate}
+              select={setDepartDate}
+              minDate={todayDate}
+            />
+          </Grid>
+          <Grid item xs={6} sm={3} md={2}>
+            <SelectDate
+              label={'Return'}
+              defaultValue={returnDate}
+              select={setReturnDate}
+              minDate={todayDate}
+            />
+          </Grid>
+          <Grid item xs={12} sm={6} md={8}>
             <Box mx="auto" p={2}>
               <Button onClick={() =>
                 dispatch(

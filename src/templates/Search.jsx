@@ -133,7 +133,7 @@ const Search = () => {
           <Grid item xs={12} className={classes.searchBar}>
             <SearchBar />
           </Grid>
-          <Grid item xs={12} md={2}>
+          <Grid item xs={6} md={2}>
             <Filters
               setSortType={_setSortType}
               filterStops={_filterStops}

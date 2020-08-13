@@ -28,6 +28,7 @@ const AutocompleteInput = (props) => {
       onChange={onTagsChange}
       autoComplete={true}
       autoHighlight={true}
+      style={{ width: '100%' }}
     />
   );
 };
