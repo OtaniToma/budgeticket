@@ -5,8 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
-import IconButton from "@material-ui/core/IconButton";
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { getIsSignedIn, getUsername } from "../../reducks/users/selectors";
 import HeaderMenus from "../molecules/HeaderMenus";
 import ClosableDrawer from "./ClosableDrawer";
@@ -57,7 +55,7 @@ const Header = () => {
       <AppBar
         position="fixed"
         className={classes.menuBar}
-        color="white"
+        color="default"
       >
         <Toolbar className={classes.toolBar}>
           <Typography

@@ -23,7 +23,6 @@ const AutocompleteInput = (props) => {
       options={AirportsData}
       getOptionLabel={(option) => `${option.name} (${option.iata})`}
       defaultValue={defaultValue}
-      style={{ width: 300 }}
       renderInput={(params) => <TextField {...params} label={label} variant="outlined" />}
       onChange={onTagsChange}
       autoComplete={true}
