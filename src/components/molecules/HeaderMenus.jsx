@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
@@ -14,9 +14,11 @@ const HeaderMenus = (props) => {
   const selector = useSelector((state) => state);
   const uid = getUserId(selector);
   const isSignedIn = getIsSignedIn(selector);
-  let ticketsInLiked = getTicketsInLiked(selector);
+
+  const [likedTickets, setLikedTickets] = useState(0);
 
   useEffect(() => {
+    let ticketsInLiked = getTicketsInLiked(selector);
     const unsubscribe = db.collection('users').doc(uid).collection('liked')
       .onSnapshot(snapshots => {
         snapshots.docChanges().forEach(change => {
@@ -39,8 +41,10 @@ const HeaderMenus = (props) => {
           }
         })
         dispatch(fetchTicketsInLiked(ticketsInLiked));
+        setLikedTickets(ticketsInLiked.length);
       })
     return () => unsubscribe()
+    // eslint-disable-next-line
   }, []);
 
   return (
@@ -48,7 +52,7 @@ const HeaderMenus = (props) => {
       {isSignedIn && (
         <div>
           <IconButton onClick={() => dispatch(push("/user/liked"))}>
-            <Badge badgeContent={ticketsInLiked.length} color="secondary">
+            <Badge badgeContent={likedTickets} color="secondary">
               <FavoriteIcon />
             </Badge>
           </IconButton>

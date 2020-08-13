@@ -36,7 +36,7 @@ const Map = ({ data }) => {
     .catch((error) => {
       console.log(error);
     })
-  }, [data])
+  }, [apiKey, data])
 
   const renderMarker = () => {
     if (location.lat !== 0) {

@@ -34,7 +34,7 @@ const AirportInfo = () => {
 
   return (
     <>
-      <Map data={airport} />
+      {airport.name && <Map data={airport} />}
       <Box p={1} bgcolor="background.paper" />
       {airport.name &&
       <>
