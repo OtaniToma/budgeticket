@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useSelector } from "react-redux";
 import {
   getCarriers,
@@ -6,12 +6,17 @@ import {
   getPlaces,
   getQuotes
 } from "../reducks/flights/selectors";
-import SearchBar from "../components/organisms/SearchBar";
-import Tickets from './Tickets'
 import { makeStyles } from "@material-ui/core/styles";
+import SearchBar from "../components/organisms/SearchBar";
+import Tickets from './Tickets';
+import DestinationInfo from '../components/organisms/DestinationInfo';
+import Filters from '../components/organisms/Filters';
+import { getIsSignedIn } from "../reducks/users/selectors";
+import { push } from "connected-react-router";
+import { useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
-import DestinationInfo from '../components/organisms/DestinationInfo'
-import Filters from '../components/organisms/Filters'
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 const Search = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   const carriers = getCarriers(selector);
   const currencies = getCurrencies(selector);
@@ -98,6 +104,28 @@ const Search = () => {
     setSortType(props)
   }
 
+  // Message
+  const [open, setOpen] = useState(false);
+  const isSignedIn = getIsSignedIn(selector);
+  const toSignIn = useCallback(() => dispatch(push('/signin')), [dispatch]);
+  const toSignUp = useCallback(() => dispatch(push('/signup')), [dispatch]);
+
+  const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  useEffect(() => {
+    if (!isSignedIn) {
+      setTimeout(() => {
+        setOpen(true);
+      }, 1000);
+    }
+  }, [isSignedIn]);
+
+  const closeError = () => {
+    setOpen(false);
+  };
+
   return (
     <>
       <div className={classes.root}>
@@ -125,6 +153,12 @@ const Search = () => {
           </Grid>
         </Grid>
       </div>
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={closeError}>
+        <Alert onClose={closeError} severity="info">
+          Please <strong onClick={toSignIn}>sign in</strong> or <strong onClick={toSignUp}>create new account</strong>.
+        </Alert>
+      </Snackbar>
     </>
   );
 };
