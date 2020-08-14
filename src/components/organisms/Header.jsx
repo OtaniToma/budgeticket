@@ -14,14 +14,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
   },
-  menuBar: {},
-  toolBar: {
-    margin: "0 auto",
-    maxWidth: 1024,
-    width: "100%",
-  },
-  iconButtons: {
-    margin: "0 0 0 auto",
+  menuButton: {
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -51,48 +45,43 @@ const Header = () => {
   );
 
   return (
-    <div className={classes.root}>
-      <AppBar
-        position="fixed"
-        className={classes.menuBar}
-        color="default"
-      >
-        <Toolbar className={classes.toolBar}>
-          <Typography
-            variant="h6"
-            className={classes.title}
-            onClick={() => dispatch(push("/"))}
-          >
-            BudgeTicket
+    <>
+      <div className={classes.root}>
+        <AppBar color="default" position="fixed">
+          <Toolbar>
+            <Typography
+              variant="h6"
+              className={classes.title}
+              onClick={() => dispatch(push("/"))}
+            >
+              BudgeTicket
           </Typography>
+            {isSignedIn && (
+              <>
+                <div className={classes.iconButtons}>
+                  <Typography
+                    variant="span"
+                    onClick={() => dispatch(push("/user/profile"))}
+                  >
+                    Hi, {username}
+                  </Typography>
+                </div>
+                <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
+              </>
+            )}
+            {!isSignedIn &&
+              <Button
+                color={'primary'}
+                label={'Sign In'}
+                onClick={() => dispatch(push("/signin"))}
+              />
+            }
+          </Toolbar>
+        </AppBar>
+      </div>
 
-          {isSignedIn && (
-            <>
-              <div className={classes.iconButtons}>
-                <Typography
-                  variant="span"
-                  onClick={() => dispatch(push("/user/profile"))}
-                >
-                  Hi, {username}
-                </Typography>
-              </div>
-              <HeaderMenus handleDrawerToggle={handleDrawerToggle} />
-            </>
-          )}
-
-
-          {!isSignedIn &&
-            <Button
-              color={'primary'}
-              label={'Sign In'}
-              onClick={() => dispatch(push("/signin"))}
-            />
-          }
-
-        </Toolbar>
-      </AppBar>
       <ClosableDrawer open={open} onClose={handleDrawerToggle} />
-    </div>
+    </>
   );
 };
 

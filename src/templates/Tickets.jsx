@@ -20,17 +20,27 @@ const Tickets = (props) => {
 
   const carriersToShow = {};
   carriers.forEach(carrier => {
-    carriersToShow[carrier.CarrierId] = carrier.Name
+    carriersToShow[carrier.CarrierId] = carrier.Name;
   });
 
   const logosToShow = {};
+  const airlinesWithLogo = [];
   carriers.forEach(carrier => {
     AirlineLogos.forEach(airline => {
       if (carrier.Name === airline.name) {
-        logosToShow[carrier.Name] = airline.logo
+        logosToShow[carrier.Name] = airline.logo;
+        airlinesWithLogo.push(carrier.Name);
       }
     })
   });
+
+  carriers.map(carrier => {
+    if(!airlinesWithLogo.includes(carrier.Name)) {
+      console.log(carrier.Name)
+      logosToShow[carrier.Name] = 'https://images.kiwi.com/airlines/64x64/airlines.png';
+    }
+  })
+
 
   const _addTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
