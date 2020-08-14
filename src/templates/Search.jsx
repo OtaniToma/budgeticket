@@ -21,7 +21,8 @@ import MuiAlert from '@material-ui/lab/Alert';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin: '100px 10px 0 10px',
+    margin: '100px auto 0 auto',
+    maxWidth: 1200
   },
   paper: {
     padding: theme.spacing(2),
