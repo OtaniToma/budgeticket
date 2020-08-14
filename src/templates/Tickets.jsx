@@ -39,6 +39,7 @@ const Tickets = (props) => {
       console.log(carrier.Name)
       logosToShow[carrier.Name] = 'https://images.kiwi.com/airlines/64x64/airlines.png';
     }
+    return true;
   })
 
 

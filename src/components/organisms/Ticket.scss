@@ -1,3 +1,9 @@
+@mixin mobile {
+  @media screen and (max-width: 600px) {
+    display: none;
+  }
+}
+
 .ticket {
   margin: 2rem 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -97,6 +103,7 @@
         &__city {
           color: grey;
           font-size: .75rem;
+          @include mobile
         }
       }
 
@@ -114,6 +121,7 @@
         &__city {
           color: grey;
           font-size: .75rem;
+          @include mobile
         }
       }
     }
