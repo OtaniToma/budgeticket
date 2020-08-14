@@ -16,12 +16,12 @@ const Reset = () => {
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={1} md={4}>
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={10} md={4}>
           <ResetTemplate />
         </Grid>
-        <Grid item xs={12} md={4}>
+        <Grid item xs={1} md={4}>
         </Grid>
       </Grid>
     </div>

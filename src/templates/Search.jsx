@@ -22,7 +22,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     margin: '100px auto 0 auto',
-    maxWidth: 1200
+    maxWidth: 1024,
+    padding: '0 5px'
   },
   paper: {
     padding: theme.spacing(2),
@@ -134,14 +135,14 @@ const Search = () => {
           <Grid item xs={12} className={classes.searchBar}>
             <SearchBar />
           </Grid>
-          <Grid item xs={6} md={2}>
+          <Grid item xs={6} sm={3} md={2}>
             <Filters
               setSortType={_setSortType}
               filterStops={_filterStops}
               filterAirlines={_filterAirlines}
             />
           </Grid>
-          <Grid item xs={12} md={7}>
+          <Grid item xs={12} sm={9} md={7}>
             <Tickets
               carriers={carriers}
               currencies={currencies}
@@ -149,7 +150,7 @@ const Search = () => {
               quotes={filteredQuotes}
             />
           </Grid>
-          <Grid item xs={12} md={3}>
+          <Grid item xs={12} sm={12} md={3}>
             <DestinationInfo />
           </Grid>
         </Grid>
