@@ -4,59 +4,67 @@ import { searchFlights } from "../../reducks/flights/operations";
 import { Button } from "../atoms";
 import { SelectBox, SelectDate, SelectAirport } from "../atoms";
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
 import AirportsData from 'airport-data';
 import CurrencyCodes from 'currency-codes';
+import moment from 'moment';
+import Box from '@material-ui/core/Box';
+import Grid from '@material-ui/core/Grid';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-
-const getToday = new Date(),
-  todayYear = getToday.getFullYear(),
-  todayMonth = ("0" + (getToday.getMonth() + 1)).slice(-2),
-  todayDay = ("0" + (getToday.getDate())).slice(-2),
-  today = todayYear + '-' + todayMonth + '-' + todayDay;
-const todayDate = today;
-
-const getAWeekLater = new Date(getToday.getTime() + 7 * 24 * 60 * 60 * 1000),
-  aWeekLaterYear = getAWeekLater.getFullYear(),
-  aWeekLaterMonth = ("0" + (getAWeekLater.getMonth() + 1)).slice(-2),
-  aWeekLaterDay = ("0" + (getAWeekLater.getDate())).slice(-2),
-  aWeekLater = aWeekLaterYear + '-' + aWeekLaterMonth + '-' + aWeekLaterDay;
-
-const getTwoWeeksLater = new Date(getToday.getTime() + 14 * 24 * 60 * 60 * 1000),
-  twoWeeksLaterYear = getTwoWeeksLater.getFullYear(),
-  twoWeeksLaterMonth = ("0" + (getTwoWeeksLater.getMonth() + 1)).slice(-2),
-  twoWeeksLaterDay = ("0" + (getTwoWeeksLater.getDate())).slice(-2),
-  twoWeeksLater = twoWeeksLaterYear + '-' + twoWeeksLaterMonth + '-' + twoWeeksLaterDay;
 
 const SearchBar = () => {
   const dispatch = useDispatch();
 
   // Default values
   const yvr = AirportsData.filter(airport => airport.iata === 'YVR')[0],
-    sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
+        sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
 
   const [originAirport, setOriginAirport] = useState("YVR"),
-    [destinationAirport, setDestinationAirport] = useState("SFO");
+        [destinationAirport, setDestinationAirport] = useState("SFO");
 
   const [currency, setCurrency] = useState("CAD");
 
-  const [departDate, setDepartDate] = useState(aWeekLater);
-  const [returnDate, setReturnDate] = useState(twoWeeksLater);
+  const todayDate = moment().format().slice(0, 10),
+        aWeekLater = moment().add(1, 'week').format().substring(0, 10),
+        twoWeeksLater = moment().add(2, 'weeks').format().substring(0, 10);
 
-  // Check dates
+  const [departDate, setDepartDate] = useState(aWeekLater),
+        [returnDate, setReturnDate] = useState(twoWeeksLater);
+
+  // Validation
   useEffect(() => {
     if (returnDate <= departDate) {
-      alert('Please select the departure date before the return date.');
+      showError('Departure date must be before than the return date.');
     }
   }, [departDate, returnDate])
 
   useEffect(() => {
-    if (departDate > returnDate) {
-      alert('Please select the departure date before the return date.');
+    if (originAirport === destinationAirport) {
+      showError('Origin and destination must be different.');
     }
-  }, [departDate, returnDate])
+  }, [originAirport, destinationAirport])
+
+  // Search
+  const search = () => {
+    if (returnDate <= departDate) {
+      showError('Departure date must be before than the return date.');
+      return false;
+    }
+    if (originAirport === destinationAirport) {
+      showError('Origin and destination must be different.');
+      return false;
+    }
+    dispatch(
+      searchFlights({
+        originAirport,
+        destinationAirport,
+        currency,
+        departDate,
+        returnDate,
+        showError
+      })
+    )
+  }
 
   // Error Message
   const Alert = (props) => {
@@ -135,18 +143,7 @@ const SearchBar = () => {
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
             <Box mx="auto" p={2}>
-              <Button onClick={() =>
-                dispatch(
-                  searchFlights({
-                    originAirport,
-                    destinationAirport,
-                    currency,
-                    departDate,
-                    returnDate,
-                    showError
-                  })
-                )
-              }
+              <Button onClick={search}
                 label={"Search"}
                 color={"primary"}
               />
