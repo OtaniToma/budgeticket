@@ -71,7 +71,7 @@ const Header = () => {
             )}
             {!isSignedIn &&
               <Button
-                color={'primary'}
+                color={'default'}
                 label={'Sign In'}
                 onClick={() => dispatch(push("/signin"))}
               />

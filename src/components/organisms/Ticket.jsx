@@ -2,8 +2,15 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import DeleteIcon from '@material-ui/icons/Delete';
+import Divider from "@material-ui/core/Divider";
 import './Ticket.scss';
 import { getIsSignedIn } from "../../reducks/users/selectors";
+import { Button } from "../atoms";
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+import IconButton from '@material-ui/core/IconButton';
+import { makeStyles } from '@material-ui/core/styles';
+
 
 const Ticket = (props) => {
 
@@ -49,6 +56,13 @@ const Ticket = (props) => {
   const _bookTicket = () => {
     bookTicket(props)
   }
+
+  const useStyles = makeStyles((theme) => ({
+    margin: {
+      margin: theme.spacing(1),
+    },
+  }));
+  const classes = useStyles();
 
   return (
     <div className={"ticket"}>
@@ -123,14 +137,27 @@ const Ticket = (props) => {
           </span>
 
           {isSignedIn && bookTicket &&
-            <button onClick={_bookTicket}>Book</button>}
+            <>
+              <Divider />
+              <Button onClick={_bookTicket}
+                label={"Select"}
+                color={"primary"}
+                size={"small"}
+                variant={"outlined"}
+                endIcon={<ArrowForwardIosIcon />}
+              />
+            </>}
 
-          {isSignedIn && addTicket && <div className="ticket__right__favicon">
-            <FavoriteIcon color={liked ? 'secondary' : 'disabled'} onClick={_addTicket} />
+          {isSignedIn && addTicket && <div className="ticket__right__icon">
+            <IconButton aria-label="like" className={classes.margin} size="medium" onClick={_addTicket}>
+              <FavoriteIcon fontSize="inherit" color={liked ? 'secondary' : 'disabled'} />
+            </IconButton>
           </div>}
 
-          {deleteTicket && <div className="ticket__right__favicon">
-            <FavoriteIcon color={'secondary'} onClick={_deleteTicket} />
+          {deleteTicket && <div className="ticket__right__icon">
+            <IconButton aria-label="delete" className={classes.margin} size="medium" onClick={_deleteTicket}>
+              <DeleteIcon fontSize="inherit" />
+            </IconButton>
           </div>}
         </div>
       </div>

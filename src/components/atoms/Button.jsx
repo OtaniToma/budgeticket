@@ -15,10 +15,13 @@ const PrimaryButton = (props) => {
     <Button
       className={classes.button}
       variant={props.variant || "contained"}
+      size={props.size || "medium"}
       color={props.color}
       onClick={() => props.onClick()}
       disabled={props.disabled || false}
       width={props.width || classes.button.width}
+      startIcon={props.startIcon || false}
+      endIcon={props.endIcon || false}
     >
       {props.label}
     </Button>
