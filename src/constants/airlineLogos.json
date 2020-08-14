@@ -794,6 +794,12 @@
   {
     "id": "GK",
     "lcc": "0",
+    "name": "Jetstar",
+    "logo": "https://images.kiwi.com/airlines/64/GK.png"
+  },
+  {
+    "id": "GK",
+    "lcc": "0",
     "name": "Jetstar Japan",
     "logo": "https://images.kiwi.com/airlines/64/GK.png"
   },
