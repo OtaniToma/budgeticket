@@ -4,7 +4,7 @@ import AirportInfo from '../molecules/AirportInfo'
 const DestinationInfo = () => {
   return (
     <>
-      <AirportInfo />
+      {/* <AirportInfo /> */}
     </>
   );
 };
