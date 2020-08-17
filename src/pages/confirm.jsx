@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import BookingTemplate from "../templates/Booking";
+import ConfirmTemplate from "../templates/Confirm";
 
-const Booking = () => {
+const Confirm = () => {
   const useStyles = makeStyles({
     root: {
       marginTop: '100px',
@@ -12,9 +12,9 @@ const Booking = () => {
 
   return (
     <div className={classes.root}>
-      <BookingTemplate />
+      <ConfirmTemplate />
     </div>
   );
 };
 
-export default Booking;
+export default Confirm;

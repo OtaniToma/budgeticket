@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const Booking = () => {
+const Confirm = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
   const confirmTicket = getConfirmTicket(selector);
@@ -64,4 +64,4 @@ const Booking = () => {
   )
 }
 
-export default Booking
+export default Confirm

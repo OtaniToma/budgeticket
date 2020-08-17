@@ -16,7 +16,7 @@ export const addTicketToLiked = (ticket) => {
 export const confirmTicket = (ticket) => {
   return async (dispatch) => {
     dispatch(confirmTicketAction(ticket))
-    dispatch(push("/user/booking"));
+    dispatch(push("/user/confirm"));
   }
 }
 
