@@ -31,7 +31,6 @@ const LikedList = () => {
     const timestamp = FirebaseTimestamp.now();
     dispatch(confirmTicket({
       added_at: timestamp,
-      completed: false,
       id: id,
       price: price,
       currencies: currencies,

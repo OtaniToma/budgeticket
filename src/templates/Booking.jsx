@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import { getConfirmTicket } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
@@ -18,9 +18,11 @@ const Booking = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
   const confirmTicket = getConfirmTicket(selector);
+  const dispatch = useDispatch();
 
   const _bookTicket = (ticket) => {
-    bookTicket(ticket)
+    const tickets = [ticket];
+    dispatch(bookTicket(tickets));
   }
 
   return (
@@ -52,7 +54,7 @@ const Booking = () => {
           <Grid item xs={12} md={3}>
           <Button
             onClick={() => _bookTicket(confirmTicket)}
-            label={"Purchase"}
+            label={"Book"}
             color={"primary"}
           />
           </Grid>
