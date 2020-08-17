@@ -11,7 +11,7 @@ service cloud.firestore {
         allow read, write: if request.auth.uid == userId;
       }
 
-      match /confirm/{confirmId} {
+      match /booked/{bookedId} {
         allow read, write: if request.auth.uid == userId;
       }
     }

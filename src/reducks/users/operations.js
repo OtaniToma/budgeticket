@@ -21,8 +21,11 @@ export const confirmTicket = (ticket) => {
 }
 
 export const bookTicket = (ticket) => {
-  return async (dispatch) => {
-    dispatch(bookTicketAction(ticket))
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const bookedRef = usersRef.doc(uid).collection('booked').doc()
+    ticket['bookedId'] = bookedRef.id
+    await bookedRef.set(ticket)
   }
 }
 

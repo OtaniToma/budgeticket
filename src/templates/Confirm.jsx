@@ -21,8 +21,7 @@ const Confirm = () => {
   const dispatch = useDispatch();
 
   const _bookTicket = (ticket) => {
-    const tickets = [ticket];
-    dispatch(bookTicket(tickets));
+    dispatch(bookTicket(ticket));
   }
 
   return (
