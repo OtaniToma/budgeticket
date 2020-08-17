@@ -5,7 +5,7 @@ import { getTicketsInLiked, getUserId } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { db } from "../firebase";
-import { bookTicket } from '../reducks/users/operations';
+import { confirmTicket } from '../reducks/users/operations';
 import { FirebaseTimestamp } from '../firebase/index';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,14 +22,14 @@ const LikedList = () => {
   const uid = getUserId(selector);
   const ticketsInLiked = getTicketsInLiked(selector);
 
-  const _bookTicket = ({
+  const _confirmTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
     outboundDepartureDate, inboundDepartureDate
   }) => {
     const timestamp = FirebaseTimestamp.now();
-    dispatch(bookTicket({
+    dispatch(confirmTicket({
       added_at: timestamp,
       completed: false,
       id: id,
@@ -86,7 +86,7 @@ const LikedList = () => {
                 inboundDepartureDate={ticket.inboundDepartureDate}
                 addTicket={false}
                 deleteTicket={_deleteTicket}
-                bookTicket={_bookTicket}
+                confirmTicket={_confirmTicket}
               />)
             )}
           </Grid>

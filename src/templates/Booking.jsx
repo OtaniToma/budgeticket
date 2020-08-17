@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
-import { getBookingTicket } from '../reducks/users/selectors'
+import { getConfirmTicket } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { Button } from "../components/atoms";
-import { purchaseTicket } from '../reducks/users/operations'
+import { bookTicket } from '../reducks/users/operations'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,10 +17,10 @@ const useStyles = makeStyles((theme) => ({
 const Booking = () => {
   const classes = useStyles();
   const selector = useSelector((state) => state);
-  const bookingTicket = getBookingTicket(selector);
+  const confirmTicket = getConfirmTicket(selector);
 
-  const _purchaseTicket = (ticket) => {
-    purchaseTicket(ticket)
+  const _bookTicket = (ticket) => {
+    bookTicket(ticket)
   }
 
   return (
@@ -32,26 +32,26 @@ const Booking = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
-            {Object.keys(bookingTicket).length > 0 && <Ticket
-              id={bookingTicket.id}
-              price={bookingTicket.price}
-              currencies={bookingTicket.currencies}
-              direct={bookingTicket.Direct}
-              departAirportCode={bookingTicket.departAirportCode}
-              arriveAirportCode={bookingTicket.arriveAirportCode}
-              departAirportName={bookingTicket.departAirportName}
-              arriveAirportName={bookingTicket.arriveAirportName}
-              outboundCarriers={bookingTicket.outboundCarriers}
-              inboundCarriers={bookingTicket.inboundCarriers}
-              outboundCarriersLogo={bookingTicket.outboundCarriersLogo}
-              inboundCarriersLogo={bookingTicket.inboundCarriersLogo}
-              outboundDepartureDate={bookingTicket.outboundDepartureDate}
-              inboundDepartureDate={bookingTicket.inboundDepartureDate}
+            {Object.keys(confirmTicket).length > 0 && <Ticket
+              id={confirmTicket.id}
+              price={confirmTicket.price}
+              currencies={confirmTicket.currencies}
+              direct={confirmTicket.Direct}
+              departAirportCode={confirmTicket.departAirportCode}
+              arriveAirportCode={confirmTicket.arriveAirportCode}
+              departAirportName={confirmTicket.departAirportName}
+              arriveAirportName={confirmTicket.arriveAirportName}
+              outboundCarriers={confirmTicket.outboundCarriers}
+              inboundCarriers={confirmTicket.inboundCarriers}
+              outboundCarriersLogo={confirmTicket.outboundCarriersLogo}
+              inboundCarriersLogo={confirmTicket.inboundCarriersLogo}
+              outboundDepartureDate={confirmTicket.outboundDepartureDate}
+              inboundDepartureDate={confirmTicket.inboundDepartureDate}
             />}
           </Grid>
           <Grid item xs={12} md={3}>
           <Button
-            onClick={() => _purchaseTicket(bookingTicket)}
+            onClick={() => _bookTicket(confirmTicket)}
             label={"Purchase"}
             color={"primary"}
           />
