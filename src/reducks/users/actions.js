@@ -1,5 +1,5 @@
 export const BOOK_TICKET = 'BOOK_TICKET';
-export const bookTicketAction = (ticket) => {
+export const confirmTicketAction = (ticket) => {
   return {
     type: BOOK_TICKET,
     payload: ticket

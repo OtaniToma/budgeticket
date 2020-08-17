@@ -30,7 +30,7 @@ const Ticket = (props) => {
     inboundDepartureDate,
     addTicket,
     deleteTicket,
-    bookTicket,
+    confirmTicket,
     showMessage
   } = props;
 
@@ -53,8 +53,8 @@ const Ticket = (props) => {
     setLiked(false)
   }
 
-  const _bookTicket = () => {
-    bookTicket(props)
+  const _confirmTicket = () => {
+    confirmTicket(props)
   }
 
   const useStyles = makeStyles((theme) => ({
@@ -136,10 +136,10 @@ const Ticket = (props) => {
             {currencies.Symbol} {price}
           </span>
 
-          {isSignedIn && bookTicket &&
+          {isSignedIn && confirmTicket &&
             <>
               <Divider />
-              <Button onClick={_bookTicket}
+              <Button onClick={_confirmTicket}
                 label={"Select"}
                 color={"primary"}
                 size={"small"}

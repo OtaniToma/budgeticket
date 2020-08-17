@@ -4,7 +4,7 @@ import AirlineLogos from '../constants/airlineLogos.json'
 import { useDispatch } from 'react-redux';
 import { push } from "connected-react-router";
 import { FirebaseTimestamp } from '../firebase/index';
-import { addTicketToLiked, bookTicket } from '../reducks/users/operations';
+import { addTicketToLiked, confirmTicket } from '../reducks/users/operations';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -69,14 +69,14 @@ const Tickets = (props) => {
     }))
   }
 
-  const _bookTicket = ({
+  const _confirmTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
     outboundDepartureDate, inboundDepartureDate
   }) => {
     const timestamp = FirebaseTimestamp.now();
-    dispatch(bookTicket({
+    dispatch(confirmTicket({
       added_at: timestamp,
       completed: false,
       id: id,
@@ -134,7 +134,7 @@ const Tickets = (props) => {
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               addTicket={_addTicket}
-              bookTicket={_bookTicket}
+              confirmTicket={_confirmTicket}
               showMessage={showMessage}
               closeMessage={closeMessage}
             />
