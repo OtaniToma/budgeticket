@@ -3,7 +3,7 @@ import initialState from "../initialState";
 
 export const UsersReducer = (state = initialState.users, action) => {
   switch (action.type) {
-    case Actions.BOOK_TICKET:
+    case Actions.CONFIRM_TICKET:
       return {
         ...state,
         booking: action.payload

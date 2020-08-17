@@ -1,7 +1,7 @@
-export const BOOK_TICKET = 'BOOK_TICKET';
+export const CONFIRM_TICKET = 'CONFIRM_TICKET';
 export const confirmTicketAction = (ticket) => {
   return {
-    type: BOOK_TICKET,
+    type: CONFIRM_TICKET,
     payload: ticket
   }
 }
