@@ -28,7 +28,7 @@ const Ticket = (props) => {
     inboundCarriersLogo,
     outboundDepartureDate,
     inboundDepartureDate,
-    addTicket,
+    likeTicket,
     deleteTicket,
     confirmTicket,
     showMessage
@@ -39,11 +39,11 @@ const Ticket = (props) => {
 
   const [liked, setLiked] = useState(false)
 
-  const _addTicket = () => {
+  const _likeTicket = () => {
     if (liked) {
       return false;
     }
-    addTicket(props)
+    likeTicket(props)
     setLiked(true)
     showMessage()
   }
@@ -148,8 +148,8 @@ const Ticket = (props) => {
               />
             </>}
 
-          {isSignedIn && addTicket && <div className="ticket__right__icon">
-            <IconButton aria-label="like" className={classes.margin} size="medium" onClick={_addTicket}>
+          {isSignedIn && likeTicket && <div className="ticket__right__icon">
+            <IconButton aria-label="like" className={classes.margin} size="medium" onClick={_likeTicket}>
               <FavoriteIcon fontSize="inherit" color={liked ? 'secondary' : 'disabled'} />
             </IconButton>
           </div>}

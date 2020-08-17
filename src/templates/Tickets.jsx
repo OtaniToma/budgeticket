@@ -43,7 +43,7 @@ const Tickets = (props) => {
   })
 
 
-  const _addTicket = ({
+  const _likeTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
@@ -133,7 +133,7 @@ const Tickets = (props) => {
               inboundCarriersLogo={logosToShow[carriersToShow[quote.InboundLeg.CarrierIds]]}
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
-              addTicket={_addTicket}
+              likeTicket={_likeTicket}
               confirmTicket={_confirmTicket}
               showMessage={showMessage}
               closeMessage={closeMessage}
