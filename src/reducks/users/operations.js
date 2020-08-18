@@ -31,6 +31,7 @@ export const bookTicket = (ticket) => {
 
 export const fetchTicketsInLiked = (tickets) => {
   return async (dispatch) => {
+    console.log(tickets)
     dispatch(fetchTicketsInLikedAction(tickets))
   }
 }

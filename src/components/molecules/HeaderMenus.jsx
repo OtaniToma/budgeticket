@@ -27,21 +27,38 @@ const HeaderMenus = (props) => {
 
           switch (changeType) {
             case 'added':
-              ticketsInLiked.push(ticket);
+
+              // console.log(...ticketsInLiked)
+              // console.log(ticket)
+
+              ticketsInLiked.push(ticket)
+              console.log(ticketsInLiked)
+
+              dispatch(fetchTicketsInLiked([
+                ...ticketsInLiked,
+                ticket
+              ]));
+
+              debugger
+              
               break;
             case 'modified':
-              const index = ticketsInLiked.findIndex(ticket => ticket.likedId === change.doc.id);
-              ticketsInLiked[index] = ticket;
+              dispatch(fetchTicketsInLiked(ticketsInLiked.map(item => {
+                if (item.likedId === change.doc.id) {
+                  return ticket
+                }
+                return item
+              })));
               break;
             case 'removed':
-              ticketsInLiked = ticketsInLiked.filter(ticket => ticket.likedId !== change.doc.id);
+              dispatch(fetchTicketsInLiked(ticketsInLiked.filter(item => item.likedId !== change.doc.id)));
               break;
             default:
               break;
           }
         })
-        dispatch(fetchTicketsInLiked(ticketsInLiked));
-        setLikedTickets(ticketsInLiked.length);
+        // dispatch(fetchTicketsInLiked(ticketsInLiked));
+        // setLikedTickets(ticketsInLiked.length);
       })
     return () => unsubscribe()
     // eslint-disable-next-line
