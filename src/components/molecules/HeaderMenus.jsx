@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import IconButton from "@material-ui/core/IconButton";
 import Badge from "@material-ui/core/Badge";
@@ -15,50 +15,31 @@ const HeaderMenus = (props) => {
   const uid = getUserId(selector);
   const isSignedIn = getIsSignedIn(selector);
 
-  const [likedTickets, setLikedTickets] = useState(0);
+  const ticketsInLiked = getTicketsInLiked(selector);
 
   useEffect(() => {
-    let ticketsInLiked = getTicketsInLiked(selector);
     const unsubscribe = db.collection('users').doc(uid).collection('liked')
       .onSnapshot(snapshots => {
+        let newTicketId = [...ticketsInLiked];
         snapshots.docChanges().forEach(change => {
           const ticket = change.doc.data();
           const changeType = change.type;
 
           switch (changeType) {
             case 'added':
-
-              // console.log(...ticketsInLiked)
-              // console.log(ticket)
-
-              ticketsInLiked.push(ticket)
-              console.log(ticketsInLiked)
-
-              dispatch(fetchTicketsInLiked([
-                ...ticketsInLiked,
-                ticket
-              ]));
-
-              debugger
-              
-              break;
-            case 'modified':
-              dispatch(fetchTicketsInLiked(ticketsInLiked.map(item => {
-                if (item.likedId === change.doc.id) {
-                  return ticket
-                }
-                return item
-              })));
+              newTicketId.push(ticket);
+              console.log(newTicketId);
+              dispatch(fetchTicketsInLiked(newTicketId));
               break;
             case 'removed':
-              dispatch(fetchTicketsInLiked(ticketsInLiked.filter(item => item.likedId !== change.doc.id)));
+              newTicketId = ticketsInLiked.filter(item => item.likedId !== change.doc.id);
+              console.log(newTicketId);
+              dispatch(fetchTicketsInLiked(newTicketId));
               break;
             default:
               break;
           }
         })
-        // dispatch(fetchTicketsInLiked(ticketsInLiked));
-        // setLikedTickets(ticketsInLiked.length);
       })
     return () => unsubscribe()
     // eslint-disable-next-line
@@ -69,7 +50,7 @@ const HeaderMenus = (props) => {
       {isSignedIn && (
         <div>
           <IconButton onClick={() => dispatch(push("/user/liked"))}>
-            <Badge badgeContent={likedTickets} color="secondary">
+            <Badge badgeContent={ticketsInLiked.length} color="secondary">
               <FavoriteIcon />
             </Badge>
           </IconButton>
