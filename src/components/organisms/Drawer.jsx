@@ -6,8 +6,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
-import HistoryIcon from "@material-ui/icons/History";
-import PersonIcon from "@material-ui/icons/Person";
+import FavoriteIcon from "@material-ui/icons/Favorite";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { makeStyles } from "@material-ui/styles";
 import { useDispatch } from "react-redux";
@@ -52,17 +51,10 @@ const ClosableDrawer = (props) => {
     },
     {
       func: selectMenu,
-      label: "History",
-      icon: <HistoryIcon />,
-      id: "history",
-      value: "/user/history",
-    },
-    {
-      func: selectMenu,
-      label: "Profile",
-      icon: <PersonIcon />,
-      id: "profile",
-      value: "/user/profile",
+      label: "Liked Tickets",
+      icon: <FavoriteIcon />,
+      id: "liked",
+      value: "/user/liked",
     },
   ];
 
