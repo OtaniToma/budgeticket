@@ -66,6 +66,8 @@ const ClosableDrawer = (props) => {
     },
   ];
 
+  const onClick = () => dispatch(signOut());
+
   return (
     <nav className={classes.drawer}>
       <Drawer
@@ -90,7 +92,7 @@ const ClosableDrawer = (props) => {
                 <ListItemText primary={menu.label} />
               </ListItem>
             ))}
-            <ListItem button key="signout" onClick={dispatch(signOut)}>
+            <ListItem button key="signout" onClick={onClick}>
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
