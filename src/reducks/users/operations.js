@@ -1,4 +1,4 @@
-import { confirmTicketAction, bookTicketAction, fetchTicketsInLikedAction, signInAction, signOutAction } from "./actions";
+import { confirmTicketAction, fetchTicketsInLikedAction, signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import { auth, db, FirebaseTimestamp } from "../../firebase/";
 
