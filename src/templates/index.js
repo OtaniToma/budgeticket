@@ -1,4 +1,4 @@
-export { default as LikedList } from "./LikedList";
+export { default as Liked } from "./Liked";
 export { default as Search } from "./Search";
 export { default as SignUp } from "./SignUp";
 export { default as SignIn } from "./SignIn";

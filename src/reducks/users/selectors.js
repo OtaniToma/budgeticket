@@ -21,5 +21,5 @@ export const getTicketsInLiked = createSelector(
 
 export const getConfirmTicket = createSelector(
   [userSelector],
-  (state) => state.booking
+  (state) => state.confirm
 );
