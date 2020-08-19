@@ -61,8 +61,9 @@ const BookedList = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
+            <h2>Booked Tickets</h2>
             {ticketsInBooked.length > 0 && (
-              ticketsInBooked.map(ticket => 
+              ticketsInBooked.map(ticket =>
                 <>
                   <Ticket
                     key={ticket.bookedId}
@@ -84,7 +85,7 @@ const BookedList = () => {
                     addTicket={false}
                   />
                   {ticket.passenger}
-              </>
+                </>
               )
             )}
           </Grid>
