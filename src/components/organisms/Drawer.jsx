@@ -56,6 +56,13 @@ const ClosableDrawer = (props) => {
       id: "liked",
       value: "/user/liked",
     },
+    {
+      func: selectMenu,
+      label: "Booked Tickets",
+      icon: <FavoriteIcon />,
+      id: "liked",
+      value: "/user/booked",
+    },
   ];
 
   const onClick = () => dispatch(signOut());

@@ -1,3 +1,4 @@
+export { default as Booked } from "./booked";
 export { default as Confirm } from "./confirm";
 export { default as History } from "./history";
 export { default as Liked } from "./liked";
