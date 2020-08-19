@@ -12,7 +12,9 @@ import { fetchTicketsInBooked } from '../reducks/users/operations';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 100
+    margin: '100px auto 0 auto',
+    maxWidth: 1024,
+    padding: '0 5px'
   }
 }));
 
@@ -34,10 +36,6 @@ const BookedList = () => {
           switch (changeType) {
             case 'added':
               ticketsInBooked.push(ticket);
-              break;
-            case 'modified':
-              const index = ticketsInBooked.findIndex(ticket => ticket.bookedId === change.doc.id);
-              ticketsInBooked[index] = ticket;
               break;
             case 'removed':
               ticketsInBooked = ticketsInBooked.filter(ticket => ticket.bookedId !== change.doc.id);

@@ -29,10 +29,6 @@ const HeaderMenus = (props) => {
             case 'added':
               ticketsInLiked.push(ticket);
               break;
-            case 'modified':
-              const index = ticketsInLiked.findIndex(ticket => ticket.likedId === change.doc.id);
-              ticketsInLiked[index] = ticket;
-              break;
             case 'removed':
               ticketsInLiked = ticketsInLiked.filter(ticket => ticket.likedId !== change.doc.id);
               break;

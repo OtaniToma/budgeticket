@@ -11,6 +11,7 @@ import { getUsername } from "../reducks/users/selectors";
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { push } from "connected-react-router";
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -96,12 +97,12 @@ const Confirm = () => {
               required={true}
               onChange={changePassengerName}
             />
-
-          <Button
-            onClick={() => _bookTicket(ticket)}
-            label={"Book"}
-            color={"primary"}
-          />
+            <Box p={2} />
+            <Button
+              onClick={() => _bookTicket(ticket)}
+              label={"Book"}
+              color={"primary"}
+            />
           </Grid>
           <Grid item xs={12} md={3}>
           </Grid>

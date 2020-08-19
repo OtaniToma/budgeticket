@@ -97,6 +97,9 @@ export const signIn = (email, password) => {
               dispatch(push("/search"));
             });
         }
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
 };
@@ -140,9 +143,15 @@ export const signUp = (username, email, password, confirmPassword) => {
             .doc(uid)
             .set(userInitialData)
             .then(() => {
-              dispatch(push("/search"));
+              dispatch(push("/signin"));
+              setTimeout(() => {
+                alert('Please sign in with your new account.');
+              }, 1000);
             });
         }
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
 };
@@ -151,7 +160,7 @@ export const signOut = () => {
   return async (dispatch) => {
     auth.signOut().then(() => {
       dispatch(signOutAction());
-      dispatch(push("/signin"));
+      dispatch(push("/"));
     });
   };
 };
