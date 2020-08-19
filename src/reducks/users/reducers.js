@@ -18,6 +18,11 @@ export const UsersReducer = (state = initialState.users, action) => {
         ...state,
         liked: [...action.payload]
       }
+    case Actions.FETCH_TICKETS_IN_BOOKED:
+      return {
+        ...state,
+        booked: [...action.payload]
+      }
     case Actions.SIGN_IN:
       return {
         ...state,

@@ -22,6 +22,14 @@ export const fetchTicketsInLikedAction = (tickets) => {
   }
 }
 
+export const FETCH_TICKETS_IN_BOOKED = 'FETCH_TICKETS_IN_BOOKED';
+export const fetchTicketsInBookedAction = (tickets) => {
+  return {
+    type: FETCH_TICKETS_IN_BOOKED,
+    payload: tickets
+  }
+}
+
 export const SIGN_IN = 'SIGN_IN';
 export const signInAction = (userState) => {
   return {

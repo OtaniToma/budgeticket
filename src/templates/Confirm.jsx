@@ -1,16 +1,23 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import { getConfirmTicket } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { Button } from "../components/atoms";
-import { bookTicket } from '../reducks/users/operations'
+import { bookTicket } from '../reducks/users/operations';
+import { TextInput } from '../components/atoms';
+import { getUsername } from "../reducks/users/selectors";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import { push } from "connected-react-router";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 100
+    margin: '100px auto 0 auto',
+    maxWidth: 1024,
+    padding: '0 5px'
   }
 }));
 
@@ -19,10 +26,43 @@ const Confirm = () => {
   const selector = useSelector((state) => state);
   const confirmTicket = getConfirmTicket(selector);
   const dispatch = useDispatch();
+  const username = getUsername(selector);
+
+  const [ticket, setTicket] = useState(confirmTicket);
+  const [passenger, setPassenger] = useState(username);
+
+  useEffect(() => {
+    ticket.passenger = passenger;
+  }, [passenger])
+
+  const changePassengerName = (props) => {
+    setPassenger(props);
+  }
 
   const _bookTicket = (ticket) => {
     dispatch(bookTicket(ticket));
+    showAlert('Ticket has been booked.');
+    setTimeout(() => {
+      dispatch(push('/user/booked'));
+    }, 2000);
   }
+
+  // Alert
+  const Alert = (props) => {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+  }
+
+  const [alert, setAlert] = useState('');
+  const [open, setOpen] = useState(false);
+
+  const showAlert = (props) => {
+    setAlert(props);
+    setOpen(true);
+  }
+
+  const closeAlert = () => {
+    setOpen(false);
+  };
 
   return (
     <>
@@ -33,6 +73,7 @@ const Confirm = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
+            <h2>Ticket Confirmation</h2>
             {Object.keys(confirmTicket).length > 0 && <Ticket
               id={confirmTicket.id}
               price={confirmTicket.price}
@@ -49,16 +90,29 @@ const Confirm = () => {
               outboundDepartureDate={confirmTicket.outboundDepartureDate}
               inboundDepartureDate={confirmTicket.inboundDepartureDate}
             />}
-          </Grid>
-          <Grid item xs={12} md={3}>
+            <TextInput
+              label={'Passenger Name'}
+              defaultValue={username}
+              required={true}
+              onChange={changePassengerName}
+            />
+
           <Button
-            onClick={() => _bookTicket(confirmTicket)}
+            onClick={() => _bookTicket(ticket)}
             label={"Book"}
             color={"primary"}
           />
           </Grid>
+          <Grid item xs={12} md={3}>
+          </Grid>
         </Grid>
       </div>
+
+      <Snackbar open={open} autoHideDuration={6000} onClose={closeAlert}>
+        <Alert onClose={closeAlert} severity="success">
+          {alert}
+        </Alert>
+      </Snackbar>
     </>
   )
 }

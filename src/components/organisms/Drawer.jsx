@@ -7,6 +7,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import HomeIcon from "@material-ui/icons/Home";
 import FavoriteIcon from "@material-ui/icons/Favorite";
+import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import { makeStyles } from "@material-ui/styles";
 import { useDispatch } from "react-redux";
@@ -55,6 +56,13 @@ const ClosableDrawer = (props) => {
       icon: <FavoriteIcon />,
       id: "liked",
       value: "/user/liked",
+    },
+    {
+      func: selectMenu,
+      label: "Booked Tickets",
+      icon: <FlightTakeoffIcon />,
+      id: "liked",
+      value: "/user/booked",
     },
   ];
 

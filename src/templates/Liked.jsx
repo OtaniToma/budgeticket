@@ -11,7 +11,9 @@ import { FirebaseTimestamp } from '../firebase/index';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 100
+    margin: '100px auto 0 auto',
+    maxWidth: 1024,
+    padding: '0 5px'
   }
 }));
 
@@ -64,6 +66,7 @@ const LikedList = () => {
           <Grid item xs={12} md={2}>
           </Grid>
           <Grid item xs={12} md={7}>
+            <h2>Liked Tickets</h2>
             {ticketsInLiked.length > 0 && (
               ticketsInLiked.map(ticket => 
               <Ticket
