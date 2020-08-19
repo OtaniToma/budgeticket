@@ -3,6 +3,7 @@ import TextField from "@material-ui/core/TextField";
 
 const TextInput = (props) => {
   const {
+    defaultValue,
     fullWidth,
     label,
     multiline,
@@ -15,6 +16,7 @@ const TextInput = (props) => {
 
   return (
     <TextField
+      defaultValue={defaultValue}
       fullWidth={fullWidth}
       label={label}
       margin="dense"
@@ -23,7 +25,7 @@ const TextInput = (props) => {
       rows={rows}
       value={value}
       type={type}
-      onChange={onChange}
+      onChange={(e) => onChange(e.target.value)}
     />
   );
 };

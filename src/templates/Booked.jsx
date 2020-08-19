@@ -63,25 +63,29 @@ const BookedList = () => {
           <Grid item xs={12} md={7}>
             {ticketsInBooked.length > 0 && (
               ticketsInBooked.map(ticket => 
-              <Ticket
-                key={ticket.bookedId}
-                id={ticket.id}
-                bookedId={ticket.bookedId}
-                currencies={ticket.currencies}
-                price={ticket.price}
-                direct={ticket.direct}
-                departAirportCode={ticket.departAirportCode}
-                arriveAirportCode={ticket.arriveAirportCode}
-                departAirportName={ticket.departAirportName}
-                arriveAirportName={ticket.arriveAirportName}
-                outboundCarriers={ticket.outboundCarriers}
-                inboundCarriers={ticket.inboundCarriers}
-                outboundCarriersLogo={ticket.outboundCarriersLogo}
-                inboundCarriersLogo={ticket.inboundCarriersLogo}
-                outboundDepartureDate={ticket.outboundDepartureDate}
-                inboundDepartureDate={ticket.inboundDepartureDate}
-                addTicket={false}
-              />)
+                <>
+                  <Ticket
+                    key={ticket.bookedId}
+                    id={ticket.id}
+                    bookedId={ticket.bookedId}
+                    currencies={ticket.currencies}
+                    price={ticket.price}
+                    direct={ticket.direct}
+                    departAirportCode={ticket.departAirportCode}
+                    arriveAirportCode={ticket.arriveAirportCode}
+                    departAirportName={ticket.departAirportName}
+                    arriveAirportName={ticket.arriveAirportName}
+                    outboundCarriers={ticket.outboundCarriers}
+                    inboundCarriers={ticket.inboundCarriers}
+                    outboundCarriersLogo={ticket.outboundCarriersLogo}
+                    inboundCarriersLogo={ticket.inboundCarriersLogo}
+                    outboundDepartureDate={ticket.outboundDepartureDate}
+                    inboundDepartureDate={ticket.inboundDepartureDate}
+                    addTicket={false}
+                  />
+                  {ticket.passenger}
+              </>
+              )
             )}
           </Grid>
           <Grid item xs={12} md={3}>
