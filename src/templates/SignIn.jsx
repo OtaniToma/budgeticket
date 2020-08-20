@@ -7,7 +7,6 @@ import { Formik, Form, Field } from 'formik';
 import { TextField } from 'formik-material-ui';
 import { Button, LinearProgress } from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
 
 const validate = (values) => {
   const errors = {};
