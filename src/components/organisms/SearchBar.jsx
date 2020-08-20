@@ -24,8 +24,7 @@ const SearchBar = () => {
 
   const [currency, setCurrency] = useState("CAD");
 
-  const todayDate = moment().format().slice(0, 10),
-        aWeekLater = moment().add(1, 'week').format().substring(0, 10),
+  const aWeekLater = moment().add(1, 'week').format().substring(0, 10),
         twoWeeksLater = moment().add(2, 'weeks').format().substring(0, 10);
 
   const [departDate, setDepartDate] = useState(aWeekLater),

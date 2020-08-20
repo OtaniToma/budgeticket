@@ -29,12 +29,14 @@ const Confirm = () => {
   const dispatch = useDispatch();
   const username = getUsername(selector);
 
+  // eslint-disable-next-line
   const [ticket, setTicket] = useState(confirmTicket);
   const [passenger, setPassenger] = useState(username);
 
   useEffect(() => {
     ticket.passenger = passenger;
-  }, [passenger])
+    // eslint-disable-next-line
+  }, [passenger]);
 
   const changePassengerName = (props) => {
     setPassenger(props);

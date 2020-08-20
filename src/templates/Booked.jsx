@@ -5,8 +5,6 @@ import { getTicketsInBooked, getUserId } from '../reducks/users/selectors'
 import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { db } from "../firebase";
-import { confirmTicket } from '../reducks/users/operations';
-import { FirebaseTimestamp } from '../firebase/index';
 import { fetchTicketsInBooked } from '../reducks/users/operations';
 
 const useStyles = makeStyles((theme) => ({
