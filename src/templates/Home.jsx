@@ -16,7 +16,7 @@ const randomBgImg = bgimages[Math.floor(Math.random() * bgimages.length)];
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundImage: `url('${randomBgImg}')`,
-    width: '100%',
+    width: '100vw',
     height: '100vh',
     backgroundSize: 'cover',
     backgroundPosition: 'center',

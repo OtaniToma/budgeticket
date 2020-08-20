@@ -87,13 +87,8 @@ const SearchBar = () => {
   const useStyles = makeStyles((theme) => ({
     root: {
       flexGrow: 1,
-      display: 'flex',
-      justifyContent: 'center'
     },
     container: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
       maxWidth: 1024
     },
   }));

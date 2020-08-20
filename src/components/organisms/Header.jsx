@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Toolbar from "@material-ui/core/Toolbar";
 import { getIsSignedIn, getUsername } from "../../reducks/users/selectors";
 import HeaderMenus from "../molecules/HeaderMenus";
-import ClosableDrawer from "./ClosableDrawer";
+import Drawer from "./Drawer";
 import Button from '../atoms/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,10 +59,7 @@ const Header = () => {
             {isSignedIn && (
               <>
                 <div className={classes.iconButtons}>
-                  <Typography
-                    variant="span"
-                    onClick={() => dispatch(push("/user/profile"))}
-                  >
+                  <Typography variant="span">
                     Hi, {username}
                   </Typography>
                 </div>
@@ -71,7 +68,7 @@ const Header = () => {
             )}
             {!isSignedIn &&
               <Button
-                color={'primary'}
+                color={'default'}
                 label={'Sign In'}
                 onClick={() => dispatch(push("/signin"))}
               />
@@ -80,7 +77,7 @@ const Header = () => {
         </AppBar>
       </div>
 
-      <ClosableDrawer open={open} onClose={handleDrawerToggle} />
+      <Drawer open={open} onClose={handleDrawerToggle} />
     </>
   );
 };

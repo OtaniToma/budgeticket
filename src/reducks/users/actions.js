@@ -1,3 +1,11 @@
+export const CONFIRM_TICKET = 'CONFIRM_TICKET';
+export const confirmTicketAction = (ticket) => {
+  return {
+    type: CONFIRM_TICKET,
+    payload: ticket
+  }
+}
+
 export const BOOK_TICKET = 'BOOK_TICKET';
 export const bookTicketAction = (ticket) => {
   return {
@@ -10,6 +18,14 @@ export const FETCH_TICKETS_IN_LIKED = 'FETCH_TICKETS_IN_LIKED';
 export const fetchTicketsInLikedAction = (tickets) => {
   return {
     type: FETCH_TICKETS_IN_LIKED,
+    payload: tickets
+  }
+}
+
+export const FETCH_TICKETS_IN_BOOKED = 'FETCH_TICKETS_IN_BOOKED';
+export const fetchTicketsInBookedAction = (tickets) => {
+  return {
+    type: FETCH_TICKETS_IN_BOOKED,
     payload: tickets
   }
 }

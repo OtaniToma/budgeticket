@@ -1,7 +1,42 @@
+@mixin mq($break) {
+  @if $break=="xl" {
+    @media (max-width: 1920px) {
+      @content;
+    }
+  }
+
+  @else if $break=="lg" {
+    @media (max-width: 1920px) {
+      @content;
+    }
+  }
+
+  @else if $break=="md" {
+    @media (max-width: 1280px) {
+      @content;
+    }
+  }
+
+  @else if $break=="sm" {
+    @media (max-width: 960px) {
+      @content;
+    }
+  }
+
+  @else if $break=="xs" {
+    @media (max-width: 600px) {
+      @content;
+    }
+  }
+
+  @else {
+    @error "Whoops! No value could be retrieved for `#{$break}`. "
+  }
+}
+
 .ticket {
   margin: 2rem 0;
   font-family: Arial, Helvetica, sans-serif;
-  max-width: 800px;
 
   &:nth-child(1) {
     margin-top: 1rem;
@@ -85,10 +120,18 @@
         flex-basis: 15%;
         color: grey;
         font-size: 1rem;
+
+        @include mq('xs') {
+          flex-basis: 20%;
+        }
       }
 
       .depAirport {
         flex-basis: 30%;
+
+        @include mq('xs') {
+          flex-basis: 25%;
+        }
 
         &__iata {
           font-weight: bold;
@@ -97,6 +140,9 @@
         &__city {
           color: grey;
           font-size: .75rem;
+          @include mq('sm') {
+            display: none;
+          }
         }
       }
 
@@ -107,6 +153,10 @@
       .arrAirport {
         flex-basis: 30%;
 
+        @include mq('xs') {
+          flex-basis: 25%;
+        }
+
         &__iata {
           font-weight: bold;
         }
@@ -114,6 +164,9 @@
         &__city {
           color: grey;
           font-size: .75rem;
+          @include mq('sm') {
+            display: none;
+          }
         }
       }
     }
@@ -190,14 +243,18 @@
     z-index: 0;
 
     &__price {
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: bold;
+
+      @media screen and (max-width: 960px) {
+        font-size: 1.5rem;
+      }
     }
 
-    &__favicon {
+    &__icon {
       position: absolute;
-      bottom: 5px;
-      right: 5px;
+      bottom: -8px;
+      right: -8px;
     }
   }
 }

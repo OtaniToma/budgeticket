@@ -1,4 +1,4 @@
-import { bookTicketAction, fetchTicketsInLikedAction, signInAction, signOutAction } from "./actions";
+import { confirmTicketAction, fetchTicketsInLikedAction, fetchTicketsInBookedAction,  signInAction, signOutAction } from "./actions";
 import { push } from "connected-react-router";
 import { auth, db, FirebaseTimestamp } from "../../firebase/";
 
@@ -13,15 +13,20 @@ export const addTicketToLiked = (ticket) => {
   }
 }
 
-export const bookTicket = (ticket) => {
+export const confirmTicket = (ticket) => {
   return async (dispatch) => {
-    dispatch(bookTicketAction(ticket))
-    dispatch(push("/user/booking"));
+    dispatch(confirmTicketAction(ticket))
+    dispatch(push("/user/confirm"));
   }
 }
 
-export const purchaseTicket = (ticket) => {
-  console.log(ticket)
+export const bookTicket = (ticket) => {
+  return async (dispatch, getState) => {
+    const uid = getState().users.uid
+    const bookedRef = usersRef.doc(uid).collection('booked').doc()
+    ticket['bookedId'] = bookedRef.id
+    await bookedRef.set(ticket)
+  }
 }
 
 export const fetchTicketsInLiked = (tickets) => {
@@ -30,27 +35,28 @@ export const fetchTicketsInLiked = (tickets) => {
   }
 }
 
+export const fetchTicketsInBooked = (tickets) => {
+  return async (dispatch) => {
+    dispatch(fetchTicketsInBookedAction(tickets))
+  }
+}
+
 export const listenAuthState = () => {
   return async (dispatch) => {
-    return auth.onAuthStateChanged((user) => {
+    return auth.onAuthStateChanged(async (user) => {
       if (user) {
         const uid = user.uid;
+        const snapshot = await db.collection.apply('users').doc(uid).get();
+        const data = snapshot.data();
 
-        db.collection("users")
-          .doc(uid)
-          .get()
-          .then((snapshot) => {
-            const data = snapshot.data();
-
-            dispatch(
-              signInAction({
-                isSignedIn: true,
-                role: data.role,
-                uid: uid,
-                username: data.username,
-              })
-            );
-          });
+        dispatch(
+          signInAction({
+            isSignedIn: true,
+            role: data.role,
+            uid: uid,
+            username: data.username,
+          })
+        );
       } else {
         dispatch(push("/signin"));
       }
@@ -91,6 +97,9 @@ export const signIn = (email, password) => {
               dispatch(push("/search"));
             });
         }
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
 };
@@ -134,9 +143,15 @@ export const signUp = (username, email, password, confirmPassword) => {
             .doc(uid)
             .set(userInitialData)
             .then(() => {
-              dispatch(push("/search"));
+              dispatch(push("/signin"));
+              setTimeout(() => {
+                alert('Please sign in with your new account.');
+              }, 1000);
             });
         }
+      })
+      .catch((error) => {
+        alert(error);
       });
   };
 };
@@ -145,7 +160,7 @@ export const signOut = () => {
   return async (dispatch) => {
     auth.signOut().then(() => {
       dispatch(signOutAction());
-      dispatch(push("/signin"));
+      dispatch(push("/"));
     });
   };
 };

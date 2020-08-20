@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles } from '@material-ui/core/styles';
-import LikedList from "../templates/Liked";
+import BookedList from "../templates/Booked";
 
-const Liked = () => {
+const Booked = () => {
   const useStyles = makeStyles({
     root: {
       marginTop: '100px',
@@ -12,9 +12,9 @@ const Liked = () => {
 
   return (
     <div className={classes.root}>
-      <LikedList />
+      <BookedList />
     </div>
   );
 };
 
-export default Liked;
+export default Booked;

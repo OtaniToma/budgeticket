@@ -4,7 +4,7 @@ import AirlineLogos from '../constants/airlineLogos.json'
 import { useDispatch } from 'react-redux';
 import { push } from "connected-react-router";
 import { FirebaseTimestamp } from '../firebase/index';
-import { addTicketToLiked, bookTicket } from '../reducks/users/operations';
+import { addTicketToLiked, confirmTicket } from '../reducks/users/operations';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
@@ -39,10 +39,11 @@ const Tickets = (props) => {
       console.log(carrier.Name)
       logosToShow[carrier.Name] = 'https://images.kiwi.com/airlines/64x64/airlines.png';
     }
+    return true;
   })
 
 
-  const _addTicket = ({
+  const _likeTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
@@ -68,16 +69,15 @@ const Tickets = (props) => {
     }))
   }
 
-  const _bookTicket = ({
+  const _confirmTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
     outboundDepartureDate, inboundDepartureDate
   }) => {
     const timestamp = FirebaseTimestamp.now();
-    dispatch(bookTicket({
+    dispatch(confirmTicket({
       added_at: timestamp,
-      completed: false,
       id: id,
       price: price,
       currencies: currencies,
@@ -132,8 +132,8 @@ const Tickets = (props) => {
               inboundCarriersLogo={logosToShow[carriersToShow[quote.InboundLeg.CarrierIds]]}
               outboundDepartureDate={quote.OutboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
               inboundDepartureDate={quote.InboundLeg.DepartureDate.substring(0, 10).substring(5, 10)}
-              addTicket={_addTicket}
-              bookTicket={_bookTicket}
+              likeTicket={_likeTicket}
+              confirmTicket={_confirmTicket}
               showMessage={showMessage}
               closeMessage={closeMessage}
             />

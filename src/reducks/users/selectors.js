@@ -19,7 +19,12 @@ export const getTicketsInLiked = createSelector(
   (state) => state.liked
 );
 
-export const getBookingTicket = createSelector(
+export const getTicketsInBooked = createSelector(
   [userSelector],
-  (state) => state.booking
+  (state) => state.booked
+);
+
+export const getConfirmTicket = createSelector(
+  [userSelector],
+  (state) => state.confirm
 );
