@@ -122,18 +122,16 @@ const SearchBar = () => {
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
             <SelectDate
-              label={'Depart'}
-              defaultValue={departDate}
               select={setDepartDate}
-              minDate={todayDate}
+              label={'Depart'}
+              defaultValue={aWeekLater}
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
             <SelectDate
-              label={'Return'}
-              defaultValue={returnDate}
               select={setReturnDate}
-              minDate={todayDate}
+              label={'Return'}
+              defaultValue={twoWeeksLater}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={8}>
