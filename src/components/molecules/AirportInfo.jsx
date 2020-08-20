@@ -39,7 +39,7 @@ const AirportInfo = () => {
       {airport.name &&
       <>
         <Typography variant="subtitle2" gutterBottom>
-            <FlightLandIcon />&nbsp;{airport.name} ({airport.code})
+          {airport.name} ({airport.code})
         </Typography>
         <Typography variant="body1" gutterBottom>
           {airport.city}, {airport.country}

@@ -1,10 +1,10 @@
 import React from "react";
-// import AirportInfo from '../molecules/AirportInfo'
+import AirportInfo from '../molecules/AirportInfo'
 
 const DestinationInfo = () => {
   return (
     <>
-      {/* <AirportInfo /> */}
+      <AirportInfo />
     </>
   );
 };
