@@ -1,12 +1,12 @@
 import React from "react";
 // import AirportInfo from '../molecules/AirportInfo'
-import Photo from '../molecules/Photo'
+import Photos from '../molecules/Photos'
 
 const DestinationInfo = () => {
   return (
     <>
       {/* <AirportInfo /> */}
-      <Photo />
+      <Photos />
     </>
   );
 };
