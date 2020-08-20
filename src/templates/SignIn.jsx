@@ -88,12 +88,6 @@ const SignIn = () => {
               </Form>
             )}
           </Formik>
-          <br />
-          <Typography variant="caption">
-            Trial account<br />
-            Email: <strong>budgeticket@gmail.com</strong><br />
-            Password: <strong>foobar</strong>
-          </Typography>
         </Box>
       </Paper>
       &nbsp;
