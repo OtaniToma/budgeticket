@@ -158,7 +158,7 @@ const Search = () => {
 
       <Snackbar open={open} autoHideDuration={6000} onClose={closeError}>
         <Alert onClose={closeError} severity="info">
-          Please <strong onClick={toSignIn}>sign in</strong> or <strong onClick={toSignUp}>create new account</strong>.
+          Please <strong onClick={toSignIn}>sign in</strong> or <strong onClick={toSignUp}>create new account to book flights</strong>.
         </Alert>
       </Snackbar>
     </>

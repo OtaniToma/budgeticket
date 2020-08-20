@@ -6,6 +6,7 @@ import Ticket from '../components/organisms/Ticket';
 import Grid from "@material-ui/core/Grid";
 import { db } from "../firebase";
 import { fetchTicketsInBooked } from '../reducks/users/operations';
+import NotFound from '../components/organisms/NotFound';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -84,6 +85,7 @@ const BookedList = () => {
                 </>
               )
             )}
+            {ticketsInBooked.length === 0 && <NotFound />}
           </Grid>
           <Grid item xs={12} md={3}>
           </Grid>

@@ -9,6 +9,7 @@ import { getIsSignedIn } from "../../reducks/users/selectors";
 import { Button } from "../atoms";
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -61,6 +62,10 @@ const Ticket = (props) => {
     margin: {
       margin: theme.spacing(1),
     },
+    caption: {
+      color: '#bdbdbd',
+      lineHeight: 1.25
+    }
   }));
   const classes = useStyles();
 
@@ -135,6 +140,22 @@ const Ticket = (props) => {
           <span className="ticket__right__price">
             {currencies.Symbol} {price}
           </span>
+
+          {!isSignedIn &&
+            <>
+              <Divider />
+              <Button
+                label={"Select"}
+                color={"primary"}
+                size={"small"}
+                variant={"outlined"}
+                endIcon={<ArrowForwardIosIcon />}
+                disabled
+              />
+              <Typography className={classes.caption} variant="caption" display="block" gutterBottom>
+                Ticket will be available after sign in
+              </Typography>
+            </>}
 
           {isSignedIn && confirmTicket &&
             <>

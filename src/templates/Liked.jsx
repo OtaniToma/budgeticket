@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import { db } from "../firebase";
 import { confirmTicket } from '../reducks/users/operations';
 import { FirebaseTimestamp } from '../firebase/index';
+import NotFound from '../components/organisms/NotFound';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,6 +92,7 @@ const LikedList = () => {
                 confirmTicket={_confirmTicket}
               />)
             )}
+            {ticketsInLiked.length === 0 && <NotFound />}
           </Grid>
           <Grid item xs={12} md={3}>
           </Grid>
