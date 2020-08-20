@@ -24,8 +24,7 @@ const SearchBar = () => {
 
   const [currency, setCurrency] = useState("CAD");
 
-  const todayDate = moment().format().slice(0, 10),
-        aWeekLater = moment().add(1, 'week').format().substring(0, 10),
+  const aWeekLater = moment().add(1, 'week').format().substring(0, 10),
         twoWeeksLater = moment().add(2, 'weeks').format().substring(0, 10);
 
   const [departDate, setDepartDate] = useState(aWeekLater),
@@ -122,18 +121,16 @@ const SearchBar = () => {
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
             <SelectDate
-              label={'Depart'}
-              defaultValue={departDate}
               select={setDepartDate}
-              minDate={todayDate}
+              label={'Depart'}
+              defaultValue={aWeekLater}
             />
           </Grid>
           <Grid item xs={6} sm={3} md={2}>
             <SelectDate
-              label={'Return'}
-              defaultValue={returnDate}
               select={setReturnDate}
-              minDate={todayDate}
+              label={'Return'}
+              defaultValue={twoWeeksLater}
             />
           </Grid>
           <Grid item xs={12} sm={6} md={8}>

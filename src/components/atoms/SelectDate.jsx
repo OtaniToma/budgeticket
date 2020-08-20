@@ -1,34 +1,48 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
+import React from 'react';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import format from 'date-fns/format';
+import 'date-fns';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 140,
-  },
+    maxWidth: 160,
+  }
 });
 
-const SelectDate = (props) => {
-  const {
-    label,
-    defaultValue,
-    select,
-    minDate
-  } = props;
+const SelectDate2 = ({ select, label, defaultValue }) => {
 
+  const [selectedDate, setSelectedDate] = React.useState(defaultValue);
 
-const classes = useStyles();
+  const handleDateChange = (date) => {
+    const formattedDate = format(date, 'yyyy-MM-dd');
+    select(formattedDate);
+    setSelectedDate(date);
+  };
+
+  const classes = useStyles();
 
   return (
-    <TextField
-      onChange={(event) => select(event.target.value)}
-      label={label}
-      type="date"
-      defaultValue={defaultValue}
-      InputProps={{ inputProps: { min: minDate } }}
-      className={classes.root}
-    />
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <KeyboardDatePicker
+        margin="normal"
+        id="date-picker-dialog"
+        label={label}
+        format="yyyy/MM/dd"
+        value={selectedDate}
+        onChange={handleDateChange}
+        KeyboardButtonProps={{
+          'aria-label': 'change date',
+        }}
+        minDate={new Date()}
+        className={classes.root}
+      />
+    </MuiPickersUtilsProvider>
   );
-};
+}
 
-export default SelectDate;
+export default SelectDate2
