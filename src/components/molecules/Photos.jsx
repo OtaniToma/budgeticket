@@ -1,38 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { getPlaces } from "../../reducks/flights/selectors";
-import Unsplash, { toJson } from 'unsplash-js';
-import { db } from "../../firebase";
 import { makeStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
-const Photos = () => {
-  const selector = useSelector((state) => state);
-  const places = getPlaces(selector);
+const Photos = ({ images }) => {
 
-  const [apiKey, setApiKey] = useState('');
-  const [photos, setPhotos] = useState([]);
-
-  useEffect(() => {
-    db.collection('/keys').doc('unsplash').get().then((doc) => {
-      setApiKey(doc.data().key)
-    });
-  }, [])
-
-  useEffect(() => {
-    if (places.length > 0) {
-      const city = places[0].CityName;
-      const unsplash = new Unsplash({ accessKey: apiKey });
-      unsplash.search.photos(city, 1, 10, { orientation: "portrait" })
-      .then(toJson)
-      .then(data => {
-        setPhotos(data.results)
-      });
-    }
-  }, [places])
-
-  console.log(photos)
+  console.log(images)
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,17 +24,59 @@ const Photos = () => {
       width: '100%',
       height: 'auto',
     },
+    modal: {
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    paper: {
+      backgroundColor: theme.palette.background.paper,
+      border: '2px solid #000',
+      boxShadow: theme.shadows[5],
+      padding: theme.spacing(2, 4, 3),
+    },
   }));
   const classes = useStyles();
 
+  const [open, setOpen] = useState(false);
+  const [image, setImage] = useState('');
+
+  const handleOpen = (props) => {
+    setImage(props);
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <>
-      {photos && (
+      <Modal
+        aria-labelledby="transition-modal-title"
+        aria-describedby="transition-modal-description"
+        className={classes.modal}
+        open={open}
+        onClose={handleClose}
+        closeAfterTransition
+        BackdropComponent={Backdrop}
+        BackdropProps={{
+          timeout: 500,
+        }}
+      >
+        <Fade in={open}>
+          <div className={classes.paper}>
+            <img src={image} />
+          </div>
+        </Fade>
+      </Modal>
+
+      {images && (
         <div className={classes.root}>
         <GridList cellHeight={150} className={classes.gridList} cols={2}>
-          {photos.map((photo) => (
-            <GridListTile key={photo.id} cols={1}>
-              <img src={photo.urls.thumb} alt={photo.description} />
+          {images.map((image) => (
+            <GridListTile key={image.id} cols={1} onClick={handleOpen(image.urls.regular)}>
+              <img src={image.urls.thumb} alt={image.description} />
             </GridListTile>
           ))}
         </GridList>
