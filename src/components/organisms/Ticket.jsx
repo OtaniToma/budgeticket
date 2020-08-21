@@ -63,7 +63,7 @@ const Ticket = (props) => {
       margin: theme.spacing(1),
     },
     caption: {
-      color: '#bdbdbd',
+      color: '#616161',
       lineHeight: 1.25
     }
   }));
