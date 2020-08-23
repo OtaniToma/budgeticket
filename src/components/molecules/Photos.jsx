@@ -9,7 +9,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
 const Photos = ({ images }) => {
-
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -71,6 +70,7 @@ const Photos = ({ images }) => {
 
       {images && (
         <div className={classes.root}>
+          photos
         <GridList cellHeight={150} className={classes.gridList} cols={2}>
           {images.map((image) => (
             <GridListTile key={image.id} cols={1} onClick={handleOpen(image.urls.regular)}>
