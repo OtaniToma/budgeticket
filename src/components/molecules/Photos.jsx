@@ -10,8 +10,6 @@ import Fade from '@material-ui/core/Fade';
 
 const Photos = ({ images }) => {
 
-  console.log(images)
-
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
