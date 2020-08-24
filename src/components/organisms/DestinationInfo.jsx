@@ -9,26 +9,28 @@ import { getImages } from "../../reducks/images/selectors";
 const DestinationInfo = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
-  const places = getPlaces(selector);
-  const images = getImages(selector);
+  const places = useSelector(getPlaces);
+  const images = useSelector(getImages);
 
   useEffect(() => {
     if (places.length > 0){
       const cityName = places[0].CityName;
       dispatch(searchImages(cityName));
     }
-  }, [places])
+  }, [places]);
 
-  useEffect(() => {
+  const showImages = () => {
     if (images.length > 0) {
-      console.log(images)
+      console.log(images);
+      debugger
+      return(<Photos images={images} />)
     }
-  }, [images])
+  }
 
   return (
     <>
       {/* <AirportInfo /> */}
-      {images.length > 0 && <Photos images={images} />}
+      {showImages()}
     </>
   );
 };

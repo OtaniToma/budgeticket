@@ -68,7 +68,7 @@ const Photos = ({ images }) => {
         </Fade>
       </Modal>
 
-      {images && (
+      {images.length > 0 && (
         <div className={classes.root}>
           photos
         <GridList cellHeight={150} className={classes.gridList} cols={2}>
