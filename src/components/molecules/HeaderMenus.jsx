@@ -14,34 +14,16 @@ const HeaderMenus = (props) => {
   const selector = useSelector((state) => state);
   const uid = getUserId(selector);
   const isSignedIn = getIsSignedIn(selector);
-
   const ticketsInLiked = getTicketsInLiked(selector);
 
   useEffect(() => {
-    const unsubscribe = db.collection('users').doc(uid).collection('liked')
-      .onSnapshot(snapshots => {
-        let newTicketId = [...ticketsInLiked];
-        snapshots.docChanges().forEach(change => {
-          const ticket = change.doc.data();
-          const changeType = change.type;
-
-          switch (changeType) {
-            case 'added':
-              newTicketId.push(ticket);
-              console.log(newTicketId);
-              dispatch(fetchTicketsInLiked(newTicketId));
-              break;
-            case 'removed':
-              newTicketId = ticketsInLiked.filter(item => item.likedId !== change.doc.id);
-              console.log(newTicketId);
-              dispatch(fetchTicketsInLiked(newTicketId));
-              break;
-            default:
-              break;
-          }
-        })
-      })
-    return () => unsubscribe()
+    const init = async() => {
+      const docs = await db.collection('users').doc(uid).collection('liked').get();
+      const list = [];
+      docs.forEach(doc => list.push(doc.data()));
+      dispatch(fetchTicketsInLiked(list));
+    }
+    init();
     // eslint-disable-next-line
   }, []);
 
