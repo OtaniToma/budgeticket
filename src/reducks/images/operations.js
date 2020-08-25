@@ -10,7 +10,7 @@ db.collection('/keys').doc('unsplash').get().then((doc) => {
 export const searchImages = (props) => {
   return (dispatch) => {
     const unsplash = new Unsplash({ accessKey: apiKey });
-    unsplash.search.photos(props, 1, 10, { orientation: "portrait" })
+    unsplash.search.photos(props, 1, 10)
     .then(toJson)
     .then(data => {
       dispatch(searchImagesAction(data.results));

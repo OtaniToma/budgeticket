@@ -7,6 +7,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
+import Typography from '@material-ui/core/Typography';
 
 const Photos = ({ images }) => {
   const useStyles = makeStyles((theme) => ({
@@ -32,16 +33,17 @@ const Photos = ({ images }) => {
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
     },
+    image: {
+      maxWidth: 800,
+      height: '75vh',
+      objectFit: 'contain'
+    }
   }));
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
   const [image, setImage] = useState('');
-
-  const handleOpen = (props) => {
-    setImage(props);
-    setOpen(true);
-  };
+  const [description, setDescription] = useState('');
 
   const handleClose = () => {
     setOpen(false);
@@ -63,22 +65,29 @@ const Photos = ({ images }) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <img src={image} />
+            <img src={image} className={classes.image} alt={description} />
+            <Typography variant="caption" display="block" gutterBottom>
+              {description}
+            </Typography>
           </div>
         </Fade>
       </Modal>
 
       {images.length > 0 && (
         <div className={classes.root}>
-          photos
-        <GridList cellHeight={150} className={classes.gridList} cols={2}>
-          {images.map((image) => (
-            <GridListTile key={image.id} cols={1} onClick={handleOpen(image.urls.regular)}>
-              <img src={image.urls.thumb} alt={image.description} />
-            </GridListTile>
-          ))}
-        </GridList>
-      </div>
+          <GridList cellHeight={150} className={classes.gridList} cols={2}>
+            {images.map((image) => {
+              const handleOpen = () => {
+                setImage(image.urls.regular);
+                setDescription(image.description);
+                setOpen(true);
+              }
+              return <GridListTile key={image.id} cols={1} onClick={handleOpen}>
+                <img src={image.urls.thumb} alt={image.description} />
+              </GridListTile>
+            })}
+          </GridList>
+        </div>
       )}
     </>
   );

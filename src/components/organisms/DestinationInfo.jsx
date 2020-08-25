@@ -21,8 +21,6 @@ const DestinationInfo = () => {
 
   const showImages = () => {
     if (images.length > 0) {
-      console.log(images);
-      debugger
       return(<Photos images={images} />)
     }
   }
