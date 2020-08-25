@@ -5,8 +5,6 @@ import {
   getQuotes
 } from "../../reducks/flights/selectors";
 import Map from '../atoms/Map';
-import Typography from '@material-ui/core/Typography';
-import FlightLandIcon from '@material-ui/icons/FlightLand';
 import Box from '@material-ui/core/Box';
 
 const AirportInfo = () => {
@@ -36,16 +34,6 @@ const AirportInfo = () => {
     <>
       {airport.name && <Map data={airport} />}
       <Box p={1} bgcolor="background.paper" />
-      {airport.name &&
-      <>
-        <Typography variant="subtitle2" gutterBottom>
-          {airport.name} ({airport.code})
-        </Typography>
-        <Typography variant="body1" gutterBottom>
-          {airport.city}, {airport.country}
-        </Typography>
-      </>
-    }
     </>
   );
 };
