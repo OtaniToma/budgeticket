@@ -1,15 +1,19 @@
 import React, { useState, useCallback } from "react";
+import { useSelector } from 'react-redux';
 import Ticket from '../components/organisms/Ticket';
 import AirlineLogos from '../constants/airlineLogos.json'
 import { useDispatch } from 'react-redux';
 import { push } from "connected-react-router";
 import { FirebaseTimestamp } from '../firebase/index';
-import { addTicketToLiked, confirmTicket } from '../reducks/users/operations';
+import { getUserId } from "../reducks/users/selectors";
+import { fetchTicketsInLiked, addTicketToLiked, confirmTicket } from '../reducks/users/operations';
+import { db } from '../firebase/index';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 const Tickets = (props) => {
   const dispatch = useDispatch();
+  const uid = useSelector(getUserId);
   
   const {
     carriers,
@@ -42,31 +46,16 @@ const Tickets = (props) => {
     return true;
   })
 
-
-  const _likeTicket = ({
-    id, price, currencies, direct, departAirportCode, arriveAirportCode,
-    departAirportName, arriveAirportName,
-    outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
-    outboundDepartureDate, inboundDepartureDate
-  }) => {
+  const _likeTicket = async (params) => {
     const timestamp = FirebaseTimestamp.now();
     dispatch(addTicketToLiked({
-      added_at: timestamp,
-      id: id,
-      price: price,
-      currencies: currencies,
-      direct: direct,
-      departAirportCode: departAirportCode,
-      arriveAirportCode: arriveAirportCode,
-      departAirportName: departAirportName,
-      arriveAirportName: arriveAirportName,
-      outboundCarriers: outboundCarriers,
-      inboundCarriers: inboundCarriers,
-      outboundCarriersLogo: outboundCarriersLogo,
-      inboundCarriersLogo: inboundCarriersLogo,
-      outboundDepartureDate: outboundDepartureDate,
-      inboundDepartureDate: inboundDepartureDate
+      ...params,
+      added_at: timestamp
     }))
+    const docs = await db.collection('users').doc(uid).collection('liked').get();
+    const list = [];
+    docs.forEach(doc => list.push(doc.data()));
+    dispatch(fetchTicketsInLiked(list));
   }
 
   const _confirmTicket = ({
