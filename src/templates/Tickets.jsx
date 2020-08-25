@@ -36,7 +36,6 @@ const Tickets = (props) => {
 
   carriers.map(carrier => {
     if(!airlinesWithLogo.includes(carrier.Name)) {
-      console.log(carrier.Name)
       logosToShow[carrier.Name] = 'https://images.kiwi.com/airlines/64x64/airlines.png';
     }
     return true;
