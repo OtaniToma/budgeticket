@@ -7,6 +7,8 @@ import {Formik, Form, Field} from 'formik';
 import {TextField} from 'formik-material-ui';
 import {Button, LinearProgress} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
+import Link from '@material-ui/core/Link';
+import Typography from '@material-ui/core/Typography';
 
 const validate = (values) => {
   const errors = {};
@@ -70,10 +72,15 @@ const Reset = () => {
               </Form>
             )}
           </Formik>
+          <Box mt={3}>
+            <Typography align="center">
+              <Link href="/signin" onClick={toSignIn} color="primary">
+                Back to Sign In
+              </Link>
+            </Typography>
+          </Box>
         </Box>
       </Paper>
-      &nbsp;
-      <p onClick={toSignIn}>Back to Sign In</p>
     </>
   );
 };

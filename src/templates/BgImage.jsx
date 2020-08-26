@@ -1,8 +1,5 @@
 import React from 'react';
-import SearchBar from '../components/organisms/SearchBar';
 import {makeStyles} from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 
 const bgimages = [
   'https://images.unsplash.com/photo-1593182440709-4b7b56482c55?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2048&q=80',
@@ -23,31 +20,16 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  card: {
-    background: 'rgba(255, 255, 255, 0.85)',
-    maxWidth: '90%',
-  },
-  cardContent: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
 }));
 
-const Home = () => {
+const BgImage = ({children}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Card className={classes.card}>
-        <CardContent className={classes.cardContent}>
-          <h1>Where to next?</h1>
-          <SearchBar />
-        </CardContent>
-      </Card>
+      {children}
     </div>
   );
 };
 
-export default Home;
+export default BgImage;

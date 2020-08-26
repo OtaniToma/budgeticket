@@ -1,7 +1,7 @@
 import React from 'react';
 import ResetTemplate from '../templates/Reset';
-import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
