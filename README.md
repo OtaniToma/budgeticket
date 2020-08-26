@@ -1,14 +1,19 @@
 # BudgeTicket
-BudgeTicket can find cheap flight tickets. The purpose of creating this app is to understand the basics of JavaScript and SPA development.
+BudgeTicket can find cheap flight tickets with the destination information. The purpose of creating this app is to understand the basics of JavaScript and SPA development with React.js.
 
-# DEMO
+# Demo
 [https://budgeticket.firebaseapp.com/](https://budgeticket.firebaseapp.com/)
 
 # Technology Used
 * React
-* Redux
+* Redux (re-ducks design pattern)
 * Firebase
 * Material-UI
+
+# API
+* [Skyscanner Flight Search](https://rapidapi.com/skyscanner/api/skyscanner-flight-search/details) 
+* [Google Maps](https://developers.google.com/maps/documentation) 
+* [Unsplash Image](https://unsplash.com/developers)
 
 # Installation
 
@@ -28,6 +33,18 @@ $ cd budgeticket
 
 ```bash
 $ npm i
+```
+
+4. Create .env file on root directory
+
+```.env
+# Firebase
+REACT_APP_DEV_API_KEY="****************"
+REACT_APP_DEV_MESSAGING_SENDER_ID="****************"
+REACT_APP_DEV_APP_ID="****************"
+
+# Geocoding
+REACT_APP_DEV_GEOCODING_API_KEY="****************"
 ```
 
 4. Run the app
