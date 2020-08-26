@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {push} from 'connected-react-router';
 import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
+import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import {getIsSignedIn, getUsername} from '../../reducks/users/selectors';
@@ -41,6 +42,8 @@ const Header = () => {
     setOpen(!open);
   }, [setOpen, open]);
 
+  const preventDefault = (event) => event.preventDefault();
+
   return (
     <>
       <div className={classes.root}>
@@ -51,7 +54,11 @@ const Header = () => {
               className={classes.title}
               onClick={() => dispatch(push('/'))}
             >
-              BudgeTicket
+              <Link href="#"
+                onClick={preventDefault}
+                color="inherit">
+                  BudgeTicket
+              </Link>
             </Typography>
             {isSignedIn && (
               <>

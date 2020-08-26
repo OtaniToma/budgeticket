@@ -1,20 +1,11 @@
 import React from 'react';
 import SignupTemplate from '../templates/SignUp';
-import {makeStyles} from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    marginTop: 100,
-  },
-}));
+import BgImage from '../templates/BgImage';
 
 const Signup = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <BgImage>
       <Grid container spacing={2}>
         <Grid item xs={1} md={4}>
         </Grid>
@@ -24,7 +15,7 @@ const Signup = () => {
         <Grid item xs={1} md={4}>
         </Grid>
       </Grid>
-    </div>
+    </BgImage>
   );
 };
 
