@@ -13,8 +13,11 @@ const initialState = {
     carriers: [],
     currency: [],
     places: [],
-    quotes: [],
+    quotes: []
   },
+  images: {
+    data: []
+  }
 };
 
 export default initialState;

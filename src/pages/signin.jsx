@@ -1,13 +1,13 @@
-import React from "react";
-import SigninTemplate from "../templates/SignIn";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import React from 'react';
+import SigninTemplate from '../templates/SignIn';
+import {makeStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 100
-  }
+    marginTop: 100,
+  },
 }));
 
 const Signin = () => {

@@ -1,22 +1,22 @@
-import React from "react";
-import Divider from "@material-ui/core/Divider";
-import Drawer from "@material-ui/core/Drawer";
-import List from "@material-ui/core/list";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import HomeIcon from "@material-ui/icons/Home";
-import FavoriteIcon from "@material-ui/icons/Favorite";
+import React from 'react';
+import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
+import List from '@material-ui/core/list';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import HomeIcon from '@material-ui/icons/Home';
+import FavoriteIcon from '@material-ui/icons/Favorite';
 import FlightTakeoffIcon from '@material-ui/icons/FlightTakeoff';
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import { makeStyles } from "@material-ui/styles";
-import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
-import { signOut } from "../../reducks/users/operations";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import {makeStyles} from '@material-ui/styles';
+import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router';
+import {signOut} from '../../reducks/users/operations';
 
 const useStyles = makeStyles((theme) => ({
   drawer: {
-    [theme.breakpoints.up("sm")]: {
+    [theme.breakpoints.up('sm')]: {
       flexShrink: 0,
       width: 256,
     },
@@ -26,15 +26,15 @@ const useStyles = makeStyles((theme) => ({
     width: 256,
   },
   searchField: {
-    alignItems: "center",
-    display: "flex",
+    alignItems: 'center',
+    display: 'flex',
     marginLeft: 32,
   },
 }));
 
 const ClosableDrawer = (props) => {
   const classes = useStyles();
-  const { container } = props;
+  const {container} = props;
   const dispatch = useDispatch();
 
   const selectMenu = (event, path) => {
@@ -45,24 +45,24 @@ const ClosableDrawer = (props) => {
   const menus = [
     {
       func: selectMenu,
-      label: "Home",
+      label: 'Home',
       icon: <HomeIcon />,
-      id: "home",
-      value: "/",
+      id: 'home',
+      value: '/',
     },
     {
       func: selectMenu,
-      label: "Liked Tickets",
+      label: 'Liked Tickets',
       icon: <FavoriteIcon />,
-      id: "liked",
-      value: "/user/liked",
+      id: 'liked',
+      value: '/user/liked',
     },
     {
       func: selectMenu,
-      label: "Booked Tickets",
+      label: 'Booked Tickets',
       icon: <FlightTakeoffIcon />,
-      id: "liked",
-      value: "/user/booked",
+      id: 'liked',
+      value: '/user/booked',
     },
   ];
 
@@ -76,8 +76,8 @@ const ClosableDrawer = (props) => {
         anchor="right"
         open={props.open}
         onClose={props.onClose}
-        classes={{ paper: classes.drawerPaper }}
-        ModalProps={{ keepMounted: true }}
+        classes={{paper: classes.drawerPaper}}
+        ModalProps={{keepMounted: true}}
       >
         <div onClose={props.onClose}>
           <Divider />
@@ -96,7 +96,7 @@ const ClosableDrawer = (props) => {
               <ListItemIcon>
                 <ExitToAppIcon />
               </ListItemIcon>
-              <ListItemText primary={"Sign Out"} />
+              <ListItemText primary={'Sign Out'} />
             </ListItem>
           </List>
         </div>

@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { searchFlights } from "../../reducks/flights/operations";
-import { Button } from "../atoms";
-import { SelectBox, SelectDate, SelectAirport } from "../atoms";
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
+import {searchFlights} from '../../reducks/flights/operations';
+import {Button} from '../atoms';
+import {SelectBox, SelectDate, SelectAirport} from '../atoms';
+import {makeStyles} from '@material-ui/core/styles';
 import AirportsData from 'airport-data';
 import CurrencyCodes from 'currency-codes';
 import moment from 'moment';
@@ -16,32 +16,32 @@ const SearchBar = () => {
   const dispatch = useDispatch();
 
   // Default values
-  const yvr = AirportsData.filter(airport => airport.iata === 'YVR')[0],
-        sfo = AirportsData.filter(airport => airport.iata === 'SFO')[0];
+  const yvr = AirportsData.filter((airport) => airport.iata === 'YVR')[0];
+  const sfo = AirportsData.filter((airport) => airport.iata === 'SFO')[0];
 
-  const [originAirport, setOriginAirport] = useState("YVR"),
-        [destinationAirport, setDestinationAirport] = useState("SFO");
+  const [originAirport, setOriginAirport] = useState('YVR');
+  const [destinationAirport, setDestinationAirport] = useState('SFO');
 
-  const [currency, setCurrency] = useState("CAD");
+  const [currency, setCurrency] = useState('CAD');
 
-  const aWeekLater = moment().add(1, 'week').format().substring(0, 10),
-        twoWeeksLater = moment().add(2, 'weeks').format().substring(0, 10);
+  const aWeekLater = moment().add(1, 'week').format().substring(0, 10);
+  const twoWeeksLater = moment().add(2, 'weeks').format().substring(0, 10);
 
-  const [departDate, setDepartDate] = useState(aWeekLater),
-        [returnDate, setReturnDate] = useState(twoWeeksLater);
+  const [departDate, setDepartDate] = useState(aWeekLater);
+  const [returnDate, setReturnDate] = useState(twoWeeksLater);
 
   // Validation
   useEffect(() => {
     if (returnDate <= departDate) {
       showError('Departure date must be before than the return date.');
     }
-  }, [departDate, returnDate])
+  }, [departDate, returnDate]);
 
   useEffect(() => {
     if (originAirport === destinationAirport) {
       showError('Origin and destination must be different.');
     }
-  }, [originAirport, destinationAirport])
+  }, [originAirport, destinationAirport]);
 
   // Search
   const search = () => {
@@ -54,21 +54,21 @@ const SearchBar = () => {
       return false;
     }
     dispatch(
-      searchFlights({
-        originAirport,
-        destinationAirport,
-        currency,
-        departDate,
-        returnDate,
-        showError
-      })
-    )
-  }
+        searchFlights({
+          originAirport,
+          destinationAirport,
+          currency,
+          departDate,
+          returnDate,
+          showError,
+        }),
+    );
+  };
 
   // Error Message
   const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  };
 
   const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
@@ -76,7 +76,7 @@ const SearchBar = () => {
   const showError = (props) => {
     setMessage(props);
     setOpen(true);
-  }
+  };
 
   const closeError = () => {
     setOpen(false);
@@ -88,7 +88,7 @@ const SearchBar = () => {
       flexGrow: 1,
     },
     container: {
-      maxWidth: 1024
+      maxWidth: 1024,
     },
   }));
   const classes = useStyles();
@@ -136,8 +136,8 @@ const SearchBar = () => {
           <Grid item xs={12} sm={6} md={8}>
             <Box mx="auto" p={2}>
               <Button onClick={search}
-                label={"Search"}
-                color={"primary"}
+                label={'Search'}
+                color={'primary'}
               />
             </Box>
           </Grid>

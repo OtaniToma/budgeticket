@@ -1,53 +1,52 @@
-import React, { useState, useCallback } from "react";
+import React, {useState, useCallback} from 'react';
 import Ticket from '../components/organisms/Ticket';
-import AirlineLogos from '../constants/airlineLogos.json'
-import { useDispatch } from 'react-redux';
-import { push } from "connected-react-router";
-import { FirebaseTimestamp } from '../firebase/index';
-import { addTicketToLiked, confirmTicket } from '../reducks/users/operations';
+import AirlineLogos from '../constants/airlineLogos.json';
+import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router';
+import {FirebaseTimestamp} from '../firebase/index';
+import {addTicketToLiked, confirmTicket} from '../reducks/users/operations';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 
 const Tickets = (props) => {
   const dispatch = useDispatch();
-  
+
   const {
     carriers,
     currencies,
     places,
-    quotes
+    quotes,
   } = props;
 
   const carriersToShow = {};
-  carriers.forEach(carrier => {
+  carriers.forEach((carrier) => {
     carriersToShow[carrier.CarrierId] = carrier.Name;
   });
 
   const logosToShow = {};
   const airlinesWithLogo = [];
-  carriers.forEach(carrier => {
-    AirlineLogos.forEach(airline => {
+  carriers.forEach((carrier) => {
+    AirlineLogos.forEach((airline) => {
       if (carrier.Name === airline.name) {
         logosToShow[carrier.Name] = airline.logo;
         airlinesWithLogo.push(carrier.Name);
       }
-    })
+    });
   });
 
-  carriers.map(carrier => {
-    if(!airlinesWithLogo.includes(carrier.Name)) {
-      console.log(carrier.Name)
+  carriers.map((carrier) => {
+    if (!airlinesWithLogo.includes(carrier.Name)) {
       logosToShow[carrier.Name] = 'https://images.kiwi.com/airlines/64x64/airlines.png';
     }
     return true;
-  })
+  });
 
 
   const _likeTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
-    outboundDepartureDate, inboundDepartureDate
+    outboundDepartureDate, inboundDepartureDate,
   }) => {
     const timestamp = FirebaseTimestamp.now();
     dispatch(addTicketToLiked({
@@ -65,15 +64,15 @@ const Tickets = (props) => {
       outboundCarriersLogo: outboundCarriersLogo,
       inboundCarriersLogo: inboundCarriersLogo,
       outboundDepartureDate: outboundDepartureDate,
-      inboundDepartureDate: inboundDepartureDate
-    }))
-  }
+      inboundDepartureDate: inboundDepartureDate,
+    }));
+  };
 
   const _confirmTicket = ({
     id, price, currencies, direct, departAirportCode, arriveAirportCode,
     departAirportName, arriveAirportName,
     outboundCarriers, inboundCarriers, outboundCarriersLogo, inboundCarriersLogo,
-    outboundDepartureDate, inboundDepartureDate
+    outboundDepartureDate, inboundDepartureDate,
   }) => {
     const timestamp = FirebaseTimestamp.now();
     dispatch(confirmTicket({
@@ -91,21 +90,22 @@ const Tickets = (props) => {
       outboundCarriersLogo: outboundCarriersLogo,
       inboundCarriersLogo: inboundCarriersLogo,
       outboundDepartureDate: outboundDepartureDate,
-      inboundDepartureDate: inboundDepartureDate
-    }))
-  }
+      inboundDepartureDate: inboundDepartureDate,
+    }));
+  };
 
   // Message
-  const toLikedList = useCallback(() => dispatch(push('/user/liked')), [dispatch]);
+  const toLikedList = useCallback(() =>
+    dispatch(push('/user/liked')), [dispatch]);
 
   const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  };
   const [open, setOpen] = useState(false);
 
   const showMessage = (props) => {
     setOpen(true);
-  }
+  };
 
   const closeMessage = () => {
     setOpen(false);
@@ -137,7 +137,7 @@ const Tickets = (props) => {
               showMessage={showMessage}
               closeMessage={closeMessage}
             />
-          )
+          );
         })
       }
 

@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/styles'
-import { getTicketsInBooked, getUserId } from '../reducks/users/selectors'
+import React, {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {makeStyles} from '@material-ui/styles';
+import {getTicketsInBooked, getUserId} from '../reducks/users/selectors';
 import Ticket from '../components/organisms/Ticket';
-import Grid from "@material-ui/core/Grid";
-import { db } from "../firebase";
-import { fetchTicketsInBooked } from '../reducks/users/operations';
+import Grid from '@material-ui/core/Grid';
+import {db} from '../firebase';
+import {fetchTicketsInBooked} from '../reducks/users/operations';
+import NotFound from '../components/organisms/NotFound';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     margin: '100px auto 0 auto',
     maxWidth: 1024,
-    padding: '0 5px'
-  }
+    padding: '0 5px',
+  },
 }));
 
 const BookedList = () => {
@@ -26,25 +27,26 @@ const BookedList = () => {
   useEffect(() => {
     let ticketsInBooked = getTicketsInBooked(selector);
     const unsubscribe = db.collection('users').doc(uid).collection('booked')
-      .onSnapshot(snapshots => {
-        snapshots.docChanges().forEach(change => {
-          const ticket = change.doc.data();
-          const changeType = change.type;
+        .onSnapshot((snapshots) => {
+          snapshots.docChanges().forEach((change) => {
+            const ticket = change.doc.data();
+            const changeType = change.type;
 
-          switch (changeType) {
-            case 'added':
-              ticketsInBooked.push(ticket);
-              break;
-            case 'removed':
-              ticketsInBooked = ticketsInBooked.filter(ticket => ticket.bookedId !== change.doc.id);
-              break;
-            default:
-              break;
-          }
-        })
-        dispatch(fetchTicketsInBooked(ticketsInBooked));
-      })
-    return () => unsubscribe()
+            switch (changeType) {
+              case 'added':
+                ticketsInBooked.push(ticket);
+                break;
+              case 'removed':
+                ticketsInBooked = ticketsInBooked.filter((ticket) =>
+                  ticket.bookedId !== change.doc.id);
+                break;
+              default:
+                break;
+            }
+          });
+          dispatch(fetchTicketsInBooked(ticketsInBooked));
+        });
+    return () => unsubscribe();
     // eslint-disable-next-line
   }, []);
 
@@ -59,7 +61,7 @@ const BookedList = () => {
           <Grid item xs={12} md={7}>
             <h2>Booked Tickets</h2>
             {ticketsInBooked.length > 0 && (
-              ticketsInBooked.map(ticket =>
+              ticketsInBooked.map((ticket) =>
                 <>
                   <Ticket
                     key={ticket.bookedId}
@@ -81,16 +83,17 @@ const BookedList = () => {
                     addTicket={false}
                   />
                   {ticket.passenger}
-                </>
+                </>,
               )
             )}
+            {ticketsInBooked.length === 0 && <NotFound />}
           </Grid>
           <Grid item xs={12} md={3}>
           </Grid>
         </Grid>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default BookedList
+export default BookedList;

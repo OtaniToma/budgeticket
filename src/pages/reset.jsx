@@ -1,18 +1,18 @@
-import React from "react";
-import ResetTemplate from "../templates/Reset";
-import { makeStyles } from "@material-ui/core/styles";
-import Grid from "@material-ui/core/Grid";
+import React from 'react';
+import ResetTemplate from '../templates/Reset';
+import {makeStyles} from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    marginTop: 100
-  }
+    marginTop: 100,
+  },
 }));
 
 const Reset = () => {
   const classes = useStyles();
-  
+
   return (
     <div className={classes.root}>
       <Grid container spacing={2}>

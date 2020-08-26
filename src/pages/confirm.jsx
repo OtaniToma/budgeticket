@@ -1,6 +1,6 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import ConfirmTemplate from "../templates/Confirm";
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import ConfirmTemplate from '../templates/Confirm';
 
 const Confirm = () => {
   const useStyles = makeStyles({

@@ -1,13 +1,12 @@
-import React, { useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
-import { signIn } from "../reducks/users/operations";
+import React, {useCallback} from 'react';
+import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router';
+import {signIn} from '../reducks/users/operations';
 import Box from '@material-ui/core/Box';
-import { Formik, Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { Button, LinearProgress } from '@material-ui/core';
+import {Formik, Form, Field} from 'formik';
+import {TextField} from 'formik-material-ui';
+import {Button, LinearProgress} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
-import { Typography } from '@material-ui/core';
 
 const validate = (values) => {
   const errors = {};
@@ -22,21 +21,22 @@ const validate = (values) => {
     errors.password = 'Required';
   }
   return errors;
-}
+};
 
-const initialValues = { 
+const initialValues = {
   email: 'budgeticket@gmail.com',
-  password: 'foobar'
+  password: 'foobar',
 };
 
 const SignIn = () => {
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback((values, { setSubmitting }) => {
+  const onSubmit = useCallback((values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
       dispatch(signIn(values.email, values.password));
-    }, 500)}, [dispatch]
+    }, 500);
+  }, [dispatch],
   );
 
   const toSignUp = useCallback(() => dispatch(push('/signup')), [dispatch]);
@@ -52,7 +52,7 @@ const SignIn = () => {
             validate={validate}
             onSubmit={onSubmit}
           >
-            {({ submitForm, isSubmitting }) => (
+            {({submitForm, isSubmitting}) => (
               <Form>
                 <Field
                   component={TextField}

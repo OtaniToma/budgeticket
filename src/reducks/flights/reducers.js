@@ -1,5 +1,5 @@
-import * as Actions from "./actions";
-import initialState from "../initialState";
+import * as Actions from './actions';
+import initialState from '../initialState';
 
 export const FlightsReducer = (state = initialState.flights, action) => {
   switch (action.type) {
