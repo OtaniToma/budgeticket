@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { makeStyles } from '@material-ui/styles'
-import { getConfirmTicket } from '../reducks/users/selectors'
+import React, {useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {makeStyles} from '@material-ui/styles';
+import {getConfirmTicket} from '../reducks/users/selectors';
 import Ticket from '../components/organisms/Ticket';
-import Grid from "@material-ui/core/Grid";
-import { Button } from "../components/atoms";
-import { bookTicket } from '../reducks/users/operations';
-import { TextInput } from '../components/atoms';
-import { getUsername } from "../reducks/users/selectors";
+import Grid from '@material-ui/core/Grid';
+import {Button} from '../components/atoms';
+import {bookTicket} from '../reducks/users/operations';
+import {TextInput} from '../components/atoms';
+import {getUsername} from '../reducks/users/selectors';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
-import { push } from "connected-react-router";
+import {push} from 'connected-react-router';
 import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     margin: '100px auto 0 auto',
     maxWidth: 1024,
-    padding: '0 5px'
-  }
+    padding: '0 5px',
+  },
 }));
 
 const Confirm = () => {
@@ -40,7 +40,7 @@ const Confirm = () => {
 
   const changePassengerName = (props) => {
     setPassenger(props);
-  }
+  };
 
   const _bookTicket = (ticket) => {
     dispatch(bookTicket(ticket));
@@ -48,12 +48,12 @@ const Confirm = () => {
     setTimeout(() => {
       dispatch(push('/user/booked'));
     }, 2000);
-  }
+  };
 
   // Alert
   const Alert = (props) => {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
-  }
+  };
 
   const [alert, setAlert] = useState('');
   const [open, setOpen] = useState(false);
@@ -61,7 +61,7 @@ const Confirm = () => {
   const showAlert = (props) => {
     setAlert(props);
     setOpen(true);
-  }
+  };
 
   const closeAlert = () => {
     setOpen(false);
@@ -102,8 +102,8 @@ const Confirm = () => {
             <Box p={2} />
             <Button
               onClick={() => _bookTicket(ticket)}
-              label={"Book"}
-              color={"primary"}
+              label={'Book'}
+              color={'primary'}
             />
           </Grid>
           <Grid item xs={12} md={3}>
@@ -117,7 +117,7 @@ const Confirm = () => {
         </Alert>
       </Snackbar>
     </>
-  )
-}
+  );
+};
 
-export default Confirm
+export default Confirm;

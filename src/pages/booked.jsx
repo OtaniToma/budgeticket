@@ -1,6 +1,6 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import BookedList from "../templates/Booked";
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import BookedList from '../templates/Booked';
 
 const Booked = () => {
   const useStyles = makeStyles({

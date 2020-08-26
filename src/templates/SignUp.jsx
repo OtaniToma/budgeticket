@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
-import { signUp } from "../reducks/users/operations";
-import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
+import React, {useCallback} from 'react';
+import {signUp} from '../reducks/users/operations';
+import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router';
 import Box from '@material-ui/core/Box';
-import { Formik, Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { Button, LinearProgress } from '@material-ui/core';
+import {Formik, Form, Field} from 'formik';
+import {TextField} from 'formik-material-ui';
+import {Button, LinearProgress} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 
 const validate = (values) => {
@@ -33,24 +33,25 @@ const validate = (values) => {
     errors.confirmPassword = 'The password and confirm password fields do not match.';
   }
   return errors;
-}
+};
 
 const initialValues = {
   username: '',
   email: '',
   password: '',
-  confirmPassword: ''
-}
+  confirmPassword: '',
+};
 
 const SignUp = () => {
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback((values, { setSubmitting }) => {
+  const onSubmit = useCallback((values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
-      dispatch(signUp(values.username, values.email, values.password, values.confirmPassword));
-    }, 500)
-  }, [dispatch]
+      dispatch(signUp(values.username, values.email,
+          values.password, values.confirmPassword));
+    }, 500);
+  }, [dispatch],
   );
 
   const toSignIn = useCallback(() => dispatch(push('/signin')), [dispatch]);
@@ -65,7 +66,7 @@ const SignUp = () => {
             validate={validate}
             onSubmit={onSubmit}
           >
-            {({ submitForm, isSubmitting }) => (
+            {({submitForm, isSubmitting}) => (
               <Form>
                 <Field
                   component={TextField}
@@ -119,7 +120,7 @@ const SignUp = () => {
                   onClick={submitForm}
                 >
                   Submit
-          </Button>
+                </Button>
               </Form>
             )}
           </Formik>

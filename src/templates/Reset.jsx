@@ -1,11 +1,11 @@
-import React, { useCallback } from "react";
-import { resetPassword } from "../reducks/users/operations";
-import { useDispatch } from "react-redux";
-import { push } from "connected-react-router";
+import React, {useCallback} from 'react';
+import {resetPassword} from '../reducks/users/operations';
+import {useDispatch} from 'react-redux';
+import {push} from 'connected-react-router';
 import Box from '@material-ui/core/Box';
-import { Formik, Form, Field } from 'formik';
-import { TextField } from 'formik-material-ui';
-import { Button, LinearProgress } from '@material-ui/core';
+import {Formik, Form, Field} from 'formik';
+import {TextField} from 'formik-material-ui';
+import {Button, LinearProgress} from '@material-ui/core';
 import Paper from '@material-ui/core/Paper';
 
 const validate = (values) => {
@@ -18,18 +18,19 @@ const validate = (values) => {
     errors.email = 'Invalid email address';
   }
   return errors;
-}
+};
 
-const initialValues = { email: '' };
+const initialValues = {email: ''};
 
 const Reset = () => {
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback((values, { setSubmitting }) => {
+  const onSubmit = useCallback((values, {setSubmitting}) => {
     setTimeout(() => {
       setSubmitting(false);
       dispatch(resetPassword(values.email));
-    }, 500)}, [dispatch]
+    }, 500);
+  }, [dispatch],
   );
 
   const toSignIn = useCallback(() => dispatch(push('/signin')), [dispatch]);
@@ -44,7 +45,7 @@ const Reset = () => {
             validate={validate}
             onSubmit={onSubmit}
           >
-            {({ submitForm, isSubmitting }) => (
+            {({submitForm, isSubmitting}) => (
               <Form>
                 <Field
                   component={TextField}

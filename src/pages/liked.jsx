@@ -1,6 +1,6 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
-import LikedList from "../templates/Liked";
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
+import LikedList from '../templates/Liked';
 
 const Liked = () => {
   const useStyles = makeStyles({
