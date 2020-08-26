@@ -32,16 +32,15 @@ const Photos = ({ images }) => {
       padding: theme.spacing(2, 4, 3),
     },
     image: {
-      maxWidth: 800,
-      height: '75vh',
+      maxWidth: '75vw',
+      maxHeight: '75vh',
       objectFit: 'contain'
     }
   }));
   const classes = useStyles();
 
   const [open, setOpen] = useState(false);
-  const [image, setImage] = useState('');
-  const [description, setDescription] = useState('');
+  const [imageInfo, setImageInfo] = useState({});
 
   const handleClose = () => {
     setOpen(false);
@@ -63,9 +62,9 @@ const Photos = ({ images }) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <img src={image} className={classes.image} alt={description} />
+            <img src={imageInfo.url} className={classes.image} alt={imageInfo.altDescription} onClick={handleClose} />
             <Typography variant="caption" display="block" gutterBottom>
-              {description}
+              {imageInfo.description}
             </Typography>
           </div>
         </Fade>
@@ -76,8 +75,11 @@ const Photos = ({ images }) => {
           <GridList cellHeight={150} className={classes.gridList} cols={2}>
             {images.map((image) => {
               const handleOpen = () => {
-                setImage(image.urls.regular);
-                setDescription(image.description);
+                setImageInfo({
+                  url: image.urls.regular,
+                  description: image.description,
+                  altDescription: image.alt_description
+                })
                 setOpen(true);
               }
               return <GridListTile key={image.id} cols={1} onClick={handleOpen}>
