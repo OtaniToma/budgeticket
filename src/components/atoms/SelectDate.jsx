@@ -6,16 +6,15 @@ import {
 } from '@material-ui/pickers';
 import format from 'date-fns/format';
 import 'date-fns';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 160,
-  }
+  },
 });
 
-const SelectDate2 = ({ select, label, defaultValue }) => {
-
+const SelectDate2 = ({select, label, defaultValue}) => {
   const [selectedDate, setSelectedDate] = React.useState(defaultValue);
 
   const handleDateChange = (date) => {
@@ -43,6 +42,6 @@ const SelectDate2 = ({ select, label, defaultValue }) => {
       />
     </MuiPickersUtilsProvider>
   );
-}
+};
 
-export default SelectDate2
+export default SelectDate2;

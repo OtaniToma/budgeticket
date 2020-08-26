@@ -1,13 +1,13 @@
-import React from "react";
-import TextField from "@material-ui/core/TextField";
-import MenuItem from "@material-ui/core/MenuItem";
+import React from 'react';
+import TextField from '@material-ui/core/TextField';
+import MenuItem from '@material-ui/core/MenuItem';
 
 const SelectBox = (props) => {
   const {
     value,
     options,
     select,
-    label
+    label,
   } = props;
 
   return (

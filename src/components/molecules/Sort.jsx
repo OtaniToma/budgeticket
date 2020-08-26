@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
@@ -16,10 +16,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Sort = (props) => {
-
   const {
     sortType,
-    onChangeSortType
+    onChangeSortType,
   } = props;
 
   const classes = useStyles();

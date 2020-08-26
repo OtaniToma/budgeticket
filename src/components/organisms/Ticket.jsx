@@ -1,20 +1,19 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 import ArrowRightAltIcon from '@material-ui/icons/ArrowRightAlt';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import DeleteIcon from '@material-ui/icons/Delete';
-import Divider from "@material-ui/core/Divider";
+import Divider from '@material-ui/core/Divider';
 import './Ticket.scss';
-import { getIsSignedIn } from "../../reducks/users/selectors";
-import { Button } from "../atoms";
+import {getIsSignedIn} from '../../reducks/users/selectors';
+import {Button} from '../atoms';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 
 
 const Ticket = (props) => {
-
   const {
     price,
     currencies,
@@ -32,31 +31,31 @@ const Ticket = (props) => {
     likeTicket,
     deleteTicket,
     confirmTicket,
-    showMessage
+    showMessage,
   } = props;
 
   const selector = useSelector((state) => state);
   const isSignedIn = getIsSignedIn(selector);
 
-  const [liked, setLiked] = useState(false)
+  const [liked, setLiked] = useState(false);
 
   const _likeTicket = () => {
     if (liked) {
       return false;
     }
-    likeTicket(props)
-    setLiked(true)
-    showMessage()
-  }
+    likeTicket(props);
+    setLiked(true);
+    showMessage();
+  };
 
   const _deleteTicket = () => {
-    deleteTicket(props)
-    setLiked(false)
-  }
+    deleteTicket(props);
+    setLiked(false);
+  };
 
   const _confirmTicket = () => {
-    confirmTicket(props)
-  }
+    confirmTicket(props);
+  };
 
   const useStyles = makeStyles((theme) => ({
     margin: {
@@ -64,13 +63,13 @@ const Ticket = (props) => {
     },
     caption: {
       color: '#616161',
-      lineHeight: 1.25
-    }
+      lineHeight: 1.25,
+    },
   }));
   const classes = useStyles();
 
   return (
-    <div className={"ticket"}>
+    <div className={'ticket'}>
       <div className="ticket__container">
         <div className="ticket__left">
           <div className="left__container">
@@ -91,7 +90,7 @@ const Ticket = (props) => {
                   </span>
                 </div>
                 <div className="arrow">
-                  <ArrowRightAltIcon style={{ fill: 'darkgrey', fontSize: 16 }} />
+                  <ArrowRightAltIcon style={{fill: 'darkgrey', fontSize: 16}} />
                 </div>
                 <div className="arrAirport">
                   <span className="arrAirport__iata">
@@ -118,7 +117,7 @@ const Ticket = (props) => {
                   </span>
                 </div>
                 <div className="arrow">
-                  <ArrowRightAltIcon style={{ fill: 'darkgrey', fontSize: 16 }} />
+                  <ArrowRightAltIcon style={{fill: 'darkgrey', fontSize: 16}} />
                 </div>
                 <div className="arrAirport">
                   <span className="arrAirport__iata">
@@ -136,7 +135,7 @@ const Ticket = (props) => {
           <div className="ticket__punchline__top"></div>
           <div className="ticket__punchline__bottom"></div>
         </div>
-        <div className={direct ? "ticket__right non-stop" : "ticket__right with-stop"}>
+        <div className={direct ? 'ticket__right non-stop' : 'ticket__right with-stop'}>
           <span className="ticket__right__price">
             {currencies.Symbol} {price}
           </span>
@@ -145,14 +144,15 @@ const Ticket = (props) => {
             <>
               <Divider />
               <Button
-                label={"Select"}
-                color={"primary"}
-                size={"small"}
-                variant={"outlined"}
+                label={'Select'}
+                color={'primary'}
+                size={'small'}
+                variant={'outlined'}
                 endIcon={<ArrowForwardIosIcon />}
                 disabled
               />
-              <Typography className={classes.caption} variant="caption" display="block" gutterBottom>
+              <Typography className={classes.caption} variant="caption"
+                display="block" gutterBottom>
                 Ticket will be available after sign in
               </Typography>
             </>}
@@ -161,22 +161,25 @@ const Ticket = (props) => {
             <>
               <Divider />
               <Button onClick={_confirmTicket}
-                label={"Select"}
-                color={"primary"}
-                size={"small"}
-                variant={"outlined"}
+                label={'Select'}
+                color={'primary'}
+                size={'small'}
+                variant={'outlined'}
                 endIcon={<ArrowForwardIosIcon />}
               />
             </>}
 
           {isSignedIn && likeTicket && <div className="ticket__right__icon">
-            <IconButton aria-label="like" className={classes.margin} size="medium" onClick={_likeTicket}>
-              <FavoriteIcon fontSize="inherit" color={liked ? 'secondary' : 'disabled'} />
+            <IconButton aria-label="like" className={classes.margin}
+              size="medium" onClick={_likeTicket}>
+              <FavoriteIcon fontSize="inherit"
+                color={liked ? 'secondary' : 'disabled'} />
             </IconButton>
           </div>}
 
           {deleteTicket && <div className="ticket__right__icon">
-            <IconButton aria-label="delete" className={classes.margin} size="medium" onClick={_deleteTicket}>
+            <IconButton aria-label="delete" className={classes.margin}
+              size="medium" onClick={_deleteTicket}>
               <DeleteIcon fontSize="inherit" />
             </IconButton>
           </div>}

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React, {useState} from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import Modal from '@material-ui/core/Modal';
@@ -7,7 +7,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Typography from '@material-ui/core/Typography';
 
-const Photos = ({ images }) => {
+const Photos = ({images}) => {
   const useStyles = makeStyles((theme) => ({
     root: {
       display: 'flex',
@@ -34,8 +34,8 @@ const Photos = ({ images }) => {
     image: {
       maxWidth: '75vw',
       maxHeight: '75vh',
-      objectFit: 'contain'
-    }
+      objectFit: 'contain',
+    },
   }));
   const classes = useStyles();
 
@@ -62,7 +62,8 @@ const Photos = ({ images }) => {
       >
         <Fade in={open}>
           <div className={classes.paper}>
-            <img src={imageInfo.url} className={classes.image} alt={imageInfo.altDescription} onClick={handleClose} />
+            <img src={imageInfo.url} className={classes.image}
+              alt={imageInfo.altDescription} onClick={handleClose} />
             <Typography variant="caption" display="block" gutterBottom>
               {imageInfo.description}
             </Typography>
@@ -78,13 +79,13 @@ const Photos = ({ images }) => {
                 setImageInfo({
                   url: image.urls.regular,
                   description: image.description,
-                  altDescription: image.alt_description
-                })
+                  altDescription: image.alt_description,
+                });
                 setOpen(true);
-              }
+              };
               return <GridListTile key={image.id} cols={1} onClick={handleOpen}>
                 <img src={image.urls.thumb} alt={image.description} />
-              </GridListTile>
+              </GridListTile>;
             })}
           </GridList>
         </div>

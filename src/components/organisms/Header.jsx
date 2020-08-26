@@ -1,13 +1,13 @@
-import React, { useState, useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { push } from "connected-react-router";
-import { makeStyles } from "@material-ui/core/styles";
-import AppBar from "@material-ui/core/AppBar";
-import Typography from "@material-ui/core/Typography";
-import Toolbar from "@material-ui/core/Toolbar";
-import { getIsSignedIn, getUsername } from "../../reducks/users/selectors";
-import HeaderMenus from "../molecules/HeaderMenus";
-import Drawer from "./Drawer";
+import React, {useState, useCallback} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+import {push} from 'connected-react-router';
+import {makeStyles} from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Typography from '@material-ui/core/Typography';
+import Toolbar from '@material-ui/core/Toolbar';
+import {getIsSignedIn, getUsername} from '../../reducks/users/selectors';
+import HeaderMenus from '../molecules/HeaderMenus';
+import Drawer from './Drawer';
 import Button from '../atoms/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,18 +31,15 @@ const Header = () => {
 
   const [open, setOpen] = useState(false);
 
-  const handleDrawerToggle = useCallback(
-    (event) => {
-      if (
-        event.type === "keydown" &&
-        (event.key === "Tab" || event.key === "Shift")
-      ) {
-        return;
-      }
-      setOpen(!open);
-    },
-    [setOpen, open]
-  );
+  const handleDrawerToggle = useCallback((event) => {
+    if (
+      event.type === 'keydown' &&
+    (event.key === 'Tab' || event.key === 'Shift')
+    ) {
+      return;
+    }
+    setOpen(!open);
+  }, [setOpen, open]);
 
   return (
     <>
@@ -52,10 +49,10 @@ const Header = () => {
             <Typography
               variant="h6"
               className={classes.title}
-              onClick={() => dispatch(push("/"))}
+              onClick={() => dispatch(push('/'))}
             >
               BudgeTicket
-          </Typography>
+            </Typography>
             {isSignedIn && (
               <>
                 <div className={classes.iconButtons}>
@@ -70,13 +67,12 @@ const Header = () => {
               <Button
                 color={'default'}
                 label={'Sign In'}
-                onClick={() => dispatch(push("/signin"))}
+                onClick={() => dispatch(push('/signin'))}
               />
             }
           </Toolbar>
         </AppBar>
       </div>
-
       <Drawer open={open} onClose={handleDrawerToggle} />
     </>
   );

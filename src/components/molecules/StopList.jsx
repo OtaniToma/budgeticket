@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const StopList = ({ quotes, filterStops }) => {
+const StopList = ({filterStops}) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState([]);
 
@@ -33,20 +33,20 @@ const StopList = ({ quotes, filterStops }) => {
   };
 
   return (
-    <>
     <List className={classes.root}>
       {['Non-stop', 'With Stop(s)'].map((value) => {
         const labelId = `checkbox-list-label-${value}`;
 
         return (
-          <ListItem key={value} role={undefined} dense button onClick={handleToggle(value)}>
+          <ListItem key={value} role={undefined} dense button
+            onClick={handleToggle(value)}>
             <ListItemIcon>
               <Checkbox
                 edge="start"
                 checked={checked.indexOf(value) !== -1}
                 tabIndex={-1}
                 disableRipple
-                inputProps={{ 'aria-labelledby': labelId }}
+                inputProps={{'aria-labelledby': labelId}}
               />
             </ListItemIcon>
             <ListItemText id={labelId} primary={`${value}`} />
@@ -54,7 +54,6 @@ const StopList = ({ quotes, filterStops }) => {
         );
       })}
     </List>
-    </>
   );
 };
 

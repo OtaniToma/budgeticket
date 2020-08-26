@@ -1,5 +1,5 @@
-import React from "react";
-import { makeStyles } from '@material-ui/styles';
+import React from 'react';
+import {makeStyles} from '@material-ui/styles';
 import CardTravelIcon from '@material-ui/icons/CardTravel';
 import Typography from '@material-ui/core/Typography';
 
@@ -10,8 +10,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    alignItems: 'center'
-  }
+    alignItems: 'center',
+  },
 }));
 
 const NotFound = () => {

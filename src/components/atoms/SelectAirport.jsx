@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import AirportsData from 'airport-data';
@@ -7,7 +7,7 @@ const AutocompleteInput = (props) => {
   const {
     select,
     label,
-    defaultValue
+    defaultValue,
   } = props;
 
   const onTagsChange = (event, values) => {
@@ -15,8 +15,8 @@ const AutocompleteInput = (props) => {
       return false;
     }
     select(values.iata);
-  }
-  
+  };
+
   return (
     <Autocomplete
       id="combo-box-demo"
@@ -27,7 +27,7 @@ const AutocompleteInput = (props) => {
       onChange={onTagsChange}
       autoComplete={true}
       autoHighlight={true}
-      style={{ width: '100%' }}
+      style={{width: '100%'}}
     />
   );
 };
