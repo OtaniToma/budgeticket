@@ -52,7 +52,3 @@ REACT_APP_DEV_GEOCODING_API_KEY="****************"
 ```bash
 $ npm start
 ```
-
-# Author
-
-* Toma Otani
