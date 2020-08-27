@@ -6,7 +6,7 @@ import BgImage from '../templates/BgImage';
 const Signup = () => {
   return (
     <BgImage>
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item xs={1} md={4}>
         </Grid>
         <Grid item xs={10} md={4}>
