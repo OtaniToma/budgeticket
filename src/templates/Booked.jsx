@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import {db} from '../firebase';
 import {fetchTicketsInBooked} from '../reducks/users/operations';
 import NotFound from '../components/organisms/NotFound';
+import PersonIcon from '@material-ui/icons/Person';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -82,7 +84,7 @@ const BookedList = () => {
                     inboundDepartureDate={ticket.inboundDepartureDate}
                     addTicket={false}
                   />
-                  {ticket.passenger}
+                  <Typography variant="body1" gutterBottom><PersonIcon /> {ticket.passenger}</Typography>
                 </>,
               )
             )}
