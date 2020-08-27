@@ -42,7 +42,7 @@ const SignIn = () => {
   );
 
   const toSignUp = useCallback(() => dispatch(push('/signup')), [dispatch]);
-  const toReset = useCallback(() => dispatch(push('/signin/reset')), [dispatch]);
+  const toReset = useCallback(() => dispatch(push('/reset')), [dispatch]);
 
   return (
     <>
@@ -97,7 +97,7 @@ const SignIn = () => {
               </Link>
             </Typography>
             <Typography align="center">
-              <Link href="/signin/reset" onClick={toReset} color="primary">
+              <Link href="/reset" onClick={toReset} color="primary">
                 Reset password
               </Link>
             </Typography>
