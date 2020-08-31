@@ -43,26 +43,28 @@ export const fetchTicketsInBooked = (tickets) => {
 
 export const listenAuthState = () => {
   return async (dispatch) => {
-    return auth.onAuthStateChanged(async (user) => {
+    return auth.onAuthStateChanged(user => {
       if (user) {
-        const uid = user.uid;
-        const snapshot = await db.collection.apply('users').doc(uid).get();
-        const data = snapshot.data();
+        const uid = user.uid
 
-        dispatch(
-          signInAction({
-            isSignedIn: true,
-            role: data.role,
-            uid: uid,
-            username: data.username,
+        db.collection('users').doc(uid).get()
+          .then(snapshot => {
+            const data = snapshot.data()
+
+            dispatch(signInAction({
+              isSignedIn: true,
+              role: data.role,
+              uid: uid,
+              username: data.username
+            }))
           })
-        );
+
       } else {
-        dispatch(push("/signin"));
+        dispatch(push('/signin'))
       }
-    });
-  };
-};
+    })
+  }
+}
 
 export const signIn = (email, password) => {
   return async (dispatch) => {
@@ -160,7 +162,7 @@ export const signOut = () => {
   return async (dispatch) => {
     auth.signOut().then(() => {
       dispatch(signOutAction());
-      dispatch(push("/"));
+      dispatch(push("/signin"));
     });
   };
 };

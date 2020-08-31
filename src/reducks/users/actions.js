@@ -52,6 +52,10 @@ export const signOutAction = () => {
       role: "",
       uid: "",
       username: "",
+      liked: [],
+      confirm: [],
+      booked: [],
+      icon: "",
     },
   };
 };
