@@ -1,5 +1,4 @@
 # BudgeTicket
-![Screenshot](https://otanitoma.com/images/works/budgeticket.png)
 BudgeTicket can find cheap flight tickets with the destination information. The purpose of creating this app is to understand the basics of JavaScript and SPA development with React.js.
 
 # Demo
