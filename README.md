@@ -3,15 +3,18 @@ BudgeTicket can find cheap flight tickets with the destination information. The 
 
 # Demo
 [https://budgeticket.firebaseapp.com/](https://budgeticket.firebaseapp.com/)
+
 Trial account
 ID: budgeticket
 Password: foobar
 
 # Features
 ![Screenshot](https://otanitoma.com/images/works/budgeticket-1.gif)
+
 Text forms have autocomplete function to input accurate airport name. Also, datepicker components have the validation to check the departure date is before the return date.
 
 ![Screenshot](https://otanitoma.com/images/works/budgeticket-2.gif)
+
 The data from Skyscanner API is stored in Redux store. Users can filter or sort results by departure date, price, and airlines.
 
 # Technology Used
