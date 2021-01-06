@@ -15,7 +15,7 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "airport-data": "^1.0.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "connected-react-router": "^6.8.0",
     "currency-codes": "^2.1.0",
     "date-fns": "^2.15.0",
